@@ -2,7 +2,7 @@
 # Manage Shibboleth Simple SP Service
 #
 
-class profile::shibboleth::simplesp (
+class shibidp::simplesp (
   $ss_version     = '1.14.11',
   $install_base   = '/var/simplesamlphp',
   $sp_host        = 'shibvm-sp.miamioh.edu:31443',
@@ -28,7 +28,7 @@ class profile::shibboleth::simplesp (
   ].each |$config_file| {
     file { "${install_base}/${config_file}":
       ensure  => file,
-      content => template("${module_name}/shibboleth/simplesp/${config_file}.erb"),
+      content => template("${module_name}/simplesp/${config_file}.erb"),
       require => Archive["/tmp/simplesamlphp-${ss_version}.tar.gz"],
     }
   }
