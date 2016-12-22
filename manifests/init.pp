@@ -2,7 +2,7 @@
 # Manage Shibboleth IdP Service
 #
 
-class profile::shibboleth::idp (
+class shibidp (
   $shib_idp_version      = '3.2.1',
   $shib_user             = 'shib',
   $shib_group            = 'shib',
@@ -35,7 +35,7 @@ class profile::shibboleth::idp (
   $idp_server_url        = 'https://shibvm-idp.miamioh.edu:21443',
   $idp_server_name       = 'shibvm-idp.miamioh.edu',
   $ks_password           = cache_data('cache_data/shibboleth', "keystore_${::environment}_password", random_password(32)),
-  $ldapserver_cert       = 'ldapt',
+  $ldap_cert_type        = 'test',
 ){
 
   ensure_packages('unzip')
@@ -98,7 +98,7 @@ class profile::shibboleth::idp (
   ['idp.install.properties', 'idp.merge.properties'].each |$file| {
     file { "${shib_src_dir}/${file}":
       ensure  => file,
-      content => template("${module_name}/shibboleth/shibboleth/${file}.erb"),
+      content => template("${module_name}/shibboleth/${file}.erb"),
       require => Archive["/tmp/shibboleth-identity-provider-${shib_idp_version}.tar.gz"],
       notify  => Exec['shibboleth idp install'],
     }
@@ -112,7 +112,7 @@ class profile::shibboleth::idp (
 
     file { "${shib_install_base}/credentials/${type}.crt":
       ensure  => file,
-      content => template("${module_name}/shibboleth/shibboleth/credentials/cert.erb"),
+      content => template("${module_name}/shibboleth/credentials/cert.erb"),
       owner   => $shib_user,
       group   => $shib_group,
       mode    => '0644',
@@ -122,7 +122,7 @@ class profile::shibboleth::idp (
 
     file { "${shib_install_base}/credentials/${type}.key":
       ensure  => file,
-      content => template("${module_name}/shibboleth/shibboleth/credentials/key.erb"),
+      content => template("${module_name}/shibboleth/credentials/key.erb"),
       owner   => $shib_user,
       group   => $shib_group,
       mode    => '0600',
@@ -131,14 +131,17 @@ class profile::shibboleth::idp (
     }
   }
 
-  file { "${shib_install_base}/credentials/ldap-server.crt":
-    ensure  => file,
-    source  => "puppet:///modules/${module_name}/shibboleth/${ldapserver_cert}-server.crt",
-    owner   => $shib_user,
-    group   => $shib_group,
-    mode    => '0644',
-    require => Exec['shibboleth idp install'],
-    notify  => Exec['shibboleth idp build'],
+  ['ldap', 'ad',
+  ].each |$directory| {
+    file { "${shib_install_base}/credentials/${directory}-server.crt":
+      ensure  => file,
+      source  => "puppet:///modules/${module_name}/${directory}-${ldap_cert_type}-server.crt",
+      owner   => $shib_user,
+      group   => $shib_group,
+      mode    => '0644',
+      require => Exec['shibboleth idp install'],
+      notify  => Exec['shibboleth idp build'],
+    }
   }
 
   # The same keypairs appear in the idp-metadata.xml file, which must be
@@ -147,7 +150,7 @@ class profile::shibboleth::idp (
   $encryption_keypair = cache_data('cache_data/shibboleth', "idp-encryption_${::environment}_keypair", {cert => undef, key => undef})
   file { "${shib_install_base}/metadata/idp-metadata.xml":
     ensure  => file,
-    content => template("${module_name}/shibboleth/shibboleth/metadata/idp-metadata.xml.erb"),
+    content => template("${module_name}/shibboleth/metadata/idp-metadata.xml.erb"),
     require => Exec['shibboleth idp install'],
     notify  => Exec['shibboleth idp build'],
   }
@@ -165,7 +168,7 @@ class profile::shibboleth::idp (
       owner   => $shib_user,
       group   => $shib_group,
       mode    => '0644',
-      source  => "puppet:///modules/${module_name}/shibboleth/metadata/${file}",
+      source  => "puppet:///modules/${module_name}/metadata/${file}",
       require => Exec['shibboleth idp install'],
     }
   }
@@ -221,7 +224,7 @@ class profile::shibboleth::idp (
       owner   => $shib_user,
       group   => $shib_group,
       mode    => '0600',
-      content => template("${module_name}/shibboleth/shibboleth/conf/${config_file}.erb"),
+      content => template("${module_name}/shibboleth/conf/${config_file}.erb"),
       require => [File[$shib_install_base], Exec['shibboleth idp install']],
       notify  => Exec['shibboleth idp build'],
     }
@@ -257,45 +260,6 @@ class profile::shibboleth::idp (
   ####################################
 
   ####################################
-  # Generate certs that are used to create a PKCS12 file for jetty.
-  openssl::certificate::x509 { $idp_server_name:
-    base_dir     => "${shib_install_base}/credentials",
-    country      => 'US',
-    organization => 'Miami University',
-    commonname   => $idp_server_name,
-    state        => 'OH',
-    locality     => 'Oxford',
-    unit         => 'IT',
-    days         => 3650,
-    password     => $ks_password,
-    require      => Class['::openssl'],
-  } ->
-  
-  file { "${shib_install_base}/credentials/${idp_server_name}.chn":
-    ensure  => file,
-    group   => 'root',
-    owner   => 'root',
-    mode    => '0644',
-    replace => false,
-    content => template("${module_name}/openssl/ssl_chain.erb"),
-    require => Class['::openssl'],
-  } ->
-
-  openssl::export::pkcs12 { 'browser':
-    ensure   => 'present',
-    basedir  => "${shib_install_base}/credentials",
-    pkey     => "${shib_install_base}/credentials/${idp_server_name}.key",
-    cert     => "${shib_install_base}/credentials/${idp_server_name}.crt",
-    #chaincert => "${shib_install_base}/credentials/${idp_server_name}.chn",
-    in_pass  => $ks_password,
-    out_pass => $ks_password,
-    require  => Exec['shibboleth idp install'],
-    #notify   => Service['jetty'],
-  }
-
-  ####################################
-
-  ####################################
   # Create the IdP Jetty base. This uses a directory of files
   # which are overridden by templates when necessary.
   $jetty_files = [ "${idp_jetty_base}/lib", "${idp_jetty_base}/lib/logging",
@@ -307,7 +271,7 @@ class profile::shibboleth::idp (
     group   => $shib_group,
     mode    => '0744',
     recurse => true,
-    source  => "puppet:///modules/${module_name}/shibboleth/jetty_base",
+    source  => "puppet:///modules/${module_name}/jetty_base",
   } ->
 
   file { $jetty_files:
@@ -368,7 +332,7 @@ class profile::shibboleth::idp (
       owner   => $shib_user,
       group   => $shib_group,
       mode    => '0644',
-      content => template("${module_name}/shibboleth/jetty_base/${config_file}.erb"),
+      content => template("${module_name}/jetty_base/${config_file}.erb"),
       require => File[$idp_jetty_base],
       #notify  => Service['jetty'],
     }
@@ -380,13 +344,13 @@ class profile::shibboleth::idp (
   # Set up shell variables
   profiled::script { 'jetty-idp.sh':
     ensure  => file,
-    content => template("${module_name}/shibboleth/shib-idp-profile.sh.erb"),
+    content => template("${module_name}/shib-idp-profile.sh.erb"),
     shell   => 'absent',
   }
 
   file { '/etc/default/jetty':
     ensure  => file,
-    content => template("${module_name}/shibboleth/default.erb"),
+    content => template("${module_name}/default.erb"),
   }
 
   ####################################
