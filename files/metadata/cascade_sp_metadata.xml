@@ -1,0 +1,47 @@
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://cms.miamioh.edu/shibboleth">
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+    <md:KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>
+MIIFlzCCBH+gAwIBAgIQMfMUtfJuJG+1LtfGuFh0BTANBgkqhkiG9w0BAQUFADBR
+MQswCQYDVQQGEwJVUzESMBAGA1UEChMJSW50ZXJuZXQyMREwDwYDVQQLEwhJbkNv
+bW1vbjEbMBkGA1UEAxMSSW5Db21tb24gU2VydmVyIENBMB4XDTEzMDMyNTAwMDAw
+MFoXDTE1MDMyNTIzNTk1OVowgaUxCzAJBgNVBAYTAlVTMQ4wDAYDVQQREwU0NTA1
+NjELMAkGA1UECBMCT0gxDzANBgNVBAcTBk94Zm9yZDEdMBsGA1UECRMUNTAxIEVh
+c3QgSGlnaCBTdHJlZXQxGTAXBgNVBAoTEE1pYW1pIFVuaXZlcnNpdHkxFDASBgNV
+BAsTC0lUIFNlcnZpY2VzMRgwFgYDVQQDEw9jbXMubWlhbWlvaC5lZHUwggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCx0ZuYVL5ID6H8CPhMPIFtDEQ3PEPn
+XyR5PhXvmLAB5XbFzEmJdm+OzENZys+igWeePGnqWYHzFl4/DtCFuCuIZx6bXuww
+kkFqCgARHU5sFvBtlMsV4PfW+rs1OvNBBNEEDyBswCaB5JcWAWv8DjB93hiOcXcq
+JIur0EVoDto1hKXqh0s+pwW8Zrp48Rf2X5DCivHZFRPQN+RDWX6xvzYzSdZoqxKu
+ooh1UQdgWl30l6bGvm0Jad9f4vMjDAr1/l2/EZMFYhsXhW9XJPYU8477IVFQdnDt
+Drdif9VGMTuPqQfJqgU9yyCGrPjFHX/4H5CXKaVBMAmfgbHUYMoYe2aBAgMBAAGj
+ggIUMIICEDAfBgNVHSMEGDAWgBRIT1r6L0qaXuBQ82t7VaXe9b40XTAdBgNVHQ4E
+FgQU4X7tUAiA1M5vp6v7BiSkvqfR+7QwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB
+/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMGcGA1UdIARgMF4w
+UgYMKwYBBAGuIwEEAwEBMEIwQAYIKwYBBQUHAgEWNGh0dHBzOi8vd3d3LmluY29t
+bW9uLm9yZy9jZXJ0L3JlcG9zaXRvcnkvY3BzX3NzbC5wZGYwCAYGZ4EMAQICMD0G
+A1UdHwQ2MDQwMqAwoC6GLGh0dHA6Ly9jcmwuaW5jb21tb24ub3JnL0luQ29tbW9u
+U2VydmVyQ0EuY3JsMG8GCCsGAQUFBwEBBGMwYTA5BggrBgEFBQcwAoYtaHR0cDov
+L2NlcnQuaW5jb21tb24ub3JnL0luQ29tbW9uU2VydmVyQ0EuY3J0MCQGCCsGAQUF
+BzABhhhodHRwOi8vb2NzcC5pbmNvbW1vbi5vcmcweAYDVR0RBHEwb4IPY21zLm1p
+YW1pb2guZWR1gg5jbXMubXVvaGlvLmVkdYIRY21zZGV2Lm11b2hpby5lZHWCEmNt
+c29sZC5taWFtaW9oLmVkdYIRY21zb2xkLm11b2hpby5lZHWCEmNtc3Rlc3QubXVv
+aGlvLmVkdTANBgkqhkiG9w0BAQUFAAOCAQEAGrlkSYAZyeH85pl7CnQvI6/n9asa
+TtOSOT7QV04QAa4HM5CiuaKwSynx3RIc9waHrIGTecjJCG0iLh6Xw1yBbwXdTjD3
+xAZFqN7XkejDts4d8VHs7xKAV/QrguZ2OSCipn33BKhb3sFlPaqqwam8cZoYTguq
+zB2E7uofnZIi8ScNJIPWYSl1z2g8vin3AhXeRX9XhU+UXz+cnRIkYht2eULxp5iO
+mJQxF7sXKLJaOxBQwm+ZMGQSNeGaU90d422PPOkzK3X90D1y3by4U96nH73yT3un
+zlEhKtpWjFb4QdeHe3CzxbaF+mqyvj8l2diWaqqHnAvZZD3OPSyrLq8A6g==
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cms.miamioh.edu/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://cms.miamioh.edu/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://cms.miamioh.edu/Shibboleth.sso/SAML2/ECP" index="3"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://cms.miamioh.edu/Shibboleth.sso/SAML/POST" index="4"/>
+  </md:SPSSODescriptor>
+</md:EntityDescriptor>
+

@@ -1,0 +1,126 @@
+
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" ID="_7734d5798fa58bf5ce66840feb016445" entityID="https://miamioh.eshipglobal.com/shibboleth">
+
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:1.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>www.eshipglobal.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=www.eshipglobal.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIDADCCAeigAwIBAgIJAODv5PsFLWfXMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
+BAMTE3d3dy5lc2hpcGdsb2JhbC5jb20wHhcNMTUwNDI0MTQwOTExWhcNMzUwNDE5
+MTQwOTExWjAeMRwwGgYDVQQDExN3d3cuZXNoaXBnbG9iYWwuY29tMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZGZc117v+U+jslYS7AzgLn8R5mHNo7L
+Uu5YFB9X6Y+2EUWR6ZHSEGddvbpuD+47hlBAXffQM/VlHLJwsjw9xGlSzXMsQOG0
+WsnB3R+P9O9gsT5TWhNs8xY0dzeh4RyjtLhLYZhLgBkdfj6HHnVcidfb6tMMY7DP
+pBiVFYiBz2Ht6rY78legVUkcBbk09/WUVMXsG0NjJrsgUM8S2uKSDGQdDJDIQmd8
+LoHXbe9zfB1nICkBVc73wL+kArX7aUlMVBudcGBu59W7UxUwC4b42VhpOHLoqGkc
+nl87OoP7H7iqtYeFQRLcbe7zGL7yWxOxkyLf0i9kzL0ivjLrsZ4VkwIDAQABo0Ew
+PzAeBgNVHREEFzAVghN3d3cuZXNoaXBnbG9iYWwuY29tMB0GA1UdDgQWBBTyicsb
+iOJv7eE14RY2vPdgXvJ4qTANBgkqhkiG9w0BAQUFAAOCAQEAC17sP6QeYKAWVfKF
+PkyobGB6dk8HO2HTovJh3iHiIN6H2fLMctfvShrzmgofe35uPa5W07kHl1VD+e3B
+SkMR1cp1+vM8ag4IIR5rmnaTfWcsN7+J7h6S88e70yOBnhBHKlkqtg+Zbd44oMKI
+nTe8Rj9oni9p6qVanWUPPFSbUfnbutAr07MTqFXy7qxnIWMlpruPCzGIYCHiK5TI
+ZgLjK0TdD+u+6IJrBQXeiopku0AcfajpmmMCslYoAmsgxczUnAKWqyrs05NQvZ6L
+LFDXSNBO/M84V3fgVxahfBE+Uc1RCnamnXficA4tBhrTvAgfqkDDNae8qTuP2P9U
+vJ63Dw==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>www.eshipglobal.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=www.eshipglobal.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIDADCCAeigAwIBAgIJAODv5PsFLWfXMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
+BAMTE3d3dy5lc2hpcGdsb2JhbC5jb20wHhcNMTUwNDI0MTQwOTExWhcNMzUwNDE5
+MTQwOTExWjAeMRwwGgYDVQQDExN3d3cuZXNoaXBnbG9iYWwuY29tMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZGZc117v+U+jslYS7AzgLn8R5mHNo7L
+Uu5YFB9X6Y+2EUWR6ZHSEGddvbpuD+47hlBAXffQM/VlHLJwsjw9xGlSzXMsQOG0
+WsnB3R+P9O9gsT5TWhNs8xY0dzeh4RyjtLhLYZhLgBkdfj6HHnVcidfb6tMMY7DP
+pBiVFYiBz2Ht6rY78legVUkcBbk09/WUVMXsG0NjJrsgUM8S2uKSDGQdDJDIQmd8
+LoHXbe9zfB1nICkBVc73wL+kArX7aUlMVBudcGBu59W7UxUwC4b42VhpOHLoqGkc
+nl87OoP7H7iqtYeFQRLcbe7zGL7yWxOxkyLf0i9kzL0ivjLrsZ4VkwIDAQABo0Ew
+PzAeBgNVHREEFzAVghN3d3cuZXNoaXBnbG9iYWwuY29tMB0GA1UdDgQWBBTyicsb
+iOJv7eE14RY2vPdgXvJ4qTANBgkqhkiG9w0BAQUFAAOCAQEAC17sP6QeYKAWVfKF
+PkyobGB6dk8HO2HTovJh3iHiIN6H2fLMctfvShrzmgofe35uPa5W07kHl1VD+e3B
+SkMR1cp1+vM8ag4IIR5rmnaTfWcsN7+J7h6S88e70yOBnhBHKlkqtg+Zbd44oMKI
+nTe8Rj9oni9p6qVanWUPPFSbUfnbutAr07MTqFXy7qxnIWMlpruPCzGIYCHiK5TI
+ZgLjK0TdD+u+6IJrBQXeiopku0AcfajpmmMCslYoAmsgxczUnAKWqyrs05NQvZ6L
+LFDXSNBO/M84V3fgVxahfBE+Uc1RCnamnXficA4tBhrTvAgfqkDDNae8qTuP2P9U
+vJ63Dw==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>www.eshipglobal.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=www.eshipglobal.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIDADCCAeigAwIBAgIJAODv5PsFLWfXMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
+BAMTE3d3dy5lc2hpcGdsb2JhbC5jb20wHhcNMTUwNDI0MTQwOTExWhcNMzUwNDE5
+MTQwOTExWjAeMRwwGgYDVQQDExN3d3cuZXNoaXBnbG9iYWwuY29tMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZGZc117v+U+jslYS7AzgLn8R5mHNo7L
+Uu5YFB9X6Y+2EUWR6ZHSEGddvbpuD+47hlBAXffQM/VlHLJwsjw9xGlSzXMsQOG0
+WsnB3R+P9O9gsT5TWhNs8xY0dzeh4RyjtLhLYZhLgBkdfj6HHnVcidfb6tMMY7DP
+pBiVFYiBz2Ht6rY78legVUkcBbk09/WUVMXsG0NjJrsgUM8S2uKSDGQdDJDIQmd8
+LoHXbe9zfB1nICkBVc73wL+kArX7aUlMVBudcGBu59W7UxUwC4b42VhpOHLoqGkc
+nl87OoP7H7iqtYeFQRLcbe7zGL7yWxOxkyLf0i9kzL0ivjLrsZ4VkwIDAQABo0Ew
+PzAeBgNVHREEFzAVghN3d3cuZXNoaXBnbG9iYWwuY29tMB0GA1UdDgQWBBTyicsb
+iOJv7eE14RY2vPdgXvJ4qTANBgkqhkiG9w0BAQUFAAOCAQEAC17sP6QeYKAWVfKF
+PkyobGB6dk8HO2HTovJh3iHiIN6H2fLMctfvShrzmgofe35uPa5W07kHl1VD+e3B
+SkMR1cp1+vM8ag4IIR5rmnaTfWcsN7+J7h6S88e70yOBnhBHKlkqtg+Zbd44oMKI
+nTe8Rj9oni9p6qVanWUPPFSbUfnbutAr07MTqFXy7qxnIWMlpruPCzGIYCHiK5TI
+ZgLjK0TdD+u+6IJrBQXeiopku0AcfajpmmMCslYoAmsgxczUnAKWqyrs05NQvZ6L
+LFDXSNBO/M84V3fgVxahfBE+Uc1RCnamnXficA4tBhrTvAgfqkDDNae8qTuP2P9U
+vJ63Dw==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>www.eshipglobal.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=www.eshipglobal.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIDADCCAeigAwIBAgIJAODv5PsFLWfXMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
+BAMTE3d3dy5lc2hpcGdsb2JhbC5jb20wHhcNMTUwNDI0MTQwOTExWhcNMzUwNDE5
+MTQwOTExWjAeMRwwGgYDVQQDExN3d3cuZXNoaXBnbG9iYWwuY29tMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZGZc117v+U+jslYS7AzgLn8R5mHNo7L
+Uu5YFB9X6Y+2EUWR6ZHSEGddvbpuD+47hlBAXffQM/VlHLJwsjw9xGlSzXMsQOG0
+WsnB3R+P9O9gsT5TWhNs8xY0dzeh4RyjtLhLYZhLgBkdfj6HHnVcidfb6tMMY7DP
+pBiVFYiBz2Ht6rY78legVUkcBbk09/WUVMXsG0NjJrsgUM8S2uKSDGQdDJDIQmd8
+LoHXbe9zfB1nICkBVc73wL+kArX7aUlMVBudcGBu59W7UxUwC4b42VhpOHLoqGkc
+nl87OoP7H7iqtYeFQRLcbe7zGL7yWxOxkyLf0i9kzL0ivjLrsZ4VkwIDAQABo0Ew
+PzAeBgNVHREEFzAVghN3d3cuZXNoaXBnbG9iYWwuY29tMB0GA1UdDgQWBBTyicsb
+iOJv7eE14RY2vPdgXvJ4qTANBgkqhkiG9w0BAQUFAAOCAQEAC17sP6QeYKAWVfKF
+PkyobGB6dk8HO2HTovJh3iHiIN6H2fLMctfvShrzmgofe35uPa5W07kHl1VD+e3B
+SkMR1cp1+vM8ag4IIR5rmnaTfWcsN7+J7h6S88e70yOBnhBHKlkqtg+Zbd44oMKI
+nTe8Rj9oni9p6qVanWUPPFSbUfnbutAr07MTqFXy7qxnIWMlpruPCzGIYCHiK5TI
+ZgLjK0TdD+u+6IJrBQXeiopku0AcfajpmmMCslYoAmsgxczUnAKWqyrs05NQvZ6L
+LFDXSNBO/M84V3fgVxahfBE+Uc1RCnamnXficA4tBhrTvAgfqkDDNae8qTuP2P9U
+vJ63Dw==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/Artifact/SOAP" index="1"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SLO/Artifact"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SLO/POST"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SLO/Redirect"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SLO/SOAP"/>
+    <md:ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/NIM/Artifact"/>
+    <md:ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/NIM/POST"/>
+    <md:ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/NIM/Redirect"/>
+    <md:ManageNameIDService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/NIM/SOAP"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML/Artifact" index="6"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML/POST" index="7"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML2/Artifact" index="8"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML2/ECP" index="9"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML2/POST" index="10"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://miamioh.eshipglobal.com/Shibboleth.sso/SAML2/POST-SimpleSign" index="11"/>
+  </md:SPSSODescriptor>
+
+</md:EntityDescriptor>

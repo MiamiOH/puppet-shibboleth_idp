@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<AttributeFilterPolicyGroup id="ShibbolethFilterPolicy"
+        xmlns="urn:mace:shibboleth:2.0:afp"
+        xmlns:basic="urn:mace:shibboleth:2.0:afp:mf:basic"
+        xmlns:saml="urn:mace:shibboleth:2.0:afp:mf:saml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:afp http://shibboleth.net/schema/idp/shibboleth-afp.xsd
+                            urn:mace:shibboleth:2.0:afp:mf:basic http://shibboleth.net/schema/idp/shibboleth-afp-mf-basic.xsd
+                            urn:mace:shibboleth:2.0:afp:mf:saml http://shibboleth.net/schema/idp/shibboleth-afp-mf-saml.xsd">
+
+    <!-- Test release to local sp -->
+    <AttributeFilterPolicy id="releaseMUPersonInfo">
+        <PolicyRequirementRule xsi:type="OR">
+            <Rule xsi:type="Requester" value="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/metadata.php/shibvm-idp" />
+        </PolicyRequirementRule>
+     
+        <AttributeRule attributeID="eduPersonPrincipalName">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="eduPersonScopedAffiliation">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="eduPersonAffiliation">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="eduPersonEntitlement">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="uid">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="upperUID">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="sciquestRole">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="campus_fyindicator">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="mail">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="surname">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="givenName">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="isMemberOf">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="studentType">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+    </AttributeFilterPolicy>
+
+  <!-- Miami Specific Release Policies -->
+  <!-- Research and Scholarship Attribute Bundle -->
+  <AttributeFilterPolicy id="releaseToRandS">
+    <PolicyRequirementRule xsi:type="basic:OR">
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://carmenwiki.osu.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dibbs17.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dash.cdlib.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dash-dev.cdlib.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dash-stg.cdlib.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dmp.cdlib.org" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dmp-dev.cdlib.org" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dmp-stage.cdlib.org" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.coral.washington.edu/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www-test.coral.washington.edu/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://community.unizin.org/secure" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://filesender.internet2.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://services.internet2.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://spaces.internet2.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wikispaces.psu.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://coherent.phy.duke.edu" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.indianactsi.org" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://adfs-mali.icer.niaid.nih.gov/adfs/services/trust" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://federation.icer.niaid.nih.gov/adfs/services/trust" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://registry-dev.icer.niaid.nih.gov/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://registry.icer.niaid.nih.gov/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://commons.lbl.gov/sp/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://identity.lbl.gov/prod/identitylinking" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://identity.lbl.gov/prod/tokenmanagement" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://lists.lbl.gov/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://comanage.osris.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wiki.osris.org" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://fae.illinois.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://nanohub.org/login/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://nciphub.org/login/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.rcac.purdue.edu/services/hubzero/smarteragriculture" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dataverse-test.irss.unc.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dataverse.unc.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://plx-redcap00.uncg.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://redcap.uncg.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://devsso.educause.edu/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sso.educause.edu/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.educause.edu/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://cgca.phys.uwm.edu/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://gw-astronomy.org/lists/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://gw-astronomy.org/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://gw-astronomy.org/wiki/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sserca.fau.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://panther.gpolab.bbn.com/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://fed-interop-wg.ligo.org/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://gracedb.ligo.org/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://ligo.org/ligovirgo/cbcnote/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://versions-test.ligo.org/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wiki.ligo.org/shibboleth-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.naradametrics.net/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://beta.dataverse.org/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dataverse.harvard.edu/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://demo.dataverse.org/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.opensciencedatacloud.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.netec.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.unmc.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://portaldev.mghpcc.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://portal.mghpcc.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wiki.mghpcc.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://libauth.com/saml/module.php/saml/sp/metadata.php/springy-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dds.crl.edu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://beta.opendmc.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://cilogon.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wayf.rcauth.eu/wayf/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://terena.org/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://orcid.org/saml2/sp/1" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wayf.nikhef.nl/wayf/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://clarino.uib.no/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://foodl.org/simplesaml/module.php/saml/sp/metadata.php/saml" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://lap.clarino.uio.no/simplesaml/module.php/saml/sp/metadata.php/default-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://aai.egi.eu/proxy/module.php/saml/sp/metadata.php/sso" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://aai.vi-seem.eu/proxy/module.php/saml/sp/metadata.php/sso" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://rns-ng.release-check.edugain.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://rns.release-check.edugain.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://forge.switch.ch/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sso.siropglobal.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://cern.ch/login" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="http://sp.vs1.corpora.uni-hamburg.de" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="http://www.clarin-pl.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://auth.dariah.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://b2access.eudat.eu:8443/unitygw/saml-sp-metadata" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://clarin.ids-mannheim.de/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://clarin.phonetik.uni-muenchen.de" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://colreg.de.dariah.eu/colreg" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://de.dariah.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dev.clarin.nl/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dev2.dariah.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dspace-clarin-it.ilc.cnr.it/Shibboleth.sso/Metadata" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://ekrksso.keeleressursid.ee/simplesaml/module.php/saml/sp/metadata.php/ekrk-sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://infra.clarin.dk/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://lbr.csc.fi/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://openskos.meertens.knaw.nl/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://portal.clarin.inl.nl/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://registration.dariah.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://repo.clarino.uib.no/shibboleth/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://rir.dariah.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://rrzfilrshib.uni-regensburg.de/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://search.de.dariah.eu/schereg" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://search.de.dariah.eu/search" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://secure.huygens.knaw.nl" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://shibboleth.bbaw.de/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.catalog.clarin.eu" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.clarin.si/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.corpus1.mpi.nl" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.lux17.mpi.nl" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sp.textgridlab.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://ufal-point.mff.cuni.cz/shibboleth/eduid/sp" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://webanno.sfs.uni-tuebingen.de" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://weblicht.sfs.uni-tuebingen.de" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.meertens.knaw.nl/Shibboleth.sso/Metadata" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://www.nederlab.nl/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://iam-test.indigo-datacloud.eu" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://cta-sg.oact.inaf.it/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://bestr.it/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://learn.eduopen.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wiki.idem.garrservices.it/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://courses.sci-gaia.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://oar.sci-gaia.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://grouper.idem.garr.it/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://discourse.sci-gaia.eu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://dev.niif.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://hexaa.eduid.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://randevu.lab.vvc.niif.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://proxy.c4e.niif.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://niif.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://bme.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://duf.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sztaki.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://sze-gyor.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wigner.videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://videotorium.hu/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://wiki.edugain.org/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://secure.urkund.com/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://mp.uu.se/Shibboleth.sso" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://meta.cesnet.cz/sp/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://login.elixir-czech.org/proxy/" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://engine.elixir-czech.org/authentication/sp/metadata" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://clarin.oeaw.ac.at/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://vetucation.vu-wien.ac.at/shibboleth" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://guru.dcu.ie" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://guru-dcu-test-01.gurudevelopments.com" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://central-test-01.gurudevelopments.com" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://ait.gurudevelopments.com" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://central-test-02.gurudevelopments.com" />
+        <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://webtut.fccn.pt" />
+    </PolicyRequirementRule>
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="displayName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- SANS Institute -->
+  <AttributeFilterPolicy id="SANS">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https:\/\/access\.sans\.org\/.+"/>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- EAB Gradesfirst -->
+  <AttributeFilterPolicy id="EAB Campus">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://shibboleth.gradesfirst.com/Shibboleth.sso" />
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Ohio Link Release -->
+  <AttributeFilterPolicy id="OhioLink">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.ohiolink\.edu/shibboleth" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonScopedAffiliation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduLocationCode">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="shibTransient">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Lynda.Com Release -->
+  <AttributeFilterPolicy id="Lynda">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://shib.lynda.com/shibboleth-sp" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- DreamSpark -->
+  <AttributeFilterPolicy id="DreamSpark">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://downloads.channel8.msdn.com/shibboleth-sp" />
+  </AttributeFilterPolicy>
+  
+  <!-- SciQuest Release -->
+  <AttributeFilterPolicy id="SciQuest">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.sciquest\.com" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="upperUID">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduCampusTelephoneNumber">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="transientId">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduDepartment">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sciquestRole">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- e2Campus Release -->
+  <AttributeFilterPolicy id="e2Campus">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://www.omnilert.net/shibboleth" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Turning Technologies Release -->
+  <AttributeFilterPolicy id="turningtechnologies">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.turningtechnologies.com/.+"/>
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- OffCampusPartners Release -->
+  <AttributeFilterPolicy id="offcampuspartners">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.offcampuspartners.com/.+"/>
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonPrimaryAffiliation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Faculty180 Release -->
+  <AttributeFilterPolicy id="faculty180">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.faculty180.com/.+"/>
+    <AttributeRule attributeID="employeeNumber">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- educause Release -->
+  <AttributeFilterPolicy id="educause">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://sso.educause.edu/sp" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonScopedAffiliation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- InCommon Release -->
+  <AttributeFilterPolicy id="inCommon">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://spaces.internet2.edu/shibboleth" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="displayName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Campus Labs -->
+  <AttributeFilterPolicy id="CampusLabs">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://federation.campuslabs.com/shibboleth" />
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="surname">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- CascadeServer Release -->
+  <AttributeFilterPolicy id="Cascade">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://cms.miamioh.edu/shibboleth" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Qualtrics -->
+  <AttributeFilterPolicy id="Qualtrics">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.qualtrics.com/.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="cn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduDivisionCode">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduDepartmentCode">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonPrimaryAffiliation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- eShipGlobal -->
+  <AttributeFilterPolicy id="eShipGlobal">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.eshipglobal.com/.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="telephoneNumber">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="postalAddress">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- SkillPort -->
+  <AttributeFilterPolicy id="SkillPort">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.skillport.com/.+" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="surname">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="transientId">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Mentis -->
+  <AttributeFilterPolicy id="Mentis">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://mentis.miamioh.edu/.+" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="surname">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eduPersonPrimaryAffiliation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="transientId">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- CollegeNet -->
+  <AttributeFilterPolicy id="CollegeNet">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.collegenet.com/.+" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="surname">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="transientId">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- Gartner -->
+  <AttributeFilterPolicy id="Gartner">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="http://www.gartner.com" />
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="title">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- TMS -->
+  <AttributeFilterPolicy id="TMS">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.firstmarblehead.com/.+" />
+    <AttributeRule attributeID="eduPersonPrincipalName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="email">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+  
+  <!-- AlcoholEdu -->
+  <AttributeFilterPolicy id="AlcoholEdu">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.alcoholedu.com/.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduPrimaryLocation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="campus_fyindicator">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+  <!-- Everfi (AlcoholEdu/Haven) -->
+  <AttributeFilterPolicy id="EverFi">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.everfi.net/.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="muohioeduPrimaryLocation">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="campus_fyindicator">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+  <!-- California Digital Library -->
+  <AttributeFilterPolicy id="CDL">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.cdlib.org" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="mail">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+  <!-- Maxient Release -->
+  <AttributeFilterPolicy id="Maxient">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://cm.maxient.com/.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="displayName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+  <!-- Team Dynamix -->
+  <AttributeFilterPolicy id="TeamDynamix">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.teamdynamix.+" />
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+  <!-- WeComply -->
+  <AttributeFilterPolicy id="WeComply">
+    <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://training.wecomply.com/wc2" />
+    <AttributeRule attributeID="uid">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="eppnMiamiOH">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="givenName">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+    <AttributeRule attributeID="sn">
+      <PermitValueRule xsi:type="basic:ANY" />
+    </AttributeRule>
+  </AttributeFilterPolicy>
+
+<!-- my.special.name Desktop SP -->
+<AttributeFilterPolicy id="MySpecialName">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://my.special.name/shibboleth" />
+  <AttributeRule attributeID="eduPersonAffiliation">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="eduPersonPrincipalName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="mail">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="displayName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- TestShib -->
+<AttributeFilterPolicy id="TestShib">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="https://sp.testshib.org/shibboleth-sp" />
+  <AttributeRule attributeID="eduPersonAffiliation">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="mail">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="displayName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="campus_fyindicator">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- CRM OnDemand Release -->
+<AttributeFilterPolicy id="Oracle CRM">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.crmondemand\.com/" />
+  <AttributeRule attributeID="eduPersonPrincipalName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="eduPersonScopedAffiliation">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="muohioeduLocationCode">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- testSP Release -->
+<AttributeFilterPolicy id="testSP">
+  <PolicyRequirementRule xsi:type="basic:OR">
+    <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://10.28.129.48/shibboleth" />
+    <basic:Rule xsi:type="basic:AttributeRequesterString" value="https://kidddw.testSp/shibboleth" />
+  </PolicyRequirementRule>
+  <AttributeRule attributeID="eduPersonAffiliation">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="eduPersonPrincipalName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="eduPersonScopedAffiliation">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="muohioeduLocationCode">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="mail">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="displayName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- WebAssign Release -->
+<AttributeFilterPolicy id="WebAssign">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.webassign\.net/.+" />
+  <AttributeRule attributeID="eduPersonPrincipalName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="givenName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="sn">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="transientId">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="email">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="eduCourseOffering">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- Cayuse2 -->
+<AttributeFilterPolicy id="Cayuse2">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex=".+\.cayuse424.com/.+" />
+  <AttributeRule attributeID="eppnMiamiOH">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+<!-- Cayuse -->
+<AttributeFilterPolicy id="Cayuse">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterRegex" regex="https://.+\.cayuse\.com/.+" />
+  <AttributeRule attributeID="eppnMiamiOH">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="givenName">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="sn">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="transientId">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="email">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="muohioeduDivisionCode">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="muohioeduDepartmentCode">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+<!-- Office 365 -->
+<AttributeFilterPolicy id="Office365">
+  <PolicyRequirementRule xsi:type="basic:AttributeRequesterString" value="urn:federation:MicrosoftOnline" />
+  <AttributeRule attributeID="eppnMiamiOH">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+  <AttributeRule attributeID="email">
+    <PermitValueRule xsi:type="basic:ANY" />
+  </AttributeRule>
+</AttributeFilterPolicy>
+
+</AttributeFilterPolicyGroup>

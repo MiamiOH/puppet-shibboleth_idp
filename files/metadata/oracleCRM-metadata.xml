@@ -1,0 +1,100 @@
+<!--
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+	ID="168d407fc35649049f433155c96801e17ab76a27"
+	entityID="168d407fc35649049f433155c96801e17ab76a27">
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:1.0:protocol">
+    <md:KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>secure-vmsomxmja.crmondemand.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=secure-vmsomxmja.crmondemand.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIFyTCCBLGgAwIBAgIQGAJRTfjJ/xNN8yway/oa2jANBgkqhkiG9w0BAQUFADCB
+vDELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL
+ExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2Ug
+YXQgaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYSAoYykxMDE2MDQGA1UEAxMt
+VmVyaVNpZ24gQ2xhc3MgMyBJbnRlcm5hdGlvbmFsIFNlcnZlciBDQSAtIEczMB4X
+DTExMDUxNzAwMDAwMFoXDTEyMDUxNjIzNTk1OVowgcwxCzAJBgNVBAYTAlVTMRMw
+EQYDVQQIEwpDYWxpZm9ybmlhMRcwFQYDVQQHFA5SZWR3b29kIFNob3JlczEbMBkG
+A1UEChQST3JhY2xlIENvcnBvcmF0aW9uMRIwEAYDVQQLFAlHbG9iYWwgSVQxMzAx
+BgNVBAsUKlRlcm1zIG9mIHVzZSBhdCB3d3cudmVyaXNpZ24uY29tL3JwYSAoYykw
+NTEpMCcGA1UEAxQgc2VjdXJlLXZtc29teG1qYS5jcm1vbmRlbWFuZC5jb20wggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDrHyhn2aYrC3t3dtECH9b4mktQ
+E9G3WHHL5UIGkboknc4J0fy+37QmbmnspHYgtTSIfvhtQHk1dzfvIkivFUdDTGy5
+kHzvLHMXukpWVGpw4n1K6RYL0pCdritAiIsVso/9MJjorMRnADO8HfvflSJdrGkd
+QNpZ5KEEXXeuv5gpkoDkDSKntRUL69u4M4R7rOMmm2zG+Xx4sTPexIUipcb2UYmq
+vl04ZNxxgf1BtxL363L81clAlXJhTgdUA0a1gaeR0rjEkU64z1snYypuyR+d6riI
+KB6yegrmTC1RR4mahjuSQ7woSXFPVSS8h8DGHMZ95SK6ZQM7gap67qIq/X6tAgMB
+AAGjggGzMIIBrzAJBgNVHRMEAjAAMAsGA1UdDwQEAwIFoDBEBgNVHSAEPTA7MDkG
+C2CGSAGG+EUBBxcDMCowKAYIKwYBBQUHAgEWHGh0dHBzOi8vd3d3LnZlcmlzaWdu
+LmNvbS9ycGEwQQYDVR0fBDowODA2oDSgMoYwaHR0cDovL1NWUkludGwtRzMtY3Js
+LnZlcmlzaWduLmNvbS9TVlJJbnRsRzMuY3JsMCgGA1UdJQQhMB8GCCsGAQUFBwMB
+BggrBgEFBQcDAgYJYIZIAYb4QgQBMHIGCCsGAQUFBwEBBGYwZDAkBggrBgEFBQcw
+AYYYaHR0cDovL29jc3AudmVyaXNpZ24uY29tMDwGCCsGAQUFBzAChjBodHRwOi8v
+U1ZSSW50bC1HMy1haWEudmVyaXNpZ24uY29tL1NWUkludGxHMy5jZXIwbgYIKwYB
+BQUHAQwEYjBgoV6gXDBaMFgwVhYJaW1hZ2UvZ2lmMCEwHzAHBgUrDgMCGgQUS2u5
+KJYGDLvQUjibKaxLB4shBRgwJhYkaHR0cDovL2xvZ28udmVyaXNpZ24uY29tL3Zz
+bG9nbzEuZ2lmMA0GCSqGSIb3DQEBBQUAA4IBAQBg0OwONZEoMeaiIznaObV6HEBb
+fKOngA/ZsYLI9iTgf6ceZT2fNmJbH4mLgdUe4dZSsVQrI3b4/y4Ja2+bS+fBUG9o
+d/r29kOrK0qYoZJj5tdz5JXaplpTawh/tuTQ8CSeHPTIhmbZnfCL53k1GtYtBdmC
+udqhZUe7DsKvLeHsF+9U4cc8VIaGhI3M5FIf+EuiY/l6mpyLCj1AvQRjHlVhU2FL
+j3UsBpVCc50pynrhgRXjGTMSYR4rVRyyM32YA7QlJLjdOUyh+cJi7Bm90Oa/R1jp
+alzHOtyoQuAuCKspvVpaDKek28SAU0MjADxJhXiodSi00nycdKW3td8510Ur
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://sso.crmondemand.com/fed/sp/samlv11sso" index="0"/>
+  </md:SPSSODescriptor>
+
+</md:EntityDescriptor>
+-->
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+        ID="168d407fc35649049f433155c96801e17ab76a27"
+        entityID="168d407fc35649049f433155c96801e17ab76a27">
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:1.0:protocol">
+    <md:KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>secure-vmsomxmma.crmondemand.com</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=secure-vmsomxmma.crmondemand.com</ds:X509SubjectName>
+          <ds:X509Certificate>MIIFyTCCBLGgAwIBAgIQGAJRTfjJ/xNN8yway/oa2jANBgkqhkiG9w0BAQUFADCB
+vDELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL
+ExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2Ug
+YXQgaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYSAoYykxMDE2MDQGA1UEAxMt
+VmVyaVNpZ24gQ2xhc3MgMyBJbnRlcm5hdGlvbmFsIFNlcnZlciBDQSAtIEczMB4X
+DTExMDUxNzAwMDAwMFoXDTEyMDUxNjIzNTk1OVowgcwxCzAJBgNVBAYTAlVTMRMw
+EQYDVQQIEwpDYWxpZm9ybmlhMRcwFQYDVQQHFA5SZWR3b29kIFNob3JlczEbMBkG
+A1UEChQST3JhY2xlIENvcnBvcmF0aW9uMRIwEAYDVQQLFAlHbG9iYWwgSVQxMzAx
+BgNVBAsUKlRlcm1zIG9mIHVzZSBhdCB3d3cudmVyaXNpZ24uY29tL3JwYSAoYykw
+NTEpMCcGA1UEAxQgc2VjdXJlLXZtc29teG1qYS5jcm1vbmRlbWFuZC5jb20wggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDrHyhn2aYrC3t3dtECH9b4mktQ
+E9G3WHHL5UIGkboknc4J0fy+37QmbmnspHYgtTSIfvhtQHk1dzfvIkivFUdDTGy5
+kHzvLHMXukpWVGpw4n1K6RYL0pCdritAiIsVso/9MJjorMRnADO8HfvflSJdrGkd
+QNpZ5KEEXXeuv5gpkoDkDSKntRUL69u4M4R7rOMmm2zG+Xx4sTPexIUipcb2UYmq
+vl04ZNxxgf1BtxL363L81clAlXJhTgdUA0a1gaeR0rjEkU64z1snYypuyR+d6riI
+KB6yegrmTC1RR4mahjuSQ7woSXFPVSS8h8DGHMZ95SK6ZQM7gap67qIq/X6tAgMB
+AAGjggGzMIIBrzAJBgNVHRMEAjAAMAsGA1UdDwQEAwIFoDBEBgNVHSAEPTA7MDkG
+C2CGSAGG+EUBBxcDMCowKAYIKwYBBQUHAgEWHGh0dHBzOi8vd3d3LnZlcmlzaWdu
+LmNvbS9ycGEwQQYDVR0fBDowODA2oDSgMoYwaHR0cDovL1NWUkludGwtRzMtY3Js
+LnZlcmlzaWduLmNvbS9TVlJJbnRsRzMuY3JsMCgGA1UdJQQhMB8GCCsGAQUFBwMB
+BggrBgEFBQcDAgYJYIZIAYb4QgQBMHIGCCsGAQUFBwEBBGYwZDAkBggrBgEFBQcw
+AYYYaHR0cDovL29jc3AudmVyaXNpZ24uY29tMDwGCCsGAQUFBzAChjBodHRwOi8v
+U1ZSSW50bC1HMy1haWEudmVyaXNpZ24uY29tL1NWUkludGxHMy5jZXIwbgYIKwYB
+BQUHAQwEYjBgoV6gXDBaMFgwVhYJaW1hZ2UvZ2lmMCEwHzAHBgUrDgMCGgQUS2u5
+KJYGDLvQUjibKaxLB4shBRgwJhYkaHR0cDovL2xvZ28udmVyaXNpZ24uY29tL3Zz
+bG9nbzEuZ2lmMA0GCSqGSIb3DQEBBQUAA4IBAQBg0OwONZEoMeaiIznaObV6HEBb
+fKOngA/ZsYLI9iTgf6ceZT2fNmJbH4mLgdUe4dZSsVQrI3b4/y4Ja2+bS+fBUG9o
+d/r29kOrK0qYoZJj5tdz5JXaplpTawh/tuTQ8CSeHPTIhmbZnfCL53k1GtYtBdmC
+udqhZUe7DsKvLeHsF+9U4cc8VIaGhI3M5FIf+EuiY/l6mpyLCj1AvQRjHlVhU2FL
+j3UsBpVCc50pynrhgRXjGTMSYR4rVRyyM32YA7QlJLjdOUyh+cJi7Bm90Oa/R1jp
+alzHOtyoQuAuCKspvVpaDKek28SAU0MjADxJhXiodSi00nycdKW3td8510Ur
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://test-sso.crmondemand.com/fed/sp/samlv11sso" index="0"/>
+  </md:SPSSODescriptor>
+
+</md:EntityDescriptor>
+
+
