@@ -50,21 +50,54 @@
     </MetadataProvider>
     -->   
 
-    <MetadataProvider   id="ICMD" xsi:type="FileBackedHTTPMetadataProvider" 
-                        xmlns="urn:mace:shibboleth:2.0:metadata"
-                        metadataURL="http://md.incommon.org/InCommon/InCommon-metadata.xml"
-                        backingFile="%{idp.home}/metadata/InCommon-metadata.xml"
-                        proxyHost="webproxy.mcs.muohio.edu" 
-                        proxyPort="80">
-        <MetadataFilter xsi:type="ChainingFilter">
-            <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P14D" />
-            <!-- This is breaking on the ICTrust ref
-            <MetadataFilter xsi:type="SignatureValidation" trustEngineRef="ICTrust" requireSignedMetadata="true" />
-            -->
-            <MetadataFilter xsi:type="EntityRoleWhiteList">
-                <RetainedRole>md:SPSSODescriptor</RetainedRole>
-            </MetadataFilter>
-        </MetadataFilter>
+    <!--
+    Refresh the InCommon production metadata aggregate every hour.
+
+    Note: The defaults for minRefreshDelay, maxRefreshDelay, and refreshDelayFactor
+    are "PT5M", "PT4H", and "0.75", respectively. The value of maxRefreshDelay
+    has been modified below such that the metadata is refreshed every hour ("PT1H").
+    The other properties merely regurgitate their default values. They are included
+    here for convenience, in case you want to change their default values.
+    -->
+    <MetadataProvider id="ICMD" xsi:type="FileBackedHTTPMetadataProvider"
+                    xmlns="urn:mace:shibboleth:2.0:metadata"
+                    metadataURL="http://md.incommon.org/InCommon/InCommon-metadata.xml"
+                    backingFile="%{idp.home}/metadata/InCommon-metadata.xml"
+                    minRefreshDelay="PT5M"
+                    maxRefreshDelay="PT1H"
+                    refreshDelayFactor="0.75">
+
+      <!--
+        To bootstrap the trust fabric of the federation, each relying party
+        obtains and configures an authentic copy of the federation operator’s
+        Metadata Signing Certificate (https://spaces.internet2.edu/x/moHFAg).
+
+        Fetch the InCommon Metadata Signing Certificate and check its integrity:
+
+        $ IDP_HOME=/opt/shibboleth-idp
+        $ /usr/bin/curl -s https://ds.incommon.org/certs/inc-md-cert.pem \
+            | /usr/bin/tee $IDP_HOME/credentials/inc-md-cert.pem \
+            | /usr/bin/openssl x509 -sha1 -fingerprint -noout
+        SHA1 Fingerprint=7D:B4:BB:28:D3:D5:C8:52:E0:80:B3:62:43:2A:AF:34:B2:A6:0E:DD
+
+        Verify the signature on the root element of the metadata aggregate 
+        (i.e., the EntitiesDescriptor element) using the trusted Metadata 
+        Signing Certificate.
+      -->
+      <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true"
+              certificateFile="%{idp.home}/credentials/inc-md-cert.pem" />
+
+      <!--
+        Require a validUntil XML attribute on the EntitiesDescriptor element
+        and make sure its value is no more than 14 days into the future.
+      -->
+      <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P14D" />
+
+      <!-- Consume all SP metadata in the aggregate -->
+      <MetadataFilter xsi:type="EntityRoleWhiteList">
+        <RetainedRole>md:SPSSODescriptor</RetainedRole>
+      </MetadataFilter>
+
     </MetadataProvider>
 
     <MetadataProvider id="TMS" xsi:type="ResourceBackedMetadataProvider">

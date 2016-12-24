@@ -173,6 +173,18 @@ class shibidp (
     }
   }
 
+  # Fetch InCommon public signing key for verifying the metadata
+  $dl_command = "/usr/bin/curl -s https://ds.incommon.org/certs/inc-md-cert.pem \
+            | /usr/bin/tee ${shib_install_base}/credentials/inc-md-cert.pem \
+            | /usr/bin/openssl x509 -sha1 -fingerprint -noout"
+  exec { 'incommon signing key':
+    command => $dl_command,
+    cwd     => $shib_install_base,
+    path    => $::path,
+    unless  => "test -f ${shib_install_base}/credentials/inc-md-cert.pem",
+    require => Exec['shibboleth idp install'],
+  }
+
   # Fetch and install the ShibCAS component.
   archive { '/tmp/master.zip':
     source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
