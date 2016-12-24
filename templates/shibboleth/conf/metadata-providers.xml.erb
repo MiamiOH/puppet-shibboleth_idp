@@ -100,46 +100,70 @@
 
     </MetadataProvider>
 
-    <MetadataProvider id="TMS" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/tms-metadata.xml" />
-    </MetadataProvider>
+    <MetadataProvider id="TMS" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/TMS-metadata.xml" />
 
-    <MetadataProvider id="eShipGlobal" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/eShipGlobal-metadata.xml" />
-    </MetadataProvider>
+    <MetadataProvider id="eShipGlobal" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/eShipGlobal-metadata.xml" />
 
-    <MetadataProvider id="LocalMeta" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/oracleCRM-metadata.xml" />
-    </MetadataProvider>
-    
-    <MetadataProvider id="Cascade" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/cascade_sp_metadata.xml" />
-    </MetadataProvider>
+    <MetadataProvider id="OracleCRM" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/OracleCRM-metadata.xml" />
 
-    <MetadataProvider id="Gartner" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/gartner-metadata.xml" />
-    </MetadataProvider>
+    <MetadataProvider id="Cascade" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/Cascade-metadata.xml" />
 
-    <MetadataProvider id="WeComply" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/wecomply-metadata.xml"/>
-    </MetadataProvider>
+    <MetadataProvider id="Gartner" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/Gartner-metadata.xml" />
 
-    <MetadataProvider id="Mentis" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/mentis-metadata.xml"/>
-    </MetadataProvider>
+    <MetadataProvider id="WeComply" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/WeComply-metadata.xml" />
 
-    <MetadataProvider id="SANS" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/SANS-metadata.xml"/>
-    </MetadataProvider>
+    <MetadataProvider id="Mentis" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/Mentis-metadata.xml" />
 
+    <MetadataProvider id="SANS" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/SANS-metadata.xml" />
 
-    <MetadataProvider id="HTTPMetadataTESTSHIB"
-                  xsi:type="FileBackedHTTPMetadataProvider"
-                  backingFile="%{idp.home}/metadata/testshib-providers.xml"
-                  metadataURL="http://www.testshib.org/metadata/testshib-providers.xml"/>
+    <MetadataProvider id="TestShib" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/TestShib-metadata.xml" />
 
-    <MetadataProvider id="ShibSpVM" xsi:type="ResourceBackedMetadataProvider">
-        <MetadataResource xsi:type="resource:FilesystemResource" file="%{idp.home}/metadata/shibvm-sp-providers.xml"/>
-    </MetadataProvider>
+    <MetadataProvider id="ShibSpVM" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/ShibSpVM-metadata.xml" />
+
+    <MetadataProvider id="WindowsAzureAD" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/WindowsAzureAD-metadata.xml" />
 
 </MetadataProvider>

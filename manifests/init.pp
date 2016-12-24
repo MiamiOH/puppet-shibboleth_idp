@@ -157,11 +157,11 @@ class shibidp (
 
   # Manage the SP metadata backing files. These are provided by some SPs
   # out-of-band.
-  ['SANS-metadata.xml', 'mentis-metadata.xml',
-    'WindowsAzureAD-metadata.xml', 'oracleCRM-metadata.xml',
-    'cascade_sp_metadata.xml', 'testshib.xml',
-    'eShipGlobal-metadata.xml', 'tms-metadata.xml',
-    'gartner-metadata.xml', 'wecomply-metadata.xml',
+  ['SANS-metadata.xml', 'Mentis-metadata.xml',
+    'WindowsAzureAD-metadata.xml', 'OracleCRM-metadata.xml',
+    'Cascade-metadata.xml', 'TestShib-metadata.xml',
+    'eShipGlobal-metadata.xml', 'TMS-metadata.xml',
+    'Gartner-metadata.xml', 'WeComply-metadata.xml',
   ].each |$file| {
     file { "${shib_install_base}/metadata/${file}":
       ensure  => file,
