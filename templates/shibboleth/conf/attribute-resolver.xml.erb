@@ -507,8 +507,6 @@
             <resolver:Dependency ref="muohioeduPrimaryLocation" />
             <resolver:Dependency ref="studentType" />
             <resolver:Dependency ref="forCampusFyIndicatorScript" />
-            <resolver:AttributeEncoder xsi:type="enc:SAML1String" 
-                    name="https://miamioh.edu/attributes/campus_fyindicator" />
             <resolver:AttributeEncoder xsi:type="enc:SAML2String" 
                     name="https://miamioh.edu/attributes/campus_fyindicator" friendlyName="campus_fyindicator" />
             <resolver:AttributeEncoder xsi:type="enc:SAML2StringNameID" 
@@ -558,9 +556,9 @@
     <!---  End of WebAssign Attributes -->
 
     <!---  SciQuest Attribute -->
-     <resolver:AttributeDefinition id="upperUID" xsi:type="ad:Script"
-             sourceAttributeID="uid">
+     <resolver:AttributeDefinition id="upperUID" xsi:type="ad:Script">
         <resolver:Dependency ref="muLDAP" />
+        <resolver:Dependency ref="uid" />
         <resolver:Dependency ref="forUpperUidScript"/>
         <resolver:AttributeEncoder xsi:type="enc:SAML1String" 
             name="urn:mace:dir:attribute-def:upperUID" />
@@ -582,9 +580,9 @@
         </Attribute>
     </resolver:DataConnector>
     
-    <resolver:AttributeDefinition xsi:type="ad:Script" 
-        sourceAttributeID="memberOf" id="sciquestRole" >
+    <resolver:AttributeDefinition xsi:type="ad:Script" id="sciquestRole" >
         <resolver:Dependency ref="muAD" />
+        <resolver:Dependency ref="isMemberOf" />
         <resolver:Dependency ref="forSciquestRoleScript"/>
         <resolver:AttributeEncoder xsi:type="enc:SAML1String" 
             name="urn:mace:dir:attribute-def:sciquestRole" />
@@ -603,11 +601,11 @@
             sciquestRole.getValues().add("Tester");
 
             // If the user has group membership
-            if (typeof memberOf != "undefined" && memberOf != null ){
+            if (typeof isMemberOf != "undefined" && isMemberOf != null ){
                 // The go through each group membership and add the appropriate affiliation
                 // The IdP will remove duplicate values so we don't need to worry about that here
-                for ( i = 0; memberOf != null && i < memberOf.getValues().size(); i++ ) {
-                    value = memberOf.getValues().get(i);
+                for ( i = 0; isMemberOf != null && i < isMemberOf.getValues().size(); i++ ) {
+                    value = isMemberOf.getValues().get(i);
                     if (value.indexOf("acp-buyer")>0) {
                         sciquestRole.getValues().add("Buyer");
                         counter++;
