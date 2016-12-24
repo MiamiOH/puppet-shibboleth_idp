@@ -131,6 +131,10 @@ class shibidp (
     }
   }
 
+  # These certs are required for the connections to OpenLDAP and AD to be
+  # trusted. Run:
+  #  openssl s_client -showcerts -connect ldap.miamioh.edu:636
+  # and take the copy the first cert in the chain.
   ['ldap', 'ad',
   ].each |$directory| {
     file { "${shib_install_base}/credentials/${directory}-server.crt":
@@ -142,6 +146,19 @@ class shibidp (
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
+  }
+
+  # This is the InCommon signing key public cert used to validate the downloaded
+  # InCommon metadata. The metadata-providers.xml config contains instructions
+  # for acquiring the cert and the configuration for the automated refresh.
+  file { "${shib_install_base}/credentials/inc-md-cert.pem":
+    ensure  => file,
+    source  => "puppet:///modules/${module_name}/inc-md-cert.pem",
+    owner   => $shib_user,
+    group   => $shib_group,
+    mode    => '0644',
+    require => Exec['shibboleth idp install'],
+    notify  => Exec['shibboleth idp build'],
   }
 
   # The same keypairs appear in the idp-metadata.xml file, which must be
@@ -171,18 +188,6 @@ class shibidp (
       source  => "puppet:///modules/${module_name}/metadata/${file}",
       require => Exec['shibboleth idp install'],
     }
-  }
-
-  # Fetch InCommon public signing key for verifying the metadata
-  $dl_command = "/usr/bin/curl -s https://ds.incommon.org/certs/inc-md-cert.pem \
-            | /usr/bin/tee ${shib_install_base}/credentials/inc-md-cert.pem \
-            | /usr/bin/openssl x509 -sha1 -fingerprint -noout"
-  exec { 'incommon signing key':
-    command => $dl_command,
-    cwd     => $shib_install_base,
-    path    => $::path,
-    unless  => "test -f ${shib_install_base}/credentials/inc-md-cert.pem",
-    require => Exec['shibboleth idp install'],
   }
 
   # Fetch and install the ShibCAS component.
