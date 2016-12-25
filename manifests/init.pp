@@ -38,7 +38,10 @@ class shibidp (
   $ldap_cert_type         = $shibidp::params::ldap_cert_type,
 ) inherits shibidp::params {
 
-  class { '::shibidp::install': }
+  class { '::shibidp::install': } ->
+  class { '::shibidp::jetty': }
+
   contain shibidp::install
-  
+  contain shibidp::jetty
+
 }
