@@ -113,48 +113,6 @@ class shibidp::install inherits shibidp {
     }
   }
 
-  # This is the InCommon signing key public cert used to validate the downloaded
-  # InCommon metadata. The metadata-providers.xml config contains instructions
-  # for acquiring the cert and the configuration for the automated refresh.
-  file { "${shibidp::shib_install_base}/credentials/inc-md-cert.pem":
-    ensure  => file,
-    source  => "puppet:///modules/${module_name}/inc-md-cert.pem",
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
-    mode    => '0644',
-    require => Exec['shibboleth idp install'],
-    notify  => Exec['shibboleth idp build'],
-  }
-
-  # The same keypairs appear in the idp-metadata.xml file, which must be
-  # updated any time the certs change.
-  $signing_keypair = cache_data('cache_data/shibboleth', "idp-signing_${::environment}_keypair", {cert => undef, key => undef})
-  $encryption_keypair = cache_data('cache_data/shibboleth', "idp-encryption_${::environment}_keypair", {cert => undef, key => undef})
-  file { "${shibidp::shib_install_base}/metadata/idp-metadata.xml":
-    ensure  => file,
-    content => template("${module_name}/shibboleth/metadata/idp-metadata.xml.erb"),
-    require => Exec['shibboleth idp install'],
-    notify  => Exec['shibboleth idp build'],
-  }
-
-  # Manage the SP metadata backing files. These are provided by some SPs
-  # out-of-band.
-  ['SANS-metadata.xml', 'Mentis-metadata.xml',
-    'WindowsAzureAD-metadata.xml', 'OracleCRM-metadata.xml',
-    'Cascade-metadata.xml', 'TestShib-metadata.xml',
-    'eShipGlobal-metadata.xml', 'TMS-metadata.xml',
-    'Gartner-metadata.xml', 'WeComply-metadata.xml',
-  ].each |$file| {
-    file { "${shibidp::shib_install_base}/metadata/${file}":
-      ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      mode    => '0644',
-      source  => "puppet:///modules/${module_name}/metadata/${file}",
-      require => Exec['shibboleth idp install'],
-    }
-  }
-
   # Fetch and install the ShibCAS component.
   archive { '/tmp/master.zip':
     source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
@@ -198,7 +156,7 @@ class shibidp::install inherits shibidp {
 
   # Render the Shibboleth configuration. These are run time and not used
   # during the build process. It should restart Jetty, though.
-  ['ldap.properties', 'idp.properties', 'metadata-providers.xml', 'authn/general-authn.xml',
+  ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
     'attribute-resolver.xml', 'relying-party.xml', 'attribute-filter.xml',
   ].each |$config_file| {
     file { "${shibidp::shib_install_base}/conf/${config_file}":
