@@ -38,16 +38,21 @@ class shibidp (
   $ldap_cert_type         = $shibidp::params::ldap_cert_type,
 
   $metadata_files         = $shibidp::params::metadata_files,
+  $dataconnectors         = $shibidp::params::dataconnectors,
+  $attributes             = $shibidp::params::attributes,
+
 ) inherits shibidp::params {
 
   validate_hash($metadata_files)
 
   class { '::shibidp::install': } ->
   class { '::shibidp::metadata': } ->
+  class { '::shibidp::attribute_resolver': } ->
   class { '::shibidp::jetty': }
 
   contain shibidp::install
   contain shibidp::metadata
+  contain shibidp::attribute_resolver
   contain shibidp::jetty
 
 }

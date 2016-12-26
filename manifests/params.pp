@@ -39,5 +39,7 @@ class shibidp::params {
   $ldap_cert_type         = 'test'
 
   $metadata_files         = {}
+  $dataconnectors         = {}
+  $attributes             = {}
 
 }

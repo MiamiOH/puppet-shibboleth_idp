@@ -1,0 +1,16 @@
+    <resolver:DataConnector id="<%= @id %>" xsi:type="dc:<%= @type %>"
+        ldapURL="<%= @ldap_url %>"
+        baseDN="<%= @base_dn %>" 
+        principal="<%= @principal %>"
+        principalCredential="<%= @principal_credential %>"
+        useStartTLS="<%= @use_start_tls %>">
+        <dc:FilterTemplate>
+            <![CDATA[
+                <%= @filter_template %>
+            ]]>
+        </dc:FilterTemplate>
+        <dc:StartTLSTrustCredential id="<%= @filter_tls_trust_id %>" xsi:type="sec:X509ResourceBacked">
+            <sec:Certificate><%= @filter_tls_trust_cert %></sec:Certificate>
+        </dc:StartTLSTrustCredential>
+        <!-- <ReturnAttributes><%= @return_attributes %></ReturnAttributes> -->
+    </resolver:DataConnector>

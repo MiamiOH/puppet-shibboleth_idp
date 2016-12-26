@@ -1,0 +1,12 @@
+    <resolver:AttributeDefinition id="<%= @id %>" xsi:type="ad:<%= @type %>" sourceAttributeID="<%= @source_attribute_id %>">
+        <% @dependencies.each do |dependency| -%>
+        <resolver:Dependency <%= dependency['attribute'] %>="<%= dependency['value'] %>" />
+        <% end -%>
+        <% @encoders.each do |encoder| -%>
+        <resolver:AttributeEncoder xsi:type="enc:<%= encoder['type'] %>"
+            <% if encoder['name'] %>name="<%= encoder['name'] %>"<% end %>
+            <% if encoder['friendly_name'] %>friendlyName="<%= encoder['friendly_name'] %>"<% end %>
+            <% if encoder['encode_type'] %>encodeType="<%= encoder['encode_type'] %>"<% end %>
+            />
+        <% end -%>
+    </resolver:AttributeDefinition>
