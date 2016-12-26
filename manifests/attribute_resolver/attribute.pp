@@ -1,8 +1,11 @@
 define shibidp::attribute_resolver::attribute (
   $id = $name,
   $type = undef,
+  $scope = undef,
   $source_attribute_id = undef,
-  
+  $transient = false,
+  $script = undef,
+
   $dependencies = {},
   $encoders = {},
 ) {

@@ -1,12 +1,43 @@
-    <resolver:AttributeDefinition id="<%= @id %>" xsi:type="ad:<%= @type %>" sourceAttributeID="<%= @source_attribute_id %>">
-        <% @dependencies.each do |dependency| -%>
-        <resolver:Dependency <%= dependency['attribute'] %>="<%= dependency['value'] %>" />
-        <% end -%>
-        <% @encoders.each do |encoder| -%>
+    <resolver:AttributeDefinition id="<%= @id %>" xsi:type="ad:<%= @type %>" 
+        <% if @scope %>scope="<%= @scope %>" <% end %><% if @source_attribute_id %>sourceAttributeID="<%= @source_attribute_id %>" <% end %>>
+        <%- @dependencies.each do |dependency| -%>
+        <resolver:Dependency ref="<%= dependency %>" />
+        <%- end -%>
+        <%- if @type == 'Script' -%>
+        <resolver:Dependency ref="<%= @id %>_scripted" />
+        <%- end -%>
+        <%- @encoders.each do |encoder| -%>
         <resolver:AttributeEncoder xsi:type="enc:<%= encoder['type'] %>"
-            <% if encoder['name'] %>name="<%= encoder['name'] %>"<% end %>
-            <% if encoder['friendly_name'] %>friendlyName="<%= encoder['friendly_name'] %>"<% end %>
-            <% if encoder['encode_type'] %>encodeType="<%= encoder['encode_type'] %>"<% end %>
-            />
-        <% end -%>
+            <%- if encoder['name'] -%>
+            name="<%= encoder['name'] %>"
+            <%- end -%>
+            <%- if encoder['name_format'] -%>
+            nameFormat="<%= encoder['name_format'] %>"
+            <%- end -%>
+            <%- if encoder['friendly_name'] -%>
+            friendlyName="<%= encoder['friendly_name'] %>"
+            <%- end -%>
+            <%- if encoder['encode_type'] -%>
+            encodeType="<%= encoder['encode_type'] %>"
+            <%- end %>/>
+        <%- end -%>
+        <%- if @transient -%>
+        <resolver:AttributeEncoder xsi:type="enc:SAML2StringNameID" 
+            nameFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" />
+        <%- end -%>
+        <%- if @type == 'Script' -%>
+        <ad:Script><![CDATA[
+        <%= @script %>
+        ]]></ad:Script>
+        <%- end -%>
     </resolver:AttributeDefinition>
+
+    <%- if @type == 'Script' -%>
+    <resolver:DataConnector xsi:type="dc:Static" id="<%= @id %>_scripted"
+         xmlns="urn:mace:shibboleth:2.0:resolver:dc">
+        <Attribute id="<%= @id %>">
+            <Value>dummy</Value>
+        </Attribute>
+    </resolver:DataConnector>
+
+    <%- end -%>
