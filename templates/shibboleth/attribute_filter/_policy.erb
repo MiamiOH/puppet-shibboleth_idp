@@ -1,0 +1,22 @@
+    <AttributeFilterPolicy id="<%= @id %>">
+        <PolicyRequirementRule xsi:type="OR">
+            <%- @requesters.each do |requester| -%>
+            <%- if requester['url'] -%>
+            <Rule xsi:type="Requester" value="<%= requester['url'] %>" />
+            <%- end -%>
+            <%- if requester['regex'] -%>
+            <Rule xsi:type="RequesterRegex" regex="<%= requester['regex'] %>" />
+            <%- end -%>
+            <%- end -%>
+        </PolicyRequirementRule>
+     
+        <%- @attributes.each do |name,attribute| -%>
+        <AttributeRule attributeID="<%= name %>">
+            <%- if (!attribute['permit'].is_a?(Array) || attribute['permit'].empty?) && (!attribute['deny'].is_a?(Array) || attribute['deny'].empty?) -%>
+            <PermitValueRule xsi:type="ANY" />
+            <%- end -%>
+        </AttributeRule>
+        <%- end -%>
+
+    </AttributeFilterPolicy>
+

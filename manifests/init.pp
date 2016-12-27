@@ -40,6 +40,7 @@ class shibidp (
   $metadata_providers     = $shibidp::params::metadata_providers,
   $dataconnectors         = $shibidp::params::dataconnectors,
   $attributes             = $shibidp::params::attributes,
+  $filters                = $shibidp::params::filters,
 
 ) inherits shibidp::params {
 
@@ -48,11 +49,13 @@ class shibidp (
   class { '::shibidp::install': } ->
   class { '::shibidp::metadata': } ->
   class { '::shibidp::attribute_resolver': } ->
+  class { '::shibidp::attribute_filter': } ->
   class { '::shibidp::jetty': }
 
   contain shibidp::install
   contain shibidp::metadata
   contain shibidp::attribute_resolver
+  contain shibidp::attribute_filter
   contain shibidp::jetty
 
 }

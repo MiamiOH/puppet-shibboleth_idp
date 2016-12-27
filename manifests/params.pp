@@ -41,5 +41,6 @@ class shibidp::params {
   $metadata_providers     = {}
   $dataconnectors         = {}
   $attributes             = {}
+  $filters                = {}
 
 }

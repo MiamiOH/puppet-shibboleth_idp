@@ -49,17 +49,4 @@ class shibidp::metadata inherits shibidp {
     content => template("${module_name}/shibboleth/metadata_providers/_metadata_providers_foot.erb")
   }
 
-  # Create the metadata-providers.xml configuration file.
-  $providers = $shibidp::metadata_providers
-
-  file { "${shibidp::shib_install_base}/conf/metadata-providers.xml":
-    ensure  => file,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
-    mode    => '0600',
-    content => template("${module_name}/shibboleth/conf/metadata-providers.xml.erb"),
-    #require => [File[$shibidp::shib_install_base], Exec['shibboleth idp install']],
-    #notify  => Exec['shibboleth idp build'],
-  }
-
 }

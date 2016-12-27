@@ -18,8 +18,7 @@
             friendlyName="<%= encoder['friendly_name'] %>"
             <%- end -%>
             <%- if encoder['encode_type'] -%>
-            encodeType="<%= encoder['encode_type'] %>"
-            <%- end %>/>
+            encodeType="<%= encoder['encode_type'] %>"<%- end %>/>
         <%- end -%>
         <%- if @transient -%>
         <resolver:AttributeEncoder xsi:type="enc:SAML2StringNameID" 

@@ -157,7 +157,7 @@ class shibidp::install inherits shibidp {
   # Render the Shibboleth configuration. These are run time and not used
   # during the build process. It should restart Jetty, though.
   ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
-    'relying-party.xml', 'attribute-filter.xml',
+    'relying-party.xml',
   ].each |$config_file| {
     file { "${shibidp::shib_install_base}/conf/${config_file}":
       ensure  => file,
