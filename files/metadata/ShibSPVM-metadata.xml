@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/metadata.php/shibvm-idp">
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDQDCCAigCCQC+tossbc5drTANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzELMAkGA1UECBMCT0gxDzANBgNVBAcTBk94Zm9yZDEUMBIGA1UEChMLbWlhbWlvaC5lZHUxHzAdBgNVBAMTFnB1cHBldC5tY3MubWlhbWlvaC5lZHUwHhcNMTYxMjIzMTIzODQ5WhcNMjYwNjEwMTIzODQ5WjBiMQswCQYDVQQGEwJVUzELMAkGA1UECBMCT0gxDzANBgNVBAcTBk94Zm9yZDEUMBIGA1UEChMLbWlhbWlvaC5lZHUxHzAdBgNVBAMTFnB1cHBldC5tY3MubWlhbWlvaC5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLFUuRwjR2MUQpL8VdOnlZ0HD/UPy4lbOZgP3StHua95XRuaIjBwqaUE0kWkO58tS0QKV80YDcVJjYVRCNsQ7uA8tUC3sIBxWScNLknzYt2LNe9zpKsTAFbMkNkaXTwELG7T9qHQke9hrPxhSNUpWlyoBSI0I4kTzoXxW2gmmMzifzxr5w1DpLN2VmdtrguZGvef1mwCbl5mWLMM/IKEa8iomJE536zrMEcb+tcvmSwOQdVy60vB0CrLyv5P4qQbvlqLDM4kuBOPmwi4ZtgZoQLZrexHaUvDDcNEMqujofvt/rVfnYiy9hTbrWYe8KsnJDAijx211dgpz0oJHZkXrTAgMBAAEwDQYJKoZIhvcNAQELBQADggEBADTxbvScgv9qm7rforW1Gl0dE3xejz74dtPuCV8gh/UY2N2gik8p28fLff5gAHBjBmQbA/Lf60dFwpp+upk1wwNp5ZjPC8R0drmIksjhtLWJVFtkhKsT6w0nMb83eU88jR9Stl0jrMthhOAgDZSm987VbRinBpMMbRciP+Ez/CtRlTy43LGLSQcqTaW0BTSXqIpX0ijVRttKTyqN56iBiJ0/r96Buwzo7RplDnQZ6l0w+7YNRhvhcnNHkFooy1UEeMA9n1/48f5GdYfLE+bga7bwZfa8bd8qLwZ8gPXgN9JW7GYTudOVk5KrSJrf2hw6WBelhZz93DJEpiJ1/7oYU9k=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDQDCCAigCCQC+tossbc5drTANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzELMAkGA1UECBMCT0gxDzANBgNVBAcTBk94Zm9yZDEUMBIGA1UEChMLbWlhbWlvaC5lZHUxHzAdBgNVBAMTFnB1cHBldC5tY3MubWlhbWlvaC5lZHUwHhcNMTYxMjIzMTIzODQ5WhcNMjYwNjEwMTIzODQ5WjBiMQswCQYDVQQGEwJVUzELMAkGA1UECBMCT0gxDzANBgNVBAcTBk94Zm9yZDEUMBIGA1UEChMLbWlhbWlvaC5lZHUxHzAdBgNVBAMTFnB1cHBldC5tY3MubWlhbWlvaC5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLFUuRwjR2MUQpL8VdOnlZ0HD/UPy4lbOZgP3StHua95XRuaIjBwqaUE0kWkO58tS0QKV80YDcVJjYVRCNsQ7uA8tUC3sIBxWScNLknzYt2LNe9zpKsTAFbMkNkaXTwELG7T9qHQke9hrPxhSNUpWlyoBSI0I4kTzoXxW2gmmMzifzxr5w1DpLN2VmdtrguZGvef1mwCbl5mWLMM/IKEa8iomJE536zrMEcb+tcvmSwOQdVy60vB0CrLyv5P4qQbvlqLDM4kuBOPmwi4ZtgZoQLZrexHaUvDDcNEMqujofvt/rVfnYiy9hTbrWYe8KsnJDAijx211dgpz0oJHZkXrTAgMBAAEwDQYJKoZIhvcNAQELBQADggEBADTxbvScgv9qm7rforW1Gl0dE3xejz74dtPuCV8gh/UY2N2gik8p28fLff5gAHBjBmQbA/Lf60dFwpp+upk1wwNp5ZjPC8R0drmIksjhtLWJVFtkhKsT6w0nMb83eU88jR9Stl0jrMthhOAgDZSm987VbRinBpMMbRciP+Ez/CtRlTy43LGLSQcqTaW0BTSXqIpX0ijVRttKTyqN56iBiJ0/r96Buwzo7RplDnQZ6l0w+7YNRhvhcnNHkFooy1UEeMA9n1/48f5GdYfLE+bga7bwZfa8bd8qLwZ8gPXgN9JW7GYTudOVk5KrSJrf2hw6WBelhZz93DJEpiJ1/7oYU9k=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/saml2-logout.php/shibvm-idp"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/saml2-acs.php/shibvm-idp" index="0"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/saml1-acs.php/shibvm-idp" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/saml2-acs.php/shibvm-idp" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://shibvm-sp.miamioh.edu:31443/simplesaml/module.php/saml/sp/saml1-acs.php/shibvm-idp/artifact" index="3"/>
+  </md:SPSSODescriptor>
+</md:EntityDescriptor>

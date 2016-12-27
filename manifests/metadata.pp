@@ -4,8 +4,6 @@
 
 class shibidp::metadata inherits shibidp {
 
-  $providers = $shibidp::metadata_files
-
   # This is the InCommon signing key public cert used to validate the downloaded
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.
@@ -31,7 +29,29 @@ class shibidp::metadata inherits shibidp {
     #notify  => Exec['shibboleth idp build'],
   }
 
+  # Create the attribute-resolver.xml configuration file.
+  concat { 'metadata-providers.xml':
+    path    => "${shibidp::shib_install_base}/conf/metadata-providers.xml",
+    owner   => $shibidp::shib_user,
+    group   => $shibidp::shib_group,
+    mode    => '0600',
+  }
+
+  concat::fragment { 'metadata_providers_head':
+    target  => 'metadata-providers.xml',
+    order   => '01',
+    content => template("${module_name}/shibboleth/metadata_providers/_metadata_providers_head.erb")
+  }
+
+  concat::fragment { 'metadata_providers_foot':
+    target  => 'metadata-providers.xml',
+    order   => '99',
+    content => template("${module_name}/shibboleth/metadata_providers/_metadata_providers_foot.erb")
+  }
+
   # Create the metadata-providers.xml configuration file.
+  $providers = $shibidp::metadata_providers
+
   file { "${shibidp::shib_install_base}/conf/metadata-providers.xml":
     ensure  => file,
     owner   => $shibidp::shib_user,
@@ -40,21 +60,6 @@ class shibidp::metadata inherits shibidp {
     content => template("${module_name}/shibboleth/conf/metadata-providers.xml.erb"),
     #require => [File[$shibidp::shib_install_base], Exec['shibboleth idp install']],
     #notify  => Exec['shibboleth idp build'],
-  }
-
-  # Manage the SP metadata backing files. These are provided by some SPs
-  # out-of-band.
-  $providers.each |$key, $config| {
-    $config_real = pick($config, {})
-    $file = pick($config_real['filename'], "${key}-metadata.xml")
-    file { "${shibidp::shib_install_base}/metadata/${file}":
-      ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      mode    => '0644',
-      source  => "puppet:///modules/${module_name}/metadata/${file}",
-      #require => Exec['shibboleth idp install'],
-    }
   }
 
 }

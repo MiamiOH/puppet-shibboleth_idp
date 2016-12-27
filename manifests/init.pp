@@ -37,13 +37,13 @@ class shibidp (
   $ks_password            = $shibidp::params::ks_password,
   $ldap_cert_type         = $shibidp::params::ldap_cert_type,
 
-  $metadata_files         = $shibidp::params::metadata_files,
+  $metadata_providers     = $shibidp::params::metadata_providers,
   $dataconnectors         = $shibidp::params::dataconnectors,
   $attributes             = $shibidp::params::attributes,
 
 ) inherits shibidp::params {
 
-  validate_hash($metadata_files)
+  validate_hash($metadata_providers)
 
   class { '::shibidp::install': } ->
   class { '::shibidp::metadata': } ->

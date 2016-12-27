@@ -1,0 +1,6 @@
+    <MetadataProvider id="<%= @id %>" xsi:type="FilesystemMetadataProvider"
+        xmlns="urn:mace:shibboleth:2.0:metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:mace:shibboleth:2.0:metadata http://shibboleth.net/schema/idp/shibboleth-metadata.xsd"
+        failFastInitialization="true"
+        metadataFile="%{idp.home}/metadata/<%= @filename %>" />
+
