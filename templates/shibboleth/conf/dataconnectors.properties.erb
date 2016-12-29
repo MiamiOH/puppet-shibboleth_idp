@@ -1,0 +1,19 @@
+# LDAP attribute configuration, see attribute-resolver.xml
+#idp.attribute.resolver.LDAP.ldapURL             = %{idp.authn.LDAP.ldapURL}
+#idp.attribute.resolver.LDAP.baseDN              = %{idp.authn.LDAP.baseDN:undefined}
+#idp.attribute.resolver.LDAP.bindDN              = %{idp.authn.LDAP.bindDN:undefined}
+#idp.attribute.resolver.LDAP.bindDNCredential    = %{idp.authn.LDAP.bindDNCredential:undefined}
+#idp.attribute.resolver.LDAP.useStartTLS         = %{idp.authn.LDAP.useStartTLS:true}
+#idp.attribute.resolver.LDAP.trustCertificates   = %{idp.authn.LDAP.trustCertificates:undefined}
+#idp.attribute.resolver.LDAP.searchFilter        = (uid=$resolutionContext.principal)
+#idp.attribute.resolver.LDAP.returnAttributes    = %{idp.authn.LDAP.returnAttributes}
+#
+#idp.attribute.resolver.AD.ldapURL             = <%= @ad_ldap_url %>
+#idp.attribute.resolver.AD.baseDN              = <%= @ad_base_dn %>
+#idp.attribute.resolver.AD.bindDN              = <%= @ad_bind_dn %>
+#idp.attribute.resolver.AD.bindDNCredential    = <%= @ad_bind_pw %>
+#idp.attribute.resolver.AD.useStartTLS         = false
+#idp.attribute.resolver.AD.trustCertificates   = %{idp.home}/credentials/ad-server.crt
+#idp.attribute.resolver.AD.searchFilter        = (cn=$resolutionContext.principal)
+#idp.attribute.resolver.AD.returnAttributes    = <%= @ad_return_attributes %>
+

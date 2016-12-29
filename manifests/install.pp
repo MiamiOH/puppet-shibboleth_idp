@@ -96,23 +96,6 @@ class shibidp::install inherits shibidp {
     }
   }
 
-  # These certs are required for the connections to OpenLDAP and AD to be
-  # trusted. Run:
-  #  openssl s_client -showcerts -connect ldap.miamioh.edu:636
-  # and take the copy the first cert in the chain.
-  ['ldap', 'ad',
-  ].each |$directory| {
-    file { "${shibidp::shib_install_base}/credentials/${directory}-server.crt":
-      ensure  => file,
-      source  => "puppet:///modules/${module_name}/${directory}-${shibidp::ldap_cert_type}-server.crt",
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      mode    => '0644',
-      require => Exec['shibboleth idp install'],
-      notify  => Exec['shibboleth idp build'],
-    }
-  }
-
   # Fetch and install the ShibCAS component.
   archive { '/tmp/master.zip':
     source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',

@@ -1,0 +1,9 @@
+idp.attribute.resolver.<%= @id %>.ldapURL             = <%= @ldap_url %>
+idp.attribute.resolver.<%= @id %>.baseDN              = <%= @ldap_base_dn %>
+idp.attribute.resolver.<%= @id %>.bindDN              = <%= @ldap_principal %>
+idp.attribute.resolver.<%= @id %>.bindDNCredential    = <%= @ldap_principal_credential %>
+idp.attribute.resolver.<%= @id %>.useStartTLS         = <%= @ldap_use_start_tls %>
+idp.attribute.resolver.<%= @id %>.trustCertificates   = %{idp.home}/<%= @ldap_filter_tls_trust_cert %>
+idp.attribute.resolver.<%= @id %>.searchFilter        = <%= @ldap_filter_template %>
+idp.attribute.resolver.<%= @id %>.returnAttributes    = <%= @ldap_return_attributes.join(',') %>
+
