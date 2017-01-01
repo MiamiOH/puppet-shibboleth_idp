@@ -5,7 +5,7 @@
 idp.authn.LDAP.authenticator                   = bindSearchAuthenticator
 
 ## Connection properties ##
-idp.authn.LDAP.ldapURL                          = <%= @ldap_url %>
+idp.authn.LDAP.ldapURL                         = <%= @ldap_url %>
 idp.authn.LDAP.useStartTLS                     = false
 idp.authn.LDAP.useSSL                          = true
 idp.authn.LDAP.connectTimeout                  = 3000
@@ -13,37 +13,37 @@ idp.authn.LDAP.connectTimeout                  = 3000
 ## SSL configuration, either jvmTrust, certificateTrust, or keyStoreTrust
 idp.authn.LDAP.sslConfig                       = certificateTrust
 ## If using certificateTrust above, set to the trusted certificate's path
-idp.authn.LDAP.trustCertificates                = %{idp.home}/credentials/ldap-server.crt
+idp.authn.LDAP.trustCertificates               = %{idp.home}/credentials/ldap-server.crt
 ## If using keyStoreTrust above, set to the truststore path
-#idp.authn.LDAP.trustStore                       = %{idp.home}/credentials/ldap-server.truststore
+#idp.authn.LDAP.trustStore                     = %{idp.home}/credentials/ldap-server.truststore
 
 ## Return attributes during authentication
 ## NOTE: there is a separate property used for attribute resolution
-idp.authn.LDAP.returnAttributes                 = <%= @ldap_return_attributes.join(',') %>
+idp.authn.LDAP.returnAttributes                = <%= @ldap_return_attributes.join(',') %>
 
 ## DN resolution properties ##
 
 # Search DN resolution, used by anonSearchAuthenticator, bindSearchAuthenticator
 # for AD: CN=Users,DC=example,DC=org
-idp.authn.LDAP.baseDN                           = <%= @ldap_base_dn %>
-#idp.authn.LDAP.subtreeSearch                   = false
-idp.authn.LDAP.userFilter                       = (uid={user})
+idp.authn.LDAP.baseDN                          = <%= @ldap_base_dn %>
+#idp.authn.LDAP.subtreeSearch                  = false
+idp.authn.LDAP.userFilter                      = (uid={user})
 # bind search configuration
 # for AD: idp.authn.LDAP.bindDN=adminuser@domain.com
-idp.authn.LDAP.bindDN                           = <%= @ldap_bind_dn %>
-idp.authn.LDAP.bindDNCredential                 = <%= @ldap_bind_pw %>
+idp.authn.LDAP.bindDN                          = <%= @ldap_bind_dn %>
+idp.authn.LDAP.bindDNCredential                = <%= @ldap_bind_pw %>
 
 # Format DN resolution, used by directAuthenticator, adAuthenticator
 # for AD use idp.authn.LDAP.dnFormat=%s@domain.com
-idp.authn.LDAP.dnFormat                         = <%= @ldap_dn_format %>
+idp.authn.LDAP.dnFormat                        = <%= @ldap_dn_format %>
 
 # LDAP pool configuration, used for both authn and DN resolution
-#idp.pool.LDAP.minSize                          = 3
-#idp.pool.LDAP.maxSize                          = 10
-#idp.pool.LDAP.validateOnCheckout               = false
-#idp.pool.LDAP.validatePeriodically             = true
-#idp.pool.LDAP.validatePeriod                   = 300
-#idp.pool.LDAP.prunePeriod                      = 300
-#idp.pool.LDAP.idleTime                         = 600
-#idp.pool.LDAP.blockWaitTime                    = 3000
-#idp.pool.LDAP.failFastInitialize               = false
+#idp.pool.LDAP.minSize                         = 3
+#idp.pool.LDAP.maxSize                         = 10
+#idp.pool.LDAP.validateOnCheckout              = false
+#idp.pool.LDAP.validatePeriodically            = true
+#idp.pool.LDAP.validatePeriod                  = 300
+#idp.pool.LDAP.prunePeriod                     = 300
+#idp.pool.LDAP.idleTime                        = 600
+#idp.pool.LDAP.blockWaitTime                   = 3000
+#idp.pool.LDAP.failFastInitialize              = false

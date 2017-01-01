@@ -99,6 +99,7 @@ idp.encryption.cert= %{idp.home}/credentials/idp-encryption.crt
 # Regular expression matching login flows to enable, e.g. IPAddress|Password
 #idp.authn.flows= Password
 
+<%- if @include_cas -%>
 idp.authn.flows= Shibcas
 
 # CAS Client properties (usage loosely matches that of the Java CAS Client)
@@ -108,6 +109,7 @@ shibcas.casServerLoginUrl = ${shibcas.casServerUrlPrefix}/login
 
 ## Shibboleth Server Properties
 shibcas.serverName = <%= @idp_server_url %>
+<%- end -%>
 
 # Regular expression of forced "initial" methods when no session exists,
 # usually in conjunction with the idp.authn.resolveAttribute property below.

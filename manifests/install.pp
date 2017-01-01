@@ -10,6 +10,8 @@ class shibidp::install inherits shibidp {
   $exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
   $java_home = $::profile::java::java_home
 
+  $include_cas = $shibidp::include_cas
+
   file { $shibidp::shib_src_dir:
     ensure => directory,
   }
@@ -98,50 +100,50 @@ class shibidp::install inherits shibidp {
   }
 
   # Fetch and install the ShibCAS component.
-  # TODO Make CAS an optional install (must also address authn config)
-  archive { '/tmp/master.zip':
-    source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
-    extract      => true,
-    extract_path => '/tmp',
-    cleanup      => true,
-    creates      => '/tmp/shib-cas-authn3-master/README.md',
-  } ->
+  if $include_cas {
+    archive { '/tmp/master.zip':
+      source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
+      extract      => true,
+      extract_path => '/tmp',
+      cleanup      => true,
+      creates      => '/tmp/shib-cas-authn3-master/README.md',
+    } ->
 
-  file { "${shibidp::shib_install_base}/flows/authn/Shibcas":
-    ensure  => directory,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
-    mode    => '0644',
-    recurse => true,
-    source  => '/tmp/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas',
-    require => Exec['shibboleth idp install'],
-    notify  => Exec['shibboleth idp build'],
-  }
+    file { "${shibidp::shib_install_base}/flows/authn/Shibcas":
+      ensure  => directory,
+      owner   => $shibidp::shib_user,
+      group   => $shibidp::shib_group,
+      mode    => '0644',
+      recurse => true,
+      source  => '/tmp/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas',
+      require => Exec['shibboleth idp install'],
+      notify  => Exec['shibboleth idp build'],
+    }
 
-  archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
-    source  => 'https://github.com/Unicon/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar',
-    extract => false,
-    cleanup => false,
-    creates => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar",
-    require => Exec['shibboleth idp install'],
-    notify  => Exec['shibboleth idp build'],
-  }
+    archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
+      source  => 'https://github.com/Unicon/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar',
+      extract => false,
+      cleanup => false,
+      creates => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar",
+      require => Exec['shibboleth idp install'],
+      notify  => Exec['shibboleth idp build'],
+    }
 
-  # This one does not support https, so verify the md5 hash
-  archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar":
-    source        => 'http://central.maven.org/maven2/org/jasig/cas/client/cas-client-core/3.4.1/cas-client-core-3.4.1.jar',
-    extract       => false,
-    cleanup       => false,
-    checksum_type => 'md5',
-    checksum      => '0cde05fb6892018f19913eb6f3081758',
-    creates       => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar",
-    require       => Exec['shibboleth idp install'],
-    notify        => Exec['shibboleth idp build'],
+    # This one does not support https, so verify the md5 hash
+    archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar":
+      source        => 'http://central.maven.org/maven2/org/jasig/cas/client/cas-client-core/3.4.1/cas-client-core-3.4.1.jar',
+      extract       => false,
+      cleanup       => false,
+      checksum_type => 'md5',
+      checksum      => '0cde05fb6892018f19913eb6f3081758',
+      creates       => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar",
+      require       => Exec['shibboleth idp install'],
+      notify        => Exec['shibboleth idp build'],
+    }
   }
 
   # Render the Shibboleth configuration. These are run time and not used
   # during the build process. It should restart Jetty, though.
-  # TODO Create defined type for relying party and concat config file
   ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
   ].each |$config_file| {
     file { "${shibidp::shib_install_base}/conf/${config_file}":
