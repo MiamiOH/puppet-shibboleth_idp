@@ -1,5 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::metadata
+#
+# This class manages the IdP metadata and providers
 #
 
 class shibidp::metadata inherits shibidp {
@@ -7,14 +8,13 @@ class shibidp::metadata inherits shibidp {
   # This is the InCommon signing key public cert used to validate the downloaded
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.
+  # TODO Make this optional and source directly (also impacts the provider xml file)
   file { "${shibidp::shib_install_base}/credentials/inc-md-cert.pem":
     ensure  => file,
     source  => "puppet:///modules/${module_name}/inc-md-cert.pem",
     owner   => $shibidp::shib_user,
     group   => $shibidp::shib_group,
     mode    => '0644',
-    #require => Exec['shibboleth idp install'],
-    #notify  => Exec['shibboleth idp build'],
   }
 
   # The idp-metadata.xml file represents our IdP to service providers. It
@@ -25,11 +25,12 @@ class shibidp::metadata inherits shibidp {
   file { "${shibidp::shib_install_base}/metadata/idp-metadata.xml":
     ensure  => file,
     content => template("${module_name}/shibboleth/metadata/idp-metadata.xml.erb"),
-    #require => Exec['shibboleth idp install'],
-    #notify  => Exec['shibboleth idp build'],
   }
 
-  # Create the attribute-resolver.xml configuration file.
+  # The metadata for SPs comes from a federation (InCommon) or directly
+  # from the SP. The provider configuration will collect all of the provided
+  # sources so the IdP can load them.
+  # Create the metadata-providers.xml configuration file.
   concat { 'metadata-providers.xml':
     path    => "${shibidp::shib_install_base}/conf/metadata-providers.xml",
     owner   => $shibidp::shib_user,

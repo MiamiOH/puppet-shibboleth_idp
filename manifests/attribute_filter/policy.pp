@@ -1,3 +1,8 @@
+# Type: shibidp::attribute_filter::policy
+#
+# This type represents a policy applied during attribute filtering
+#
+
 define shibidp::attribute_filter::policy (
   $id = $name,
 

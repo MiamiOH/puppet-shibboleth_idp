@@ -1,6 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: apache
 #
+# This class installs the Shibboleth IdP
 
 class shibidp (
   $shib_idp_version       = $shibidp::params::shib_idp_version,

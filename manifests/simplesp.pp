@@ -1,5 +1,6 @@
-# profile/shibboleth/simplesp.pp
-# Manage Shibboleth Simple SP Service
+# Class: shibidp::simplesp
+#
+# This class provisions a SimpleSAMLPHP based SP for testing
 #
 
 class shibidp::simplesp (

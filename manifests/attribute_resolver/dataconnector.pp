@@ -1,3 +1,8 @@
+# Type: shibidp::attribute_filter::dataconnector
+#
+# This type represents a data connector for resolving attributes
+#
+
 define shibidp::attribute_resolver::dataconnector (
   $id = $name,
   $type = undef,

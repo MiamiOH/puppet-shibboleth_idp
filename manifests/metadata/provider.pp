@@ -1,3 +1,8 @@
+# Type: shibidp::metadata::provider
+#
+# This type represents an SP metadata provider
+#
+
 define shibidp::metadata::provider (
   $id = $name,
   $filename = "${name}-metadata.xml",
@@ -20,7 +25,6 @@ define shibidp::metadata::provider (
     group   => $group,
     mode    => $mode,
     source  => "${source_path}/${source_file}",
-    #require => Exec['shibboleth idp install'],
   }
 
 }

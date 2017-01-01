@@ -1,5 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::params
+#
+# This class manages parameters for provisioning
 #
 
 class shibidp::params {

@@ -86,4 +86,4 @@ Pull Requests welcome
 
 ## Contributors
 
-Chris Edester (edestecd)
+Dirk Tepe (tepeds)

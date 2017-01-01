@@ -1,5 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::attribute_resolver
+#
+# This class creates the attribute resolver configuration
 #
 
 class shibidp::attribute_resolver inherits shibidp {

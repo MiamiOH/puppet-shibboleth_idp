@@ -1,5 +1,7 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::jetty
+#
+# This class sets up the JETTY_BASE to be used for the IdP
+# It DOES NOT install Jetty itself.
 #
 
 class shibidp::jetty inherits shibidp {
@@ -72,7 +74,6 @@ class shibidp::jetty inherits shibidp {
       mode    => '0644',
       source  => "/tmp/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
       require => Archive["/tmp/logback-${shibidp::logback_version}.tar.gz"],
-      #notify  => Service['jetty'],
     }
   }
 
@@ -85,7 +86,6 @@ class shibidp::jetty inherits shibidp {
       mode    => '0644',
       content => template("${module_name}/jetty_base/${config_file}.erb"),
       require => File[$shibidp::idp_jetty_base],
-      #notify  => Service['jetty'],
     }
   }
 

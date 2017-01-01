@@ -1,5 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::attribute_filter
+#
+# This class creates the attribute filter configuration
 #
 
 class shibidp::attribute_filter inherits shibidp {

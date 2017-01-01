@@ -1,5 +1,6 @@
-# profile/shibboleth/idp.pp
-# Manage Shibboleth IdP Service
+# Class: shibidp::params
+#
+# This is the core class for installing the IdP software
 #
 
 class shibidp::install inherits shibidp {
@@ -97,6 +98,7 @@ class shibidp::install inherits shibidp {
   }
 
   # Fetch and install the ShibCAS component.
+  # TODO Make CAS an optional install (must also address authn config)
   archive { '/tmp/master.zip':
     source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
     extract      => true,
@@ -139,6 +141,7 @@ class shibidp::install inherits shibidp {
 
   # Render the Shibboleth configuration. These are run time and not used
   # during the build process. It should restart Jetty, though.
+  # TODO Create defined type for relying party and concat config file
   ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
     'relying-party.xml',
   ].each |$config_file| {
@@ -162,7 +165,6 @@ class shibidp::install inherits shibidp {
     path        => "${::path}:${java_home}",
     refreshonly => true,
     unless      => "test -f ${shibidp::shib_install_base}/war/idp.war",
-    #notify      => Service['jetty'],
   }
 
   # The build will be rerun after certain changes in the source material. This
@@ -174,7 +176,6 @@ class shibidp::install inherits shibidp {
     environment => ["JAVA_HOME=${java_home}"],
     path        => "${::path}:${java_home}",
     refreshonly => true,
-    #notify      => Service['jetty'],
   }
 
 }
