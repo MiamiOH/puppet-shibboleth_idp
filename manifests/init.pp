@@ -37,6 +37,7 @@ class shibidp (
   $ks_password            = $shibidp::params::ks_password,
   $ldap_cert_type         = $shibidp::params::ldap_cert_type,
 
+  $relying_party_profiles = $shibidp::params::relying_party_profiles,
   $metadata_providers     = $shibidp::params::metadata_providers,
   $dataconnectors         = $shibidp::params::dataconnectors,
   $attributes             = $shibidp::params::attributes,
@@ -47,12 +48,14 @@ class shibidp (
   validate_hash($metadata_providers)
 
   class { '::shibidp::install': } ->
+  class { '::shibidp::relying_party': } ->
   class { '::shibidp::metadata': } ->
   class { '::shibidp::attribute_resolver': } ->
   class { '::shibidp::attribute_filter': } ->
   class { '::shibidp::jetty': }
 
   contain shibidp::install
+  contain shibidp::relying_party
   contain shibidp::metadata
   contain shibidp::attribute_resolver
   contain shibidp::attribute_filter

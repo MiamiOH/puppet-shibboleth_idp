@@ -143,7 +143,6 @@ class shibidp::install inherits shibidp {
   # during the build process. It should restart Jetty, though.
   # TODO Create defined type for relying party and concat config file
   ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
-    'relying-party.xml',
   ].each |$config_file| {
     file { "${shibidp::shib_install_base}/conf/${config_file}":
       ensure  => file,

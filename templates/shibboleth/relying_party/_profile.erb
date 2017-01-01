@@ -1,0 +1,11 @@
+        <bean parent="RelyingPartyByName" c:relyingPartyIds="<%= @entity_id %>">
+            <%- @properties.each do |property| -%>
+            <property name="<%= property['name'] %>">
+                <list>
+                    <%- property['beans'].each do |bean| -%>
+                    <bean parent="<%= bean['parent'] %>"<%- if !bean['encryptAssertions'].nil? %> p:encryptAssertions="<%= bean['encryptAssertions'] %>"<% end %><% if !bean['encryptNameIDs'].nil? %> p:encryptNameIDs="<%= bean['encryptAssertions'] %>"<% end %> />
+                    <%- end -%>
+                </list>
+            </property>
+            <%- end -%>
+        </bean>

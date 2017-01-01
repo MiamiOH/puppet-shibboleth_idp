@@ -39,6 +39,7 @@ class shibidp::params {
   $ks_password            = cache_data('cache_data/shibboleth', "keystore_${::environment}_password", random_password(32))
   $ldap_cert_type         = 'test'
 
+  $relying_party_profiles = {}
   $metadata_providers     = {}
   $dataconnectors         = {}
   $attributes             = {}

@@ -48,22 +48,3 @@
     
     <util:list id="shibboleth.RelyingPartyOverrides">
     
-        <bean parent="RelyingPartyByName" c:relyingPartyIds="https://training.wecomply.com/wc2">
-            <property name="profileConfigurations">
-                <list>
-                    <bean parent="SAML2.SSO" p:encryptAssertions="false" p:encryptNameIDs="false" />
-                </list>
-            </property>
-        </bean>
-        
-        <bean parent="RelyingPartyByName" c:relyingPartyIds="https://idp.testshib.org/idp/shibboleth">
-            <property name="profileConfigurations">
-                <list>
-                    <bean parent="SAML2.SSO" p:encryptAssertions="false" />
-                </list>
-            </property>
-        </bean>
-        
-    </util:list>
-
-</beans>
