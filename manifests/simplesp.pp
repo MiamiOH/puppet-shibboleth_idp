@@ -2,17 +2,28 @@
 #
 # This class provisions a SimpleSAMLPHP based SP for testing
 #
+# IMPORTANT!!!!
+#
+# This VM is intended only for testing in a local Vagrant environment.
+# It should not be built in the data center for any reason. If an SP
+# is needed for additional testing, we will need to provision one for
+# that purpose.
+#
 
 class shibidp::simplesp (
-  $ss_version     = '1.14.11',
-  $install_base   = '/var/simplesamlphp',
-  $sp_host        = 'shibvm-sp.miamioh.edu:31443',
-  $sp_url_path    = 'simplesaml',
-  $admin_password = cache_data('cache_data/shibboleth', "simplesp_${::environment}_adminpassword", random_password(32)),
-  $secret_salt    = cache_data('cache_data/shibboleth', "simplesp_${::environment}_secretsalt", random_password(64)),
-){
+  $ss_version        = $shibidp::params::ss_version,
+  $ss_install_base   = $shibidp::params::ss_install_base,
+  $ss_sp_host        = $shibidp::params::ss_sp_host,
+  $ss_sp_port        = $shibidp::params::ss_sp_port,
+  $ss_sp_domain      = $shibidp::params::ss_sp_domain,
+  $ss_sp_url_path    = $shibidp::params::ss_sp_url_path,
+  $ss_admin_password = $shibidp::params::ss_admin_password,
+  $ss_secret_salt    = $shibidp::params::ss_secret_salt,
+  $ss_cert_owner     = $shibidp::params::ss_cert_owner,
+  $ss_cert_group     = $shibidp::params::ss_cert_group,
+) inherits shibidp::params {
 
-  file { $install_base:
+  file { $ss_install_base:
     ensure => directory,
   } ->
 
@@ -20,50 +31,33 @@ class shibidp::simplesp (
     source          => "https://github.com/simplesamlphp/simplesamlphp/releases/download/v${ss_version}/simplesamlphp-${ss_version}.tar.gz",
     extract         => true,
     extract_command => 'tar xfz %s --strip-components=1',
-    extract_path    => $install_base,
-    creates         => "${install_base}/README.md",
+    extract_path    => $ss_install_base,
+    creates         => "${ss_install_base}/README.md",
     cleanup         => true,
   }
 
   ['config/config.php', 'config/authsources.php', 'metadata/saml20-idp-remote.php',
   ].each |$config_file| {
-    file { "${install_base}/${config_file}":
+    file { "${ss_install_base}/${config_file}":
       ensure  => file,
       content => template("${module_name}/simplesp/${config_file}.erb"),
       require => Archive["/tmp/simplesamlphp-${ss_version}.tar.gz"],
     }
   }
 
-  openssl::certificate::x509 { 'sp':
+  # This cert pair is used only for signing SAML assertions between the SP
+  # and an IdP. It is NOT user facing via the web server.
+  openssl::certificate::x509 { $ss_sp_host:
     ensure       => present,
     country      => 'US',
     organization => 'miamioh.edu',
-    commonname   => $::fqdn,
+    commonname   => $ss_sp_host,
     state        => 'OH',
     locality     => 'Oxford',
     days         => 3456,
-    base_dir     => "${install_base}/cert",
-    owner        => $::apache::params::user,
-    group        => $::apache::params::group,
+    base_dir     => "${ss_install_base}/cert",
+    owner        => $ss_cert_owner,
+    group        => $ss_cert_group,
   }
 
-  apache::vhost { $::fqdn:
-    port          => 443,
-    ssl           => true,
-    docroot       => '/var/www/html',
-    default_vhost => true,
-    setenv        => ["SIMPLESAMLPHP_CONFIG_DIR ${install_base}/config"],
-    aliases       => [
-      {
-        'alias' => '/simplesaml',
-        'path'  => "${install_base}/www",
-      },
-    ],
-    directories   => [
-      {
-        path    => "${install_base}/www",
-        require => 'all granted',
-      },
-    ],
-  }
 }

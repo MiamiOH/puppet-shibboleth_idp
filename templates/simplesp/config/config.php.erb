@@ -21,7 +21,7 @@ $config = array(
      * external url, no matter where you come from (direct access or via the
      * reverse proxy).
      */
-    'baseurlpath' => 'https://<%= @sp_host %>/<%= @sp_url_path %>/',
+    'baseurlpath' => 'https://<%= @ss_sp_domain %>/<%= @ss_sp_url_path %>/',
     'certdir' => 'cert/',
     'loggingdir' => 'log/',
     'datadir' => 'data/',
@@ -75,7 +75,7 @@ $config = array(
      * metadata listing and diagnostics pages.
      * You can also put a hash here; run "bin/pwgen.php" to generate one.
      */
-    'auth.adminpassword' => '<%= @admin_password %>',
+    'auth.adminpassword' => '<%= @ss_admin_password %>',
     'admin.protectindexpage' => false,
     'admin.protectmetadata' => false,
 
@@ -87,7 +87,7 @@ $config = array(
      * A possible way to generate a random salt is by running the following command from a unix shell:
      * tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
      */
-    'secretsalt' => '<%= @secret_salt %>',
+    'secretsalt' => '<%= @ss_secret_salt %>',
 
     /*
      * Some information about the technical persons running this installation.
@@ -846,6 +846,6 @@ $config = array(
      * Example:
      *   'trusted.url.domains' => array('sp.example.com', 'app.example.com'),
      */
-    'trusted.url.domains' => array('<%= @sp_host %>'),
+    'trusted.url.domains' => array('<%= @ss_sp_domain %>'),
 
 );

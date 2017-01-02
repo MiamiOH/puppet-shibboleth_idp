@@ -13,8 +13,8 @@ $config = array(
     'shibvm-idp' => array(
         'saml:SP',
 
-        'privatekey' => 'sp.key',
-        'certificate' => 'sp.crt',
+        'privatekey' => '<%= @ss_sp_host %>.key',
+        'certificate' => '<%= @ss_sp_host %>.crt',
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
@@ -30,8 +30,8 @@ $config = array(
     'default-sp' => array(
         'saml:SP',
 
-        'privatekey' => 'sp.key',
-        'certificate' => 'sp.crt',
+        'privatekey' => '<%= @ss_sp_host %>.key',
+        'certificate' => '<%= @ss_sp_host %>.crt',
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
