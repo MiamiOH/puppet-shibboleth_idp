@@ -101,14 +101,14 @@ class shibidp::jetty (
     recurse => true,
   }
 
-  archive { "/tmp/slf4j-${shibidp::slf4j_version}.tar.gz":
+  archive { "/usr/local/src/slf4j-${shibidp::slf4j_version}.tar.gz":
     source        => "http://slf4j.org/dist/slf4j-${shibidp::slf4j_version}.tar.gz",
     extract       => true,
-    extract_path  => '/tmp',
+    extract_path  => '/usr/local/src',
     cleanup       => false,
     checksum_type => $shibidp::slf4j_checksum_type,
     checksum      => $shibidp::slf4j_checksum,
-    creates       => "/tmp/slf4j-${shibidp::slf4j_version}/README.md",
+    creates       => "/usr/local/src/slf4j-${shibidp::slf4j_version}/README.md",
   }
 
   file { "${shibidp::idp_jetty_base}/lib/logging/slf4j-api.jar":
@@ -116,18 +116,18 @@ class shibidp::jetty (
     owner   => $shibidp::shib_user,
     group   => $shibidp::shib_group,
     mode    => '0644',
-    source  => "/tmp/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
-    require => Archive["/tmp/slf4j-${shibidp::slf4j_version}.tar.gz"],
+    source  => "/usr/local/src/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
+    require => Archive["/usr/local/src/slf4j-${shibidp::slf4j_version}.tar.gz"],
   }
   
-  archive { "/tmp/logback-${shibidp::logback_version}.tar.gz":
+  archive { "/usr/local/src/logback-${shibidp::logback_version}.tar.gz":
     source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
     extract       => true,
-    extract_path  => '/tmp',
+    extract_path  => '/usr/local/src',
     cleanup       => false,
     checksum_type => $shibidp::logback_checksum_type,
     checksum      => $shibidp::logback_checksum,
-    creates       => "/tmp/logback-${shibidp::logback_version}/README.txt",
+    creates       => "/usr/local/src/logback-${shibidp::logback_version}/README.txt",
   }
   
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
@@ -136,8 +136,8 @@ class shibidp::jetty (
       owner   => $shibidp::shib_user,
       group   => $shibidp::shib_group,
       mode    => '0644',
-      source  => "/tmp/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
-      require => Archive["/tmp/logback-${shibidp::logback_version}.tar.gz"],
+      source  => "/usr/local/src/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
+      require => Archive["/usr/local/src/logback-${shibidp::logback_version}.tar.gz"],
     }
   }
 
