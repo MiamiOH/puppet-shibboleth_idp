@@ -1,4 +1,4 @@
-# Class: shibidp::params
+# Class: shibidp::install
 #
 # This is the core class for installing the IdP software
 #

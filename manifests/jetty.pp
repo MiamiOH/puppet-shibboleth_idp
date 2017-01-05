@@ -4,10 +4,74 @@
 # It DOES NOT install Jetty itself.
 #
 
-class shibidp::jetty inherits shibidp {
+class shibidp::jetty (
+  $jetty_version          = $shibidp::params::jetty_version,
+  $jetty_home             = $shibidp::params::jetty_home,
+  $jetty_manage_user      = $shibidp::params::jetty_manage_user,
+  $jetty_user             = $shibidp::params::jetty_user,
+  $jetty_group            = $shibidp::params::jetty_group,
+  $jetty_service_ensure   = $shibidp::params::jetty_service_ensure,
+  $jetty_java_home        = $shibidp::params::jetty_java_home,
+) inherits shibidp {
 
-  $java_home = $::profile::java::java_home
-  $jetty_home = $::jetty::home
+  $java_home = $jetty_java_home
+
+  if $jetty_manage_user {
+    ensure_resource('user', $jetty_user, {
+      managehome => true,
+      system     => true,
+      gid        => jetty_group,
+      shell      => '/sbin/nologin',
+    })
+
+    ensure_resource('group', jetty_group, { 
+      ensure => present
+    })
+  }
+
+  archive { "/usr/local/src/jetty-distribution-${jetty_version}.tar.gz":
+    source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
+    extract      => true,
+    extract_path => $jetty_home,
+    cleanup      => false,
+    creates      => "${jetty_home}/jetty-distribution-${jetty_version}",
+    notify  => Service["jetty"]
+  } ->
+
+  file { "${home}/jetty":
+    ensure => 'link',
+    target => "${home}/jetty-distribution-${version}",
+  } ->
+
+  file { "/var/log/jetty":
+    ensure => "${jetty_home}/jetty/logs",
+  } ->
+
+  file { "/etc/init.d/jetty":
+    ensure => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+  }
+
+  if $::service_provider == 'systemd' {
+    # systemd::unit_file { 'jetty.service':
+    #   content => template("${module_name}/jetty.service.erb"),
+    #   require => File['/etc/init.d/jetty'],
+    #   before => Service['jetty'],
+    # }
+    file { '/usr/lib/systemd/system/jetty.service':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      content => template("${module_name}/jetty/jetty.service.erb"),
+    }
+  }
+    
+  service { "jetty":
+    enable     => true,
+    ensure     => $jetty_service_ensure,
+    hasstatus  => false,
+    hasrestart => true,
+  }
 
   # TODO Why does notifying the jetty service cause a dependency cycle in puppet?
   # TODO Why is the jetty service running as root?

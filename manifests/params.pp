@@ -41,6 +41,14 @@ class shibidp::params {
   $attributes             = {}
   $filters                = {}
 
+  $jetty_version          = undef
+  $jetty_home             = '/opt'
+  $jetty_manage_user      = true
+  $jetty_user             = 'jetty'
+  $jetty_group            = 'jetty'
+  $jetty_service_ensure   = 'running'
+  $jetty_java_home        = undef
+
   $ss_version             = '1.14.11'
   $ss_install_base        = '/var/simplesamlphp'
   $ss_sp_host             = 'shibvm-sp.miamioh.edu'
