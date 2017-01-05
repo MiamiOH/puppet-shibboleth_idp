@@ -1,0 +1,14 @@
+---
+stages:
+- test
+
+test:
+  stage: test
+  script:
+  - bundle install --without system_tests development --path vendor/bundle --jobs=3 --retry=3
+  - bundle exec rake test SPEC_OPTS='--format documentation'
+  tags:
+  - ruby21
+  cache:
+    paths:
+    - vendor/bundle

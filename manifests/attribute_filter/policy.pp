@@ -11,9 +11,9 @@ define shibidp::attribute_filter::policy (
 ) {
 
   concat::fragment { "attribute_filter_policy_${id}":
-    target => 'attribute-filter.xml',
-    order  => '20',
-    content => template("${module_name}/shibboleth/attribute_filter/_policy.erb")
+    target  => 'attribute-filter.xml',
+    order   => '20',
+    content => template("${module_name}/shibboleth/attribute_filter/_policy.erb"),
   }
 
 }
