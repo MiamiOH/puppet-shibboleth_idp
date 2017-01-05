@@ -34,13 +34,13 @@ class shibidp::jetty (
     extract      => true,
     extract_path => $jetty_home,
     cleanup      => false,
-    creates      => "${jetty_home}/jetty-distribution-${jetty_version}",
+    creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
     notify  => Service["jetty"]
   } ->
 
-  file { "${home}/jetty":
+  file { "${jetty_home}/jetty":
     ensure => 'link',
-    target => "${home}/jetty-distribution-${version}",
+    target => "${jetty_home}/jetty-distribution-${jetty_version}",
   } ->
 
   file { "/var/log/jetty":
