@@ -18,9 +18,11 @@
             friendlyName="<%= encoder['friendly_name'] %>"
             <%- end -%>
             <%- if encoder['encode_type'] -%>
-            encodeType="<%= encoder['encode_type'] %>"<%- end %>/>
+            encodeType="<%= encoder['encode_type'] %>" <% end %>/>
         <%- end -%>
         <%- if @transient -%>
+        <resolver:AttributeEncoder xsi:type="enc:SAML1StringNameIdentifier"
+            nameFormat="urn:mace:shibboleth:1.0:nameIdentifier" />
         <resolver:AttributeEncoder xsi:type="enc:SAML2StringNameID" 
             nameFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" />
         <%- end -%>
