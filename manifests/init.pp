@@ -13,7 +13,7 @@ class shibidp (
   $idp_entity_id          = $shibidp::params::idp_entity_id,
   $idp_server_url         = $shibidp::params::idp_server_url,
   $idp_server_name        = $shibidp::params::idp_server_name,
-  
+
   $include_cas            = $shibidp::params::include_cas,
   $cas_server_url         = $shibidp::params::cas_server_url,
 
@@ -30,7 +30,7 @@ class shibidp (
   $logback_version        = $shibidp::params::logback_version,
   $logback_checksum_type  = $shibidp::params::logback_checksum_type,
   $logback_checksum       = $shibidp::params::logback_checksum,
-  
+
   $ks_password            = $shibidp::params::ks_password,
 
   $relying_party_profiles = $shibidp::params::relying_party_profiles,
@@ -49,10 +49,10 @@ class shibidp (
   class { '::shibidp::attribute_resolver': } ->
   class { '::shibidp::attribute_filter': }
 
-  contain shibidp::install
-  contain shibidp::relying_party
-  contain shibidp::metadata
-  contain shibidp::attribute_resolver
-  contain shibidp::attribute_filter
+  contain '::shibidp::install'
+  contain '::shibidp::relying_party'
+  contain '::shibidp::metadata'
+  contain '::shibidp::attribute_resolver'
+  contain '::shibidp::attribute_filter'
 
 }

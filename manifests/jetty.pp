@@ -18,14 +18,14 @@ class shibidp::jetty (
 
   if $jetty_manage_user {
     ensure_resource('user', $jetty_user, {
-      managehome => true,
-      system     => true,
-      gid        => jetty_group,
-      shell      => '/sbin/nologin',
+        managehome => true,
+        system     => true,
+        gid        => jetty_group,
+        shell      => '/sbin/nologin',
     })
 
-    ensure_resource('group', jetty_group, { 
-      ensure => present
+    ensure_resource('group', jetty_group, {
+        ensure => present
     })
   }
 
@@ -35,7 +35,7 @@ class shibidp::jetty (
     extract_path => $jetty_home,
     cleanup      => false,
     creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
-    notify  => Service["jetty"]
+    notify       => Service['jetty'],
   } ->
 
   file { "${jetty_home}/jetty":
@@ -43,11 +43,11 @@ class shibidp::jetty (
     target => "${jetty_home}/jetty-distribution-${jetty_version}",
   } ->
 
-  file { "/var/log/jetty":
+  file { '/var/log/jetty':
     ensure => "${jetty_home}/jetty/logs",
   } ->
 
-  file { "/etc/init.d/jetty":
+  file { '/etc/init.d/jetty':
     ensure => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
   }
 
@@ -58,17 +58,17 @@ class shibidp::jetty (
     #   before => Service['jetty'],
     # }
     file { '/usr/lib/systemd/system/jetty.service':
-      ensure => file,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
       content => template("${module_name}/jetty/jetty.service.erb"),
     }
   }
-    
-  service { "jetty":
-    enable     => true,
+
+  service { 'jetty':
     ensure     => $jetty_service_ensure,
+    enable     => true,
     hasstatus  => false,
     hasrestart => true,
   }

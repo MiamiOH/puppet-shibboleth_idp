@@ -20,26 +20,26 @@ define shibidp::attribute_resolver::dataconnector (
 ) {
 
   concat::fragment { "attribute_resolver_dataconnector_${id}":
-    target => 'attribute-resolver.xml',
-    order  => '80',
-    content => template("${module_name}/shibboleth/attribute_resolver/_dataconnector.erb")
+    target  => 'attribute-resolver.xml',
+    order   => '80',
+    content => template("${module_name}/shibboleth/attribute_resolver/_dataconnector.erb"),
   }
 
   if $type == 'LDAPDirectory' {
     concat::fragment { "dataconnector_properties_${id}":
-      target => 'dataconnectors.properties',
-      order  => '10',
-      content => template("${module_name}/shibboleth/attribute_resolver/_ldap_properties.erb")
+      target  => 'dataconnectors.properties',
+      order   => '10',
+      content => template("${module_name}/shibboleth/attribute_resolver/_ldap_properties.erb"),
     }
   }
 
   if $ldap_trust_cert_source {
     file { "${shibidp::shib_install_base}/${ldap_filter_tls_trust_cert}":
-      ensure  => file,
-      source  => $ldap_trust_cert_source,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      mode    => '0644',
+      ensure => file,
+      source => $ldap_trust_cert_source,
+      owner  => $shibidp::shib_user,
+      group  => $shibidp::shib_group,
+      mode   => '0644',
     }
   }
 }

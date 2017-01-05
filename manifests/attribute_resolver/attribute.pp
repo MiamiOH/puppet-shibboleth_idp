@@ -16,9 +16,9 @@ define shibidp::attribute_resolver::attribute (
 ) {
 
   concat::fragment { "attribute_resolver_attribute_${id}":
-    target => 'attribute-resolver.xml',
-    order  => '20',
-    content => template("${module_name}/shibboleth/attribute_resolver/_attribute.erb")
+    target  => 'attribute-resolver.xml',
+    order   => '20',
+    content => template("${module_name}/shibboleth/attribute_resolver/_attribute.erb"),
   }
 
 }

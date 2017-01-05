@@ -14,17 +14,17 @@ define shibidp::metadata::provider (
 ) {
 
   concat::fragment { "metadata_providers_${id}":
-    target => 'metadata-providers.xml',
-    order  => '80',
-    content => template("${module_name}/shibboleth/metadata_providers/_provider.erb")
+    target  => 'metadata-providers.xml',
+    order   => '80',
+    content => template("${module_name}/shibboleth/metadata_providers/_provider.erb"),
   }
 
   file { "${shibidp::shib_install_base}/metadata/${filename}":
-    ensure  => file,
-    owner   => $owner,
-    group   => $group,
-    mode    => $mode,
-    source  => "${source_path}/${source_file}",
+    ensure => file,
+    owner  => $owner,
+    group  => $group,
+    mode   => $mode,
+    source => "${source_path}/${source_file}",
   }
 
 }
