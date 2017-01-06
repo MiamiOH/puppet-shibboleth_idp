@@ -14,7 +14,6 @@ describe 'shibidp', :type => :class do
         it { is_expected.to contain_class('shibidp::metadata') }
         it { is_expected.to contain_class('shibidp::attribute_resolver') }
         it { is_expected.to contain_class('shibidp::attribute_filter') }
-        it { is_expected.to contain_class('shibidp::jetty') }
       end
     end
   end
