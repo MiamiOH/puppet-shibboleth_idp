@@ -52,17 +52,10 @@ class shibidp::jetty (
   }
 
   if $::service_provider == 'systemd' {
-    # systemd::unit_file { 'jetty.service':
-    #   content => template("${module_name}/jetty.service.erb"),
-    #   require => File['/etc/init.d/jetty'],
-    #   before => Service['jetty'],
-    # }
-    file { '/usr/lib/systemd/system/jetty.service':
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
+    systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
+      require => File['/etc/init.d/jetty'],
+      before => Service['jetty'],
     }
   }
 
