@@ -30,7 +30,7 @@ class shibidp::jetty (
     })
   }
 
-  archive { "${src_directory}/jetty-distribution-${jetty_version}.tar.gz":
+  archive { '/tmp/jetty-distribution-${jetty_version}.tar.gz':
     source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
     extract      => true,
     extract_path => $jetty_home,
@@ -102,7 +102,7 @@ class shibidp::jetty (
     recurse => true,
   }
 
-  archive { "${src_directory}/slf4j-${shibidp::slf4j_version}.tar.gz":
+  archive { "/tmp/slf4j-${shibidp::slf4j_version}.tar.gz":
     source        => "http://slf4j.org/dist/slf4j-${shibidp::slf4j_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
@@ -118,10 +118,10 @@ class shibidp::jetty (
     group   => $shibidp::shib_group,
     mode    => '0644',
     source  => "${src_directory}/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
-    require => Archive["${src_directory}/slf4j-${shibidp::slf4j_version}.tar.gz"],
+    require => Archive["/tmp/slf4j-${shibidp::slf4j_version}.tar.gz"],
   }
   
-  archive { "${src_directory}/logback-${shibidp::logback_version}.tar.gz":
+  archive { "/tmp/logback-${shibidp::logback_version}.tar.gz":
     source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
@@ -138,7 +138,7 @@ class shibidp::jetty (
       group   => $shibidp::shib_group,
       mode    => '0644',
       source  => "${src_directory}/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
-      require => Archive["${src_directory}/logback-${shibidp::logback_version}.tar.gz"],
+      require => Archive["/tmp/logback-${shibidp::logback_version}.tar.gz"],
     }
   }
 
