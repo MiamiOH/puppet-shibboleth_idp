@@ -41,6 +41,8 @@ class shibidp::params {
   $attributes             = {}
   $filters                = {}
 
+  $inc_signing_cert_src   = undef
+
   $jetty_version          = undef
   $jetty_home             = '/opt'
   $jetty_manage_user      = true
