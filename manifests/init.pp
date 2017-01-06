@@ -33,6 +33,9 @@ class shibidp (
 
   $ks_password            = $shibidp::params::ks_password,
 
+  $signing_keypair        = $shibidp::params::signing_keypair,
+  $encryption_keypair     = $shibidp::params::encryption_keypair,
+
   $relying_party_profiles = $shibidp::params::relying_party_profiles,
   $metadata_providers     = $shibidp::params::metadata_providers,
   $dataconnectors         = $shibidp::params::dataconnectors,

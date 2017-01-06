@@ -35,6 +35,9 @@ class shibidp::params {
 
   $ks_password            = undef
 
+  $signing_keypair        = {cert => undef, key => undef}
+  $encryption_keypair     = {cert => undef, key => undef}
+
   $relying_party_profiles = {}
   $metadata_providers     = {}
   $dataconnectors         = {}
