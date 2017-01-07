@@ -34,7 +34,7 @@ class shibidp::jetty (
     source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
     extract      => true,
     extract_path => $jetty_home,
-    cleanup      => false,
+    cleanup      => true,
     creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
     notify       => Service['jetty'],
   } ->
