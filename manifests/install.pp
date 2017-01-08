@@ -23,7 +23,7 @@ class shibidp::install inherits shibidp {
     source       => "${profile::core::params::miamioh_env_artifacts_uri}/shibboleth/UnlimitedJCEPolicyJDK8.tar.gz",
     extract      => true,
     extract_path => $shibidp::shib_src_dir,
-    cleanup      => false,
+    cleanup      => true,
     creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
     require      => File[$shibidp::shib_src_dir],
   }
