@@ -30,7 +30,7 @@ class shibidp::jetty (
     })
   }
 
-  archive { '/tmp/jetty-distribution-${jetty_version}.tar.gz':
+  archive { "/tmp/jetty-distribution-${jetty_version}.tar.gz":
     source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
     extract      => true,
     extract_path => $jetty_home,
