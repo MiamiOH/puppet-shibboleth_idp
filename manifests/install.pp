@@ -3,14 +3,13 @@
 # This is the core class for installing the IdP software
 #
 
-class shibidp::install (
-  $java_home = $shibidp::params::java_home,
-) inherits shibidp {
+class shibidp::install inherits shibidp {
 
   ensure_packages('unzip')
 
   $exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
 
+  $java_home = $shibidp::java_home
   $include_cas = $shibidp::include_cas
 
   file { $shibidp::shib_src_dir:
