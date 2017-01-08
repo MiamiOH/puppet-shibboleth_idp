@@ -55,7 +55,7 @@ class shibidp::jetty (
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
       require => File['/etc/init.d/jetty'],
-      before => Service['jetty'],
+      before  => Service['jetty'],
     }
   }
 
