@@ -75,8 +75,9 @@ class shibidp::install inherits shibidp {
   # Install the signing and encryption certs. These are used internally, not
   # through the web front end. Any change requires coordination with InCommon
   # and our service providers.
-  [{name=>'idp-signing', keypair=>$shibidp::signing_keypair}, 
+  [{name=>'idp-signing', keypair=>$shibidp::signing_keypair},
   {name=>'idp-encryption', keypair=>$shibidp::encryption_keypair}].each |$certificate| {
+    # lint:ignore:variable_scope
     $keypair = $certificate['keypair']
 
     file { "${shibidp::shib_install_base}/credentials/${certificate['name']}.crt":
@@ -98,6 +99,7 @@ class shibidp::install inherits shibidp {
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
+    # lint:endignore
   }
 
   # Fetch and install the ShibCAS component.
