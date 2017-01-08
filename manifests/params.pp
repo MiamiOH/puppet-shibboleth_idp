@@ -8,7 +8,7 @@ class shibidp::params {
   $shib_idp_version       = '3.2.1'
   $shib_user              = 'shib'
   $shib_group             = 'shib'
-  $shib_src_dir           = '/root/idpv3-source'
+  $shib_src_dir           = '/opt/idpv3-source'
   $shib_install_base      = '/opt/shibboleth-idp'
   $idp_jetty_base         = '/opt/idp_jetty'
   $idp_jetty_user         = 'jetty'

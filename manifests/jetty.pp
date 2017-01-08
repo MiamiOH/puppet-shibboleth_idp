@@ -21,11 +21,11 @@ class shibidp::jetty (
     ensure_resource('user', $jetty_user, {
         managehome => true,
         system     => true,
-        gid        => jetty_group,
+        gid        => $jetty_group,
         shell      => '/sbin/nologin',
     })
 
-    ensure_resource('group', jetty_group, {
+    ensure_resource('group', $jetty_group, {
         ensure => present
     })
   }
