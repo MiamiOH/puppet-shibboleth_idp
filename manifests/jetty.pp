@@ -45,11 +45,13 @@ class shibidp::jetty (
   } ->
 
   file { '/var/log/jetty':
-    ensure => "${jetty_home}/jetty/logs",
+    ensure => 'link',
+    target => "${jetty_home}/jetty/logs",
   } ->
 
   file { '/etc/init.d/jetty':
-    ensure => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+    ensure => 'link',
+    target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
   }
 
   if $::service_provider == 'systemd' {
@@ -106,7 +108,7 @@ class shibidp::jetty (
     source        => "http://slf4j.org/dist/slf4j-${shibidp::slf4j_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
-    cleanup       => false,
+    cleanup       => true,
     checksum_type => $shibidp::slf4j_checksum_type,
     checksum      => $shibidp::slf4j_checksum,
     creates       => "${src_directory}/slf4j-${shibidp::slf4j_version}/README.md",
@@ -125,7 +127,7 @@ class shibidp::jetty (
     source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
-    cleanup       => false,
+    cleanup       => true,
     checksum_type => $shibidp::logback_checksum_type,
     checksum      => $shibidp::logback_checksum,
     creates       => "${src_directory}/logback-${shibidp::logback_version}/README.txt",
