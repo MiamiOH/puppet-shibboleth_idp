@@ -10,7 +10,7 @@ define shibidp::attribute_resolver::dataconnector (
   $ldap_url = undef,
   $ldap_base_dn = undef,
   $ldap_principal = undef,
-  $ldap_principal_credential = cache_data('cache_data/shibidp', "${id}_${::environment}_password", random_password(32)),
+  $ldap_principal_credential = undef,
   $ldap_use_start_tls = undef,
   $ldap_filter_template = undef,
   $ldap_filter_tls_trust_id = undef,

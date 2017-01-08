@@ -20,8 +20,8 @@ class shibidp::metadata inherits shibidp {
   # The idp-metadata.xml file represents our IdP to service providers. It
   # contains the public keys for our signing and encryption certs and
   # must be updated any time the certs change.
-  $signing_keypair = cache_data('cache_data/shibboleth', "idp-signing_${::environment}_keypair", {cert => undef, key => undef})
-  $encryption_keypair = cache_data('cache_data/shibboleth', "idp-encryption_${::environment}_keypair", {cert => undef, key => undef})
+  $signing_keypair = $shibidp::signing_keypair
+  $encryption_keypair = $shibidp::encryption_keypair
   file { "${shibidp::shib_install_base}/metadata/idp-metadata.xml":
     ensure  => file,
     content => template("${module_name}/shibboleth/metadata/idp-metadata.xml.erb"),
