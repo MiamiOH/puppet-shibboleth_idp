@@ -11,7 +11,7 @@ class shibidp::metadata inherits shibidp {
   # TODO Make this optional and source directly (also impacts the provider xml file)
   file { "${shibidp::shib_install_base}/credentials/inc-md-cert.pem":
     ensure => file,
-    source => "puppet:///modules/${module_name}/inc-md-cert.pem",
+    source => $shibidp::inc_signing_cert_src,
     owner  => $shibidp::shib_user,
     group  => $shibidp::shib_group,
     mode   => '0644',

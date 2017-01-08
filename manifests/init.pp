@@ -39,6 +39,8 @@ class shibidp (
   $attributes             = $shibidp::params::attributes,
   $filters                = $shibidp::params::filters,
 
+  $inc_signing_cert_src   = $shibidp::params::inc_signing_cert_src,
+
 ) inherits shibidp::params {
 
   validate_hash($metadata_providers)
