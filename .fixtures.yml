@@ -5,6 +5,7 @@ fixtures:
     archive: "https://github.com/voxpupuli/puppet-archive.git"
     openssl: "https://github.com/camptocamp/puppet-openssl.git"
     profiled: "https://github.com/unibet/puppet-profiled.git"
+    systemd: "https://github.com/camptocamp/puppet-systemd"
     # remove this after you get rid of all the cache_data calls
     extlib: "https://github.com/voxpupuli/puppet-extlib.git"
   symlinks:
