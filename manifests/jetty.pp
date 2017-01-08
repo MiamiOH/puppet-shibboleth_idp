@@ -12,6 +12,7 @@ class shibidp::jetty (
   $jetty_group            = $shibidp::params::jetty_group,
   $jetty_service_ensure   = $shibidp::params::jetty_service_ensure,
   $jetty_java_home        = $shibidp::params::jetty_java_home,
+  $src_directory          = $shibidp::params::shib_src_dir,
 ) inherits shibidp {
 
   $java_home = $jetty_java_home
@@ -29,11 +30,11 @@ class shibidp::jetty (
     })
   }
 
-  archive { "/usr/local/src/jetty-distribution-${jetty_version}.tar.gz":
+  archive { "/tmp/jetty-distribution-${jetty_version}.tar.gz":
     source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
     extract      => true,
     extract_path => $jetty_home,
-    cleanup      => false,
+    cleanup      => true,
     creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
     notify       => Service['jetty'],
   } ->
@@ -44,11 +45,13 @@ class shibidp::jetty (
   } ->
 
   file { '/var/log/jetty':
-    ensure => "${jetty_home}/jetty/logs",
+    ensure => 'link',
+    target => "${jetty_home}/jetty/logs",
   } ->
 
   file { '/etc/init.d/jetty':
-    ensure => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+    ensure => 'link',
+    target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
   }
 
   if $::service_provider == 'systemd' {
@@ -104,11 +107,11 @@ class shibidp::jetty (
   archive { "/tmp/slf4j-${shibidp::slf4j_version}.tar.gz":
     source        => "http://slf4j.org/dist/slf4j-${shibidp::slf4j_version}.tar.gz",
     extract       => true,
-    extract_path  => '/tmp',
-    cleanup       => false,
+    extract_path  => $src_directory,
+    cleanup       => true,
     checksum_type => $shibidp::slf4j_checksum_type,
     checksum      => $shibidp::slf4j_checksum,
-    creates       => "/tmp/slf4j-${shibidp::slf4j_version}/README.md",
+    creates       => "${src_directory}/slf4j-${shibidp::slf4j_version}/README.md",
   }
 
   file { "${shibidp::idp_jetty_base}/lib/logging/slf4j-api.jar":
@@ -116,18 +119,18 @@ class shibidp::jetty (
     owner   => $shibidp::shib_user,
     group   => $shibidp::shib_group,
     mode    => '0644',
-    source  => "/tmp/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
+    source  => "${src_directory}/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
     require => Archive["/tmp/slf4j-${shibidp::slf4j_version}.tar.gz"],
   }
   
   archive { "/tmp/logback-${shibidp::logback_version}.tar.gz":
     source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
     extract       => true,
-    extract_path  => '/tmp',
-    cleanup       => false,
+    extract_path  => $src_directory,
+    cleanup       => true,
     checksum_type => $shibidp::logback_checksum_type,
     checksum      => $shibidp::logback_checksum,
-    creates       => "/tmp/logback-${shibidp::logback_version}/README.txt",
+    creates       => "${src_directory}/logback-${shibidp::logback_version}/README.txt",
   }
   
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
@@ -136,7 +139,7 @@ class shibidp::jetty (
       owner   => $shibidp::shib_user,
       group   => $shibidp::shib_group,
       mode    => '0644',
-      source  => "/tmp/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
+      source  => "${src_directory}/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
       require => Archive["/tmp/logback-${shibidp::logback_version}.tar.gz"],
     }
   }

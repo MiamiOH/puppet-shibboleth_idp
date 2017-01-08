@@ -19,12 +19,12 @@ class shibidp::install inherits shibidp {
   ####################################
   # The Shibboleth IdP uses the Java unlimited strength crypto libraries.
   # We have the required files as an artifact, just download and install.
-  archive { "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8.tar.gz":
+  archive { '/tmp/UnlimitedJCEPolicyJDK8.tar.gz':
     source       => "${profile::core::params::miamioh_env_artifacts_uri}/shibboleth/UnlimitedJCEPolicyJDK8.tar.gz",
     extract      => true,
     extract_path => $shibidp::shib_src_dir,
-    cleanup      => false,
-    creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8.tar.gz",
+    cleanup      => true,
+    creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
     require      => File[$shibidp::shib_src_dir],
   }
 
@@ -36,7 +36,7 @@ class shibidp::install inherits shibidp {
       group   => $shibidp::shib_group,
       mode    => '0744',
       source  => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/${jar_file}",
-      require => Archive["${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8.tar.gz"],
+      require => Archive['/tmp/UnlimitedJCEPolicyJDK8.tar.gz'],
     }
   }
   ####################################
@@ -104,9 +104,9 @@ class shibidp::install inherits shibidp {
     archive { '/tmp/master.zip':
       source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
       extract      => true,
-      extract_path => '/tmp',
+      extract_path => $shibidp::shib_src_dir,
       cleanup      => true,
-      creates      => '/tmp/shib-cas-authn3-master/README.md',
+      creates      => "${shibidp::shib_src_dir}/shib-cas-authn3-master/README.md",
     } ->
 
     file { "${shibidp::shib_install_base}/flows/authn/Shibcas":
@@ -115,11 +115,12 @@ class shibidp::install inherits shibidp {
       group   => $shibidp::shib_group,
       mode    => '0644',
       recurse => true,
-      source  => '/tmp/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas',
+      source  => "${shibidp::shib_src_dir}/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas",
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
 
+    # Use archive to fetch a couple of jar files, but do not extract them.
     archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
       source  => 'https://github.com/Unicon/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar',
       extract => false,
