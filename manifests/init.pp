@@ -46,8 +46,11 @@ class shibidp (
   $jetty_ks_type          = $shibidp::params::jetty_ks_type,
   $jetty_ks_password      = $shibidp::params::jetty_ks_password,
 
+  $java_home              = $shibidp::params::java_home,
+
   $proxy_server           = undef,
   $proxy_type             = undef,
+
 ) inherits shibidp::params {
 
   validate_hash($metadata_providers)

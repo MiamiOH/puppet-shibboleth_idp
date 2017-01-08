@@ -45,6 +45,8 @@ class shibidp::params {
 
   $inc_signing_cert_src   = undef
 
+  $java_home              = '/usr/java/latest'
+
   $jetty_version          = undef
   $jetty_home             = '/opt'
   $jetty_manage_user      = true
