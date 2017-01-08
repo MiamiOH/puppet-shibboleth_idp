@@ -13,7 +13,8 @@ class shibidp (
   $idp_entity_id          = $shibidp::params::idp_entity_id,
   $idp_server_url         = $shibidp::params::idp_server_url,
   $idp_server_name        = $shibidp::params::idp_server_name,
-
+  $jce_policy_src         = $shibidp::params::jce_policy_src,
+  
   $include_cas            = $shibidp::params::include_cas,
   $cas_server_url         = $shibidp::params::cas_server_url,
 

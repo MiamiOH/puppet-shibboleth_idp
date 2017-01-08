@@ -15,6 +15,7 @@ class shibidp::params {
   $idp_entity_id          = 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'
   $idp_server_url         = 'https://shibvm-idp.miamioh.edu:21443'
   $idp_server_name        = 'shibvm-idp.miamioh.edu'
+  $jce_policy_src         = undef
 
   $include_cas            = false
   $cas_server_url         = 'https://idptest.miamioh.edu/cas'
