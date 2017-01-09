@@ -49,8 +49,8 @@ class shibidp::jetty (
   } ->
 
   file { '/etc/init.d/jetty':
-    ensure  => 'present',
-    mode    => '655',
+    ensure  => file,
+    mode    => '0655',
     content => template("${module_name}/jetty/jetty.erb"),
   }
 
