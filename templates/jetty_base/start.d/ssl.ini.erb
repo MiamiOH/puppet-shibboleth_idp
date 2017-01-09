@@ -67,6 +67,6 @@ jetty.ssl.port=8443
 ## Whether cipher order is significant (since java 8 only)
 # jetty.sslContext.useCipherSuitesOrder=true
 
-jetty.sslContext.keyStorePath=<%= @shib_install_base %>/credentials/browser.p12
-jetty.sslContext.keyStoreType=PKCS12
-jetty.sslContext.keyStorePassword=<%= @ks_password %>
+jetty.sslContext.keyStorePath=<%= @jetty_ks_path %>
+jetty.sslContext.keyStoreType=<%= @jetty_ks_type %>
+jetty.sslContext.keyStorePassword=<%= @jetty_ks_password %>
