@@ -31,8 +31,6 @@ class shibidp (
   $logback_checksum_type  = $shibidp::params::logback_checksum_type,
   $logback_checksum       = $shibidp::params::logback_checksum,
 
-  $ks_password            = $shibidp::params::ks_password,
-
   $signing_keypair        = $shibidp::params::signing_keypair,
   $encryption_keypair     = $shibidp::params::encryption_keypair,
 
@@ -43,6 +41,9 @@ class shibidp (
   $filters                = $shibidp::params::filters,
 
   $inc_signing_cert_src   = $shibidp::params::inc_signing_cert_src,
+  $jetty_ks_path          = $shibidp::params::jetty_ks_path,
+  $jetty_ks_type          = $shibidp::params::jetty_ks_type,
+  $jetty_ks_password      = $shibidp::params::jetty_ks_password,
 
 ) inherits shibidp::params {
 

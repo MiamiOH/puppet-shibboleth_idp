@@ -8,7 +8,7 @@ class shibidp::params {
   $shib_idp_version       = '3.2.1'
   $shib_user              = 'shib'
   $shib_group             = 'shib'
-  $shib_src_dir           = '/root/idpv3-source'
+  $shib_src_dir           = '/opt/idpv3-source'
   $shib_install_base      = '/opt/shibboleth-idp'
   $idp_jetty_base         = '/opt/idp_jetty'
   $idp_jetty_user         = 'jetty'
@@ -33,8 +33,6 @@ class shibidp::params {
   $logback_checksum_type  = 'md5'
   $logback_checksum       = '0466114001b29808aeee2bf665e1b2f8'
 
-  $ks_password            = undef
-
   $signing_keypair        = {cert => undef, key => undef}
   $encryption_keypair     = {cert => undef, key => undef}
 
@@ -53,6 +51,9 @@ class shibidp::params {
   $jetty_group            = 'jetty'
   $jetty_service_ensure   = 'running'
   $jetty_java_home        = undef
+  $jetty_ks_path          = undef
+  $jetty_ks_type          = 'PKCS12'
+  $jetty_ks_password      = undef
 
   $ss_version             = '1.14.11'
   $ss_install_base        = '/var/simplesamlphp'
