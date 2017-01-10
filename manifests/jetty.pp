@@ -16,7 +16,7 @@ class shibidp::jetty (
   $src_directory          = $shibidp::params::shib_src_dir,
 ) inherits shibidp {
 
-  is_integer($jetty_start_minutes)
+  validate_integer($jetty_start_minutes)
   # Based on jetty startup script of 'sleep 4' repeated 1..15
   $jetty_start_interval = 4 * $jetty_start_minutes
 
