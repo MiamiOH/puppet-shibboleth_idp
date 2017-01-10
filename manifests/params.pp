@@ -53,7 +53,6 @@ class shibidp::params {
   $jetty_user             = 'jetty'
   $jetty_group            = 'jetty'
   $jetty_service_ensure   = 'running'
-  $jetty_java_home        = undef
   $jetty_ks_path          = undef
   $jetty_ks_type          = 'PKCS12'
   $jetty_ks_password      = undef
