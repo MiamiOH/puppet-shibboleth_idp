@@ -65,7 +65,7 @@ class shibidp::jetty (
   service { 'jetty':
     ensure     => $jetty_service_ensure,
     enable     => true,
-    hasstatus  => false,
+    hasstatus  => true,
     hasrestart => true,
   }
 
@@ -115,7 +115,7 @@ class shibidp::jetty (
     source  => "${src_directory}/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
     require => Archive["/tmp/slf4j-${shibidp::slf4j_version}.tar.gz"],
   }
-  
+
   archive { "/tmp/logback-${shibidp::logback_version}.tar.gz":
     source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
     extract       => true,
@@ -125,7 +125,7 @@ class shibidp::jetty (
     checksum      => $shibidp::logback_checksum,
     creates       => "${src_directory}/logback-${shibidp::logback_version}/README.txt",
   }
-  
+
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
     file { "${shibidp::idp_jetty_base}/lib/logging/${jar_file}.jar":
       ensure  => file,
