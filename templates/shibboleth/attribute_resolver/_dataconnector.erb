@@ -9,9 +9,11 @@
                 %{idp.attribute.resolver.<%= @id %>.searchFilter}
             ]]>
         </dc:FilterTemplate>
+        <%- if @ldap_trust_cert_source -%>
         <dc:StartTLSTrustCredential id="<%= @id %>toIdPCredential" xsi:type="sec:X509ResourceBacked">
             <sec:Certificate>%{idp.attribute.resolver.<%= @id %>.trustCertificates}</sec:Certificate>
         </dc:StartTLSTrustCredential>
+        <%- end -%>
         <!-- <ReturnAttributes>%{idp.attribute.resolver.<%= @id %>.returnAttributes}</ReturnAttributes> -->
     </resolver:DataConnector>
 
