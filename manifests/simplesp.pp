@@ -21,7 +21,14 @@ class shibidp::simplesp (
   $ss_secret_salt    = $shibidp::params::ss_secret_salt,
   $ss_cert_owner     = $shibidp::params::ss_cert_owner,
   $ss_cert_group     = $shibidp::params::ss_cert_group,
+  $proxy_server      = undef,
+  $proxy_type        = undef,
 ) inherits shibidp::params {
+
+  Archive {
+    proxy_server => $proxy_server,
+    proxy_type   => $proxy_type,
+  }
 
   file { $ss_install_base:
     ensure => directory,
