@@ -16,6 +16,8 @@ class shibidp::jetty (
   $src_directory          = $shibidp::params::shib_src_dir,
 ) inherits shibidp {
 
+  is_integer($jetty_start_minutes)
+
   if $jetty_manage_user {
     ensure_resource('user', $jetty_user, {
         managehome => true,
@@ -48,10 +50,17 @@ class shibidp::jetty (
     target => "${jetty_home}/jetty/logs",
   } ->
 
+  file_line { 'jetty_startup_minutes':
+    ensure => present,
+    path   => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+    # Based on jetty startup script of 'sleep 4' repeated 1..15
+    line   => "    sleep ${4 * $jetty_start_minutes}",
+    match  => '^    sleep \d+',
+  } ->
+
   file { '/etc/init.d/jetty':
-    ensure  => file,
-    mode    => '0655',
-    content => template("${module_name}/jetty/jetty.erb"),
+    ensure => 'link',
+    target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
   }
 
   if $::service_provider == 'systemd' {
