@@ -15,6 +15,7 @@ class shibidp::params {
   $idp_entity_id          = 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'
   $idp_server_url         = 'https://shibvm-idp.miamioh.edu:21443'
   $idp_server_name        = 'shibvm-idp.miamioh.edu'
+  $jce_policy_src         = undef
 
   $include_cas            = false
   $cas_server_url         = 'https://idptest.miamioh.edu/cas'
@@ -44,13 +45,14 @@ class shibidp::params {
 
   $inc_signing_cert_src   = undef
 
+  $java_home              = '/usr/java/latest'
+
   $jetty_version          = undef
   $jetty_home             = '/opt'
   $jetty_manage_user      = true
   $jetty_user             = 'jetty'
   $jetty_group            = 'jetty'
   $jetty_service_ensure   = 'running'
-  $jetty_java_home        = undef
   $jetty_ks_path          = undef
   $jetty_ks_type          = 'PKCS12'
   $jetty_ks_password      = undef

@@ -8,8 +8,8 @@ class shibidp::install inherits shibidp {
   ensure_packages('unzip')
 
   $exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
-  $java_home = $::profile::java::java_home
 
+  $java_home = $shibidp::java_home
   $include_cas = $shibidp::include_cas
 
   file { $shibidp::shib_src_dir:
@@ -21,26 +21,26 @@ class shibidp::install inherits shibidp {
   ####################################
   # The Shibboleth IdP uses the Java unlimited strength crypto libraries.
   # We have the required files as an artifact, just download and install.
-  archive { '/tmp/UnlimitedJCEPolicyJDK8.tar.gz':
-    source       => "${profile::core::params::miamioh_env_artifacts_uri}/shibboleth/UnlimitedJCEPolicyJDK8.tar.gz",
-    extract      => true,
-    extract_path => $shibidp::shib_src_dir,
-    user         => $shibidp::shib_user,
-    group        => $shibidp::shib_group,
-    cleanup      => true,
-    creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
-    require      => File[$shibidp::shib_src_dir],
-  }
+  if $shibidp::jce_policy_src {
+    archive { '/tmp/UnlimitedJCEPolicyJDK8.tar.gz':
+      source       => $shibidp::jce_policy_src,
+      extract      => true,
+      extract_path => $shibidp::shib_src_dir,
+      cleanup      => true,
+      creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
+      require      => File[$shibidp::shib_src_dir],
+    }
 
-  ['local_policy.jar', 'US_export_policy.jar',
-  ].each |$jar_file| {
-    file { "${java_home}/jre/lib/security/${jar_file}":
-      ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      mode    => '0744',
-      source  => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/${jar_file}",
-      require => Archive['/tmp/UnlimitedJCEPolicyJDK8.tar.gz'],
+    ['local_policy.jar', 'US_export_policy.jar',
+    ].each |$jar_file| {
+      file { "${java_home}/jre/lib/security/${jar_file}":
+        ensure  => file,
+        owner   => $shibidp::shib_user,
+        group   => $shibidp::shib_group,
+        mode    => '0744',
+        source  => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/${jar_file}",
+        require => Archive['/tmp/UnlimitedJCEPolicyJDK8.tar.gz'],
+      }
     }
   }
   ####################################
