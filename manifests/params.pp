@@ -19,7 +19,7 @@ class shibidp::params {
 
   $include_cas            = false
   $cas_server_url         = 'https://idptest.miamioh.edu/cas'
-  
+
   $ldap_url               = 'ldaps://ldapt.muohio.edu:636'
   $ldap_base_dn           = 'ou=people,dc=muohio,dc=edu'
   $ldap_bind_dn           = 'uid=shibboleth,ou=ldapids,dc=muohio,dc=edu'
@@ -53,6 +53,7 @@ class shibidp::params {
   $jetty_user             = 'jetty'
   $jetty_group            = 'jetty'
   $jetty_service_ensure   = 'running'
+  $jetty_start_minutes    = 4
   $jetty_ks_path          = undef
   $jetty_ks_type          = 'PKCS12'
   $jetty_ks_password      = undef

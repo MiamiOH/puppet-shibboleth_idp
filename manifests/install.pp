@@ -5,8 +5,6 @@
 
 class shibidp::install inherits shibidp {
 
-  ensure_packages('unzip')
-
   $exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
 
   $java_home = $shibidp::java_home
@@ -113,8 +111,8 @@ class shibidp::install inherits shibidp {
 
   # Fetch and install the ShibCAS component.
   if $include_cas {
-    archive { '/tmp/master.zip':
-      source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.zip',
+    archive { '/tmp/master.tar.gz':
+      source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.tar.gz',
       extract      => true,
       extract_path => $shibidp::shib_src_dir,
       user         => $shibidp::shib_user,
