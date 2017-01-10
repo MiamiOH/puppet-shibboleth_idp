@@ -17,6 +17,8 @@ class shibidp::jetty (
 ) inherits shibidp {
 
   is_integer($jetty_start_minutes)
+  # Based on jetty startup script of 'sleep 4' repeated 1..15
+  $jetty_start_interval = 4 * $jetty_start_minutes
 
   if $jetty_manage_user {
     ensure_resource('user', $jetty_user, {
@@ -53,8 +55,7 @@ class shibidp::jetty (
   file_line { 'jetty_startup_minutes':
     ensure => present,
     path   => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
-    # Based on jetty startup script of 'sleep 4' repeated 1..15
-    line   => "    sleep ${4 * $jetty_start_minutes}",
+    line   => "    sleep ${jetty_start_interval}",
     match  => '^    sleep \d+',
   } ->
 
