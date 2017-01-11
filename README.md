@@ -73,10 +73,11 @@ shibidp::option1: 'value'
 ## Limitations
 
 This module has been built on and tested against Puppet 3.8.x and higher.  
+If using puppet 3.8, you must enable the future parser.  
 While I am sure other versions work, I have not tested them.
 
 This module supports modern RedHat only systems.  
-This module has been tested on CentOS 6.x.
+This module has been tested on CentOS 7.x only.
 
 No plans to support other versions (unless you add it :)..
 
