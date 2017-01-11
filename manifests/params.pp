@@ -6,26 +6,26 @@
 class shibidp::params {
 
   $shib_idp_version       = '3.2.1'
-  $shib_user              = 'shib'
-  $shib_group             = 'shib'
+  $shib_user              = 'jetty'
+  $shib_group             = 'jetty'
   $shib_src_dir           = '/opt/idpv3-source'
   $shib_install_base      = '/opt/shibboleth-idp'
   $idp_jetty_base         = '/opt/idp_jetty'
   $idp_jetty_user         = 'jetty'
-  $idp_entity_id          = 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'
-  $idp_server_url         = 'https://shibvm-idp.miamioh.edu:21443'
-  $idp_server_name        = 'shibvm-idp.miamioh.edu'
+  $idp_entity_id          = undef
+  $idp_server_url         = undef
+  $idp_server_name        = undef
   $jce_policy_src         = undef
 
   $include_cas            = false
-  $cas_server_url         = 'https://idptest.miamioh.edu/cas'
+  $cas_server_url         = undef
 
-  $ldap_url               = 'ldaps://ldapt.muohio.edu:636'
-  $ldap_base_dn           = 'ou=people,dc=muohio,dc=edu'
-  $ldap_bind_dn           = 'uid=shibboleth,ou=ldapids,dc=muohio,dc=edu'
+  $ldap_url               = undef
+  $ldap_base_dn           = undef
+  $ldap_bind_dn           = undef
   $ldap_bind_pw           = undef
-  $ldap_dn_format         = 'uid=%s,ou=people,dc=muohio,dc=edu'
-  $ldap_return_attributes = ['uid', 'eduPersonPrincipalName']
+  $ldap_dn_format         = undef
+  $ldap_return_attributes = []
 
   $slf4j_version          = '1.7.22'
   $slf4j_checksum_type    = 'md5'
@@ -60,7 +60,7 @@ class shibidp::params {
 
   $ss_version             = '1.14.11'
   $ss_install_base        = '/var/simplesamlphp'
-  $ss_sp_host             = 'shibvm-sp.miamioh.edu'
+  $ss_sp_host             = undef
   $ss_sp_port             = '31443'
   $ss_sp_url_path         = 'simplesaml'
   $ss_admin_password      = undef
