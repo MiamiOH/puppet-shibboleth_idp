@@ -11,7 +11,7 @@ class shibidp::jetty (
   $jetty_user             = $shibidp::params::jetty_user,
   $jetty_group            = $shibidp::params::jetty_group,
   $jetty_service_ensure   = $shibidp::params::jetty_service_ensure,
-  $java_home              = $shibidp::params::java_home,
+  $java_home              = $shibidp::java_home,
   $jetty_start_minutes    = $shibidp::params::jetty_start_minutes,
   $src_directory          = $shibidp::params::shib_src_dir,
 ) inherits shibidp {
