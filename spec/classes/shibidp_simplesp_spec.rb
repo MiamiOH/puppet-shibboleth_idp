@@ -8,6 +8,7 @@ describe 'shibidp::simplesp', :type => :class do
       end
 
       context 'with defaults' do
+        let(:params) { { :ss_sp_host => 'shibvm-sp.example.com' } }
         it { is_expected.to compile.with_all_deps }
       end
     end
