@@ -1,4 +1,4 @@
-# Class: shibidp::simplesp
+# Class: shibboleth_idp::simplesp
 #
 # This class provisions a SimpleSAMLPHP based SP for testing
 #
@@ -10,20 +10,20 @@
 # that purpose.
 #
 
-class shibidp::simplesp (
-  $ss_version        = $shibidp::params::ss_version,
-  $ss_install_base   = $shibidp::params::ss_install_base,
-  $ss_sp_host        = $shibidp::params::ss_sp_host,
-  $ss_sp_port        = $shibidp::params::ss_sp_port,
-  $ss_sp_domain      = $shibidp::params::ss_sp_domain,
-  $ss_sp_url_path    = $shibidp::params::ss_sp_url_path,
-  $ss_admin_password = $shibidp::params::ss_admin_password,
-  $ss_secret_salt    = $shibidp::params::ss_secret_salt,
-  $ss_cert_owner     = $shibidp::params::ss_cert_owner,
-  $ss_cert_group     = $shibidp::params::ss_cert_group,
+class shibboleth_idp::simplesp (
+  $ss_version        = $shibboleth_idp::params::ss_version,
+  $ss_install_base   = $shibboleth_idp::params::ss_install_base,
+  $ss_sp_host        = $shibboleth_idp::params::ss_sp_host,
+  $ss_sp_port        = $shibboleth_idp::params::ss_sp_port,
+  $ss_sp_domain      = $shibboleth_idp::params::ss_sp_domain,
+  $ss_sp_url_path    = $shibboleth_idp::params::ss_sp_url_path,
+  $ss_admin_password = $shibboleth_idp::params::ss_admin_password,
+  $ss_secret_salt    = $shibboleth_idp::params::ss_secret_salt,
+  $ss_cert_owner     = $shibboleth_idp::params::ss_cert_owner,
+  $ss_cert_group     = $shibboleth_idp::params::ss_cert_group,
   $proxy_server      = undef,
   $proxy_type        = undef,
-) inherits shibidp::params {
+) inherits shibboleth_idp::params {
 
   Archive {
     proxy_server => $proxy_server,

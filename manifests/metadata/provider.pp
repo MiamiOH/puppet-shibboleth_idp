@@ -1,9 +1,9 @@
-# Type: shibidp::metadata::provider
+# Type: shibboleth_idp::metadata::provider
 #
 # This type represents an SP metadata provider
 #
 
-define shibidp::metadata::provider (
+define shibboleth_idp::metadata::provider (
   $id = $name,
   $filename = "${name}-metadata.xml",
   $owner = undef,
@@ -19,7 +19,7 @@ define shibidp::metadata::provider (
     content => template("${module_name}/shibboleth/metadata_providers/_provider.erb"),
   }
 
-  file { "${shibidp::shib_install_base}/metadata/${filename}":
+  file { "${shibboleth_idp::shib_install_base}/metadata/${filename}":
     ensure => file,
     owner  => $owner,
     group  => $group,

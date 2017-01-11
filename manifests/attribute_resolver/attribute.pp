@@ -1,9 +1,9 @@
-# Type: shibidp::attribute_resolver::attribute
+# Type: shibboleth_idp::attribute_resolver::attribute
 #
 # This type represents an attribute to be resolved
 #
 
-define shibidp::attribute_resolver::attribute (
+define shibboleth_idp::attribute_resolver::attribute (
   $id = $name,
   $type = undef,
   $scope = undef,

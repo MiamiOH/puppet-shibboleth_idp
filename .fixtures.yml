@@ -7,4 +7,4 @@ fixtures:
     profiled: "https://github.com/unibet/puppet-profiled.git"
     systemd: "https://github.com/camptocamp/puppet-systemd"
   symlinks:
-    shibidp: "#{source_dir}"
+    shibboleth_idp: "#{source_dir}"

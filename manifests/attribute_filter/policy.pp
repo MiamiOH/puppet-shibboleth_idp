@@ -1,9 +1,9 @@
-# Type: shibidp::attribute_filter::policy
+# Type: shibboleth_idp::attribute_filter::policy
 #
 # This type represents a policy applied during attribute filtering
 #
 
-define shibidp::attribute_filter::policy (
+define shibboleth_idp::attribute_filter::policy (
   $id = $name,
 
   $requesters = {},

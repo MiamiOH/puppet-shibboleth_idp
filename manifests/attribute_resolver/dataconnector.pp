@@ -1,9 +1,9 @@
-# Type: shibidp::attribute_filter::dataconnector
+# Type: shibboleth_idp::attribute_filter::dataconnector
 #
 # This type represents a data connector for resolving attributes
 #
 
-define shibidp::attribute_resolver::dataconnector (
+define shibboleth_idp::attribute_resolver::dataconnector (
   $id = $name,
   $type = undef,
 
@@ -34,11 +34,11 @@ define shibidp::attribute_resolver::dataconnector (
   }
 
   if $ldap_trust_cert_source {
-    file { "${shibidp::shib_install_base}/${ldap_filter_tls_trust_cert}":
+    file { "${shibboleth_idp::shib_install_base}/${ldap_filter_tls_trust_cert}":
       ensure => file,
       source => $ldap_trust_cert_source,
-      owner  => $shibidp::shib_user,
-      group  => $shibidp::shib_group,
+      owner  => $shibboleth_idp::shib_user,
+      group  => $shibboleth_idp::shib_group,
       mode   => '0644',
     }
   }

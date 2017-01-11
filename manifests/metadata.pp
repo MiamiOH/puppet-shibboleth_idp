@@ -1,28 +1,28 @@
-# Class: shibidp::metadata
+# Class: shibboleth_idp::metadata
 #
 # This class manages the IdP metadata and providers
 #
 
-class shibidp::metadata inherits shibidp {
+class shibboleth_idp::metadata inherits shibboleth_idp {
 
   # This is the InCommon signing key public cert used to validate the downloaded
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.
   # TODO Make this optional and source directly (also impacts the provider xml file)
-  file { "${shibidp::shib_install_base}/credentials/inc-md-cert.pem":
+  file { "${shibboleth_idp::shib_install_base}/credentials/inc-md-cert.pem":
     ensure => file,
-    source => $shibidp::inc_signing_cert_src,
-    owner  => $shibidp::shib_user,
-    group  => $shibidp::shib_group,
+    source => $shibboleth_idp::inc_signing_cert_src,
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
     mode   => '0644',
   }
 
   # The idp-metadata.xml file represents our IdP to service providers. It
   # contains the public keys for our signing and encryption certs and
   # must be updated any time the certs change.
-  $signing_keypair = $shibidp::signing_keypair
-  $encryption_keypair = $shibidp::encryption_keypair
-  file { "${shibidp::shib_install_base}/metadata/idp-metadata.xml":
+  $signing_keypair = $shibboleth_idp::signing_keypair
+  $encryption_keypair = $shibboleth_idp::encryption_keypair
+  file { "${shibboleth_idp::shib_install_base}/metadata/idp-metadata.xml":
     ensure  => file,
     content => template("${module_name}/shibboleth/metadata/idp-metadata.xml.erb"),
   }
@@ -32,9 +32,9 @@ class shibidp::metadata inherits shibidp {
   # sources so the IdP can load them.
   # Create the metadata-providers.xml configuration file.
   concat { 'metadata-providers.xml':
-    path  => "${shibidp::shib_install_base}/conf/metadata-providers.xml",
-    owner => $shibidp::shib_user,
-    group => $shibidp::shib_group,
+    path  => "${shibboleth_idp::shib_install_base}/conf/metadata-providers.xml",
+    owner => $shibboleth_idp::shib_user,
+    group => $shibboleth_idp::shib_group,
     mode  => '0600',
   }
 
