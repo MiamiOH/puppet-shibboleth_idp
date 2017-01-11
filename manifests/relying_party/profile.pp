@@ -1,9 +1,9 @@
-# Type: shibidp::relying_party::profile
+# Type: shibboleth_idp::relying_party::profile
 #
 # This type represents a profile describing overrides for a relying party
 #
 
-define shibidp::relying_party::profile (
+define shibboleth_idp::relying_party::profile (
   $entity_id = $name,
 
   $properties = {},

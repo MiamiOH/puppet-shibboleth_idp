@@ -1,23 +1,23 @@
-# Class: shibidp::attribute_resolver
+# Class: shibboleth_idp::attribute_resolver
 #
 # This class creates the attribute resolver configuration
 #
 
-class shibidp::attribute_resolver inherits shibidp {
+class shibboleth_idp::attribute_resolver inherits shibboleth_idp {
 
   # Create the dataconnectors.properties file.
   concat { 'dataconnectors.properties':
-    path  => "${shibidp::shib_install_base}/conf/dataconnectors.properties",
-    owner => $shibidp::shib_user,
-    group => $shibidp::shib_group,
+    path  => "${shibboleth_idp::shib_install_base}/conf/dataconnectors.properties",
+    owner => $shibboleth_idp::shib_user,
+    group => $shibboleth_idp::shib_group,
     mode  => '0600',
   }
 
   # Create the attribute-resolver.xml configuration file.
   concat { 'attribute-resolver.xml':
-    path  => "${shibidp::shib_install_base}/conf/attribute-resolver.xml",
-    owner => $shibidp::shib_user,
-    group => $shibidp::shib_group,
+    path  => "${shibboleth_idp::shib_install_base}/conf/attribute-resolver.xml",
+    owner => $shibboleth_idp::shib_user,
+    group => $shibboleth_idp::shib_group,
     mode  => '0600',
   }
 
@@ -33,7 +33,7 @@ class shibidp::attribute_resolver inherits shibidp {
     content => template("${module_name}/shibboleth/attribute_resolver/_attribute_resolver_foot.erb"),
   }
 
-  create_resources('shibidp::attribute_resolver::dataconnector', $shibidp::dataconnectors)
-  create_resources('shibidp::attribute_resolver::attribute', $shibidp::attributes)
+  create_resources('shibboleth_idp::attribute_resolver::dataconnector', $shibboleth_idp::dataconnectors)
+  create_resources('shibboleth_idp::attribute_resolver::attribute', $shibboleth_idp::attributes)
 
 }

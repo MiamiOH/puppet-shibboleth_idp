@@ -1,9 +1,9 @@
-# Class: shibidp::params
+# Class: shibboleth_idp::params
 #
 # This class manages parameters for provisioning
 #
 
-class shibidp::params {
+class shibboleth_idp::params {
 
   $shib_idp_version       = '3.2.1'
   $shib_user              = 'jetty'

@@ -1,42 +1,42 @@
-# Class: shibidp::install
+# Class: shibboleth_idp::install
 #
 # This is the core class for installing the IdP software
 #
 
-class shibidp::install inherits shibidp {
+class shibboleth_idp::install inherits shibboleth_idp {
 
   $exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
 
-  $java_home = $shibidp::java_home
-  $include_cas = $shibidp::include_cas
+  $java_home = $shibboleth_idp::java_home
+  $include_cas = $shibboleth_idp::include_cas
 
-  file { $shibidp::shib_src_dir:
+  file { $shibboleth_idp::shib_src_dir:
     ensure => directory,
-    owner  => $shibidp::shib_user,
-    group  => $shibidp::shib_group,
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
   }
 
   ####################################
   # The Shibboleth IdP uses the Java unlimited strength crypto libraries.
   # We have the required files as an artifact, just download and install.
-  if $shibidp::jce_policy_src {
+  if $shibboleth_idp::jce_policy_src {
     archive { '/tmp/UnlimitedJCEPolicyJDK8.tar.gz':
-      source       => $shibidp::jce_policy_src,
+      source       => $shibboleth_idp::jce_policy_src,
       extract      => true,
-      extract_path => $shibidp::shib_src_dir,
+      extract_path => $shibboleth_idp::shib_src_dir,
       cleanup      => true,
-      creates      => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
-      require      => File[$shibidp::shib_src_dir],
+      creates      => "${shibboleth_idp::shib_src_dir}/UnlimitedJCEPolicyJDK8/local_policy.jar",
+      require      => File[$shibboleth_idp::shib_src_dir],
     }
 
     ['local_policy.jar', 'US_export_policy.jar',
     ].each |$jar_file| {
       file { "${java_home}/jre/lib/security/${jar_file}":
         ensure  => file,
-        owner   => $shibidp::shib_user,
-        group   => $shibidp::shib_group,
+        owner   => $shibboleth_idp::shib_user,
+        group   => $shibboleth_idp::shib_group,
         mode    => '0744',
-        source  => "${shibidp::shib_src_dir}/UnlimitedJCEPolicyJDK8/${jar_file}",
+        source  => "${shibboleth_idp::shib_src_dir}/UnlimitedJCEPolicyJDK8/${jar_file}",
         require => Archive['/tmp/UnlimitedJCEPolicyJDK8.tar.gz'],
       }
     }
@@ -46,34 +46,34 @@ class shibidp::install inherits shibidp {
   ####################################
   # The following sets up the Shibboleth IdP installation.
 
-  file { $shibidp::shib_install_base:
+  file { $shibboleth_idp::shib_install_base:
     ensure  => directory,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
     mode    => '0744',
-    require => File[$shibidp::shib_src_dir],
+    require => File[$shibboleth_idp::shib_src_dir],
   } ->
 
-  archive { "/tmp/shibboleth-identity-provider-${shibidp::shib_idp_version}.tar.gz":
-    source       => "https://shibboleth.net/downloads/identity-provider/${shibidp::shib_idp_version}/shibboleth-identity-provider-${shibidp::shib_idp_version}.tar.gz",
+  archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
+    source       => "https://shibboleth.net/downloads/identity-provider/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
     extract      => true,
-    extract_path => $shibidp::shib_src_dir,
-    user         => $shibidp::shib_user,
-    group        => $shibidp::shib_group,
+    extract_path => $shibboleth_idp::shib_src_dir,
+    user         => $shibboleth_idp::shib_user,
+    group        => $shibboleth_idp::shib_group,
     cleanup      => true,
-    creates      => "${shibidp::shib_src_dir}/shibboleth-identity-provider-${shibidp::shib_idp_version}/LICENSE.txt",
+    creates      => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/LICENSE.txt",
     notify       => Exec['shibboleth idp install'],
   }
 
   # The install and merge properties contain settings which influence the
   # Shibboleth installation process.
   ['idp.install.properties', 'idp.merge.properties'].each |$file| {
-    file { "${shibidp::shib_src_dir}/${file}":
+    file { "${shibboleth_idp::shib_src_dir}/${file}":
       ensure  => file,
       content => template("${module_name}/shibboleth/${file}.erb"),
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      require => Archive["/tmp/shibboleth-identity-provider-${shibidp::shib_idp_version}.tar.gz"],
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
+      require => Archive["/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz"],
       notify  => Exec['shibboleth idp install'],
     }
   }
@@ -81,27 +81,27 @@ class shibidp::install inherits shibidp {
   # Install the signing and encryption certs. These are used internally, not
   # through the web front end. Any change requires coordination with InCommon
   # and our service providers.
-  [{name=>'idp-signing', keypair=>$shibidp::signing_keypair},
-  {name=>'idp-encryption', keypair=>$shibidp::encryption_keypair}].each |$certificate| {
+  [{name=>'idp-signing', keypair=>$shibboleth_idp::signing_keypair},
+  {name=>'idp-encryption', keypair=>$shibboleth_idp::encryption_keypair}].each |$certificate| {
     # lint:ignore:variable_scope
     # $keypair is used in the crt and key templates
     $keypair = $certificate['keypair']
 
-    file { "${shibidp::shib_install_base}/credentials/${certificate['name']}.crt":
+    file { "${shibboleth_idp::shib_install_base}/credentials/${certificate['name']}.crt":
       ensure  => file,
       content => template("${module_name}/shibboleth/credentials/cert.erb"),
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0644',
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
 
-    file { "${shibidp::shib_install_base}/credentials/${certificate['name']}.key":
+    file { "${shibboleth_idp::shib_install_base}/credentials/${certificate['name']}.key":
       ensure  => file,
       content => template("${module_name}/shibboleth/credentials/key.erb"),
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0600',
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
@@ -114,46 +114,46 @@ class shibidp::install inherits shibidp {
     archive { '/tmp/master.tar.gz':
       source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.tar.gz',
       extract      => true,
-      extract_path => $shibidp::shib_src_dir,
-      user         => $shibidp::shib_user,
-      group        => $shibidp::shib_group,
+      extract_path => $shibboleth_idp::shib_src_dir,
+      user         => $shibboleth_idp::shib_user,
+      group        => $shibboleth_idp::shib_group,
       cleanup      => true,
-      creates      => "${shibidp::shib_src_dir}/shib-cas-authn3-master/README.md",
+      creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-master/README.md",
     } ->
 
-    file { "${shibidp::shib_install_base}/flows/authn/Shibcas":
+    file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
       ensure  => directory,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0644',
       recurse => true,
-      source  => "${shibidp::shib_src_dir}/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas",
+      source  => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas",
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
 
     # Use archive to fetch a couple of jar files, but do not extract them.
-    archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
+    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
       source  => 'https://github.com/Unicon/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar',
       extract => false,
       cleanup => false,
-      user    => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
-      creates => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar",
+      user    => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
+      creates => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar",
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
 
     # This one does not support https, so verify the md5 hash
-    archive { "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar":
+    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar":
       source        => 'http://central.maven.org/maven2/org/jasig/cas/client/cas-client-core/3.4.1/cas-client-core-3.4.1.jar',
       extract       => false,
       cleanup       => false,
-      user          => $shibidp::shib_user,
-      group         => $shibidp::shib_group,
+      user          => $shibboleth_idp::shib_user,
+      group         => $shibboleth_idp::shib_group,
       checksum_type => 'md5',
       checksum      => '0cde05fb6892018f19913eb6f3081758',
-      creates       => "${shibidp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar",
+      creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar",
       require       => Exec['shibboleth idp install'],
       notify        => Exec['shibboleth idp build'],
     }
@@ -163,13 +163,13 @@ class shibidp::install inherits shibidp {
   # during the build process. It should restart Jetty, though.
   ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
   ].each |$config_file| {
-    file { "${shibidp::shib_install_base}/conf/${config_file}":
+    file { "${shibboleth_idp::shib_install_base}/conf/${config_file}":
       ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0600',
       content => template("${module_name}/shibboleth/conf/${config_file}.erb"),
-      require => [File[$shibidp::shib_install_base], Exec['shibboleth idp install']],
+      require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
       notify  => Exec['shibboleth idp build'],
     }
   }
@@ -177,22 +177,22 @@ class shibidp::install inherits shibidp {
   # The install should run only once for a given version. This creates
   # the Shibboleth install base (by default /opt/shibboleth-dip).
   exec { 'shibboleth idp install':
-    command     => "${shibidp::shib_src_dir}/shibboleth-identity-provider-${shibidp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibidp::shib_src_dir}/idp.install.properties",
-    cwd         => "${shibidp::shib_src_dir}/shibboleth-identity-provider-${shibidp::shib_idp_version}",
-    user        => $shibidp::shib_user,
+    command     => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibboleth_idp::shib_src_dir}/idp.install.properties",
+    cwd         => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}",
+    user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],
     path        => "${::path}:${java_home}",
     # refreshonly => true,
-    unless      => "test -f ${shibidp::shib_install_base}/war/idp.war",
+    unless      => "test -f ${shibboleth_idp::shib_install_base}/war/idp.war",
   }
 
   # The build will be rerun after certain changes in the source material. This
   # expects the Shibboleth install base to be present and will build  a new war file
   # based on the contents.
   exec { 'shibboleth idp build':
-    command     => "/usr/bin/sh ${shibidp::shib_install_base}/bin/build.sh -Didp.target.dir=${shibidp::shib_install_base}",
-    cwd         => $shibidp::shib_install_base,
-    user        => $shibidp::shib_user,
+    command     => "/usr/bin/sh ${shibboleth_idp::shib_install_base}/bin/build.sh -Didp.target.dir=${shibboleth_idp::shib_install_base}",
+    cwd         => $shibboleth_idp::shib_install_base,
+    user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],
     path        => "${::path}:${java_home}",
     refreshonly => true,

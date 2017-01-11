@@ -1,20 +1,20 @@
-# Class: shibidp::jetty
+# Class: shibboleth_idp::jetty
 #
 # This class sets up the JETTY_BASE to be used for the IdP
 # It DOES NOT install Jetty itself.
 #
 
-class shibidp::jetty (
-  $jetty_version          = $shibidp::params::jetty_version,
-  $jetty_home             = $shibidp::params::jetty_home,
-  $jetty_manage_user      = $shibidp::params::jetty_manage_user,
-  $jetty_user             = $shibidp::params::jetty_user,
-  $jetty_group            = $shibidp::params::jetty_group,
-  $jetty_service_ensure   = $shibidp::params::jetty_service_ensure,
-  $java_home              = $shibidp::java_home,
-  $jetty_start_minutes    = $shibidp::params::jetty_start_minutes,
-  $src_directory          = $shibidp::params::shib_src_dir,
-) inherits shibidp {
+class shibboleth_idp::jetty (
+  $jetty_version          = $shibboleth_idp::params::jetty_version,
+  $jetty_home             = $shibboleth_idp::params::jetty_home,
+  $jetty_manage_user      = $shibboleth_idp::params::jetty_manage_user,
+  $jetty_user             = $shibboleth_idp::params::jetty_user,
+  $jetty_group            = $shibboleth_idp::params::jetty_group,
+  $jetty_service_ensure   = $shibboleth_idp::params::jetty_service_ensure,
+  $java_home              = $shibboleth_idp::java_home,
+  $jetty_start_minutes    = $shibboleth_idp::params::jetty_start_minutes,
+  $src_directory          = $shibboleth_idp::params::shib_src_dir,
+) inherits shibboleth_idp {
 
   validate_integer($jetty_start_minutes)
   # Based on jetty startup script of 'sleep 4' repeated 1..15
@@ -87,13 +87,13 @@ class shibidp::jetty (
   ####################################
   # Create the IdP Jetty base. This uses a directory of files
   # which are overridden by templates when necessary.
-  $jetty_files = [ "${shibidp::idp_jetty_base}/lib", "${shibidp::idp_jetty_base}/lib/logging",
-  "${shibidp::idp_jetty_base}/logs", "${shibidp::idp_jetty_base}/lib/ext", "${shibidp::idp_jetty_base}/tmp" ]
+  $jetty_files = [ "${shibboleth_idp::idp_jetty_base}/lib", "${shibboleth_idp::idp_jetty_base}/lib/logging",
+  "${shibboleth_idp::idp_jetty_base}/logs", "${shibboleth_idp::idp_jetty_base}/lib/ext", "${shibboleth_idp::idp_jetty_base}/tmp" ]
 
-  file { $shibidp::idp_jetty_base:
+  file { $shibboleth_idp::idp_jetty_base:
     ensure  => directory,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
     mode    => '0744',
     recurse => true,
     source  => "puppet:///modules/${module_name}/jetty_base",
@@ -101,61 +101,61 @@ class shibidp::jetty (
 
   file { $jetty_files:
     ensure  => directory,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
     mode    => '0744',
     recurse => true,
   }
 
-  archive { "/tmp/slf4j-${shibidp::slf4j_version}.tar.gz":
-    source        => "http://slf4j.org/dist/slf4j-${shibidp::slf4j_version}.tar.gz",
+  archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
+    source        => "http://slf4j.org/dist/slf4j-${shibboleth_idp::slf4j_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
     cleanup       => true,
-    checksum_type => $shibidp::slf4j_checksum_type,
-    checksum      => $shibidp::slf4j_checksum,
-    creates       => "${src_directory}/slf4j-${shibidp::slf4j_version}/README.md",
+    checksum_type => $shibboleth_idp::slf4j_checksum_type,
+    checksum      => $shibboleth_idp::slf4j_checksum,
+    creates       => "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/README.md",
   }
 
-  file { "${shibidp::idp_jetty_base}/lib/logging/slf4j-api.jar":
+  file { "${shibboleth_idp::idp_jetty_base}/lib/logging/slf4j-api.jar":
     ensure  => file,
-    owner   => $shibidp::shib_user,
-    group   => $shibidp::shib_group,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
     mode    => '0644',
-    source  => "${src_directory}/slf4j-${shibidp::slf4j_version}/slf4j-api-${shibidp::slf4j_version}.jar",
-    require => Archive["/tmp/slf4j-${shibidp::slf4j_version}.tar.gz"],
+    source  => "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar",
+    require => Archive["/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz"],
   }
 
-  archive { "/tmp/logback-${shibidp::logback_version}.tar.gz":
-    source        => "http://logback.qos.ch/dist/logback-${shibidp::logback_version}.tar.gz",
+  archive { "/tmp/logback-${shibboleth_idp::logback_version}.tar.gz":
+    source        => "http://logback.qos.ch/dist/logback-${shibboleth_idp::logback_version}.tar.gz",
     extract       => true,
     extract_path  => $src_directory,
     cleanup       => true,
-    checksum_type => $shibidp::logback_checksum_type,
-    checksum      => $shibidp::logback_checksum,
-    creates       => "${src_directory}/logback-${shibidp::logback_version}/README.txt",
+    checksum_type => $shibboleth_idp::logback_checksum_type,
+    checksum      => $shibboleth_idp::logback_checksum,
+    creates       => "${src_directory}/logback-${shibboleth_idp::logback_version}/README.txt",
   }
 
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
-    file { "${shibidp::idp_jetty_base}/lib/logging/${jar_file}.jar":
+    file { "${shibboleth_idp::idp_jetty_base}/lib/logging/${jar_file}.jar":
       ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0644',
-      source  => "${src_directory}/logback-${shibidp::logback_version}/${jar_file}-${shibidp::logback_version}.jar",
-      require => Archive["/tmp/logback-${shibidp::logback_version}.tar.gz"],
+      source  => "${src_directory}/logback-${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
+      require => Archive["/tmp/logback-${shibboleth_idp::logback_version}.tar.gz"],
     }
   }
 
   ['start.ini', 'start.d/ssl.ini', 'start.d/http.ini',
   ].each |$config_file| {
-    file { "${shibidp::idp_jetty_base}/${config_file}":
+    file { "${shibboleth_idp::idp_jetty_base}/${config_file}":
       ensure  => file,
-      owner   => $shibidp::shib_user,
-      group   => $shibidp::shib_group,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
       mode    => '0644',
       content => template("${module_name}/jetty_base/${config_file}.erb"),
-      require => File[$shibidp::idp_jetty_base],
+      require => File[$shibboleth_idp::idp_jetty_base],
     }
   }
 

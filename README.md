@@ -41,7 +41,7 @@ only need to install the module
 Minimal setup:
 
 ```puppet
-class { 'shibidp': }
+class { 'shibboleth_idp': }
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ class { 'shibidp': }
 ### Customize the IdP options
 
 ```puppet
-class { 'shibidp':
+class { 'shibboleth_idp':
   option1   => 'value',
 }
 ```
@@ -57,18 +57,18 @@ class { 'shibidp':
 ### Configure with hiera yaml
 
 ```puppet
-include shibidp
+include shibboleth_idp
 ```
 ```yaml
 ---
-shibidp::option1: 'value'
+shibboleth_idp::option1: 'value'
 ```
 
 ## Reference
 
 ### Classes
 
-* shibidp
+* shibboleth_idp
 
 ## Limitations
 

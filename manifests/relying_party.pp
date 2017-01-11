@@ -1,15 +1,15 @@
-# Class: shibidp::relying_party
+# Class: shibboleth_idp::relying_party
 #
 # This class creates the relying party configuration
 #
 
-class shibidp::relying_party inherits shibidp {
+class shibboleth_idp::relying_party inherits shibboleth_idp {
 
   # Create the relying-party.xml configuration file.
   concat { 'relying-party.xml':
-    path  => "${shibidp::shib_install_base}/conf/relying-party.xml",
-    owner => $shibidp::shib_user,
-    group => $shibidp::shib_group,
+    path  => "${shibboleth_idp::shib_install_base}/conf/relying-party.xml",
+    owner => $shibboleth_idp::shib_user,
+    group => $shibboleth_idp::shib_group,
     mode  => '0600',
   }
 
@@ -25,6 +25,6 @@ class shibidp::relying_party inherits shibidp {
     content => template("${module_name}/shibboleth/relying_party/_relying_party_foot.erb"),
   }
 
-  create_resources('shibidp::relying_party::profile', $shibidp::relying_party_profiles)
+  create_resources('shibboleth_idp::relying_party::profile', $shibboleth_idp::relying_party_profiles)
 
 }
