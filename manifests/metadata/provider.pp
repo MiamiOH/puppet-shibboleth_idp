@@ -10,8 +10,13 @@ define shibboleth_idp::metadata::provider (
   $group = undef,
   $mode = '0644',
   $source_path = undef,
-  $source_file = $filename,
+  $source_file = undef,
 ) {
+
+  $_source_file = $source_file ? {
+    undef   => $filename,
+    default => $source_file,
+  }
 
   concat::fragment { "metadata_providers_${id}":
     target  => 'metadata-providers.xml',
@@ -24,7 +29,7 @@ define shibboleth_idp::metadata::provider (
     owner  => $owner,
     group  => $group,
     mode   => $mode,
-    source => "${source_path}/${source_file}",
+    source => "${source_path}/${_source_file}",
   }
 
 }
