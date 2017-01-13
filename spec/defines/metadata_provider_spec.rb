@@ -19,20 +19,23 @@ describe 'shibboleth_idp::metadata::provider', :type => :define do
         it { is_expected.to compile.with_all_deps }
 
         context 'with defaults' do
-          
-          it { should contain_file('/junk/path/metadata/TestSP-metadata.xml').with({
-            :source => "/TestSP-metadata.xml",
-          })}
+
+          it do
+            should contain_file('/junk/path/metadata/TestSP-metadata.xml').with(
+              :source => '/TestSP-metadata.xml'
+            )
+          end
 
         end
 
         context 'with source_path => /file/source' do
-          let(:params) { {:source_path => '/file/source'} }
+          let(:params) { { :source_path => '/file/source' } }
 
-          it { should contain_file('/junk/path/metadata/TestSP-metadata.xml').with({
-            :source => "/file/source/TestSP-metadata.xml",
-          })}
-
+          it do
+            should contain_file('/junk/path/metadata/TestSP-metadata.xml').with(
+              :source => '/file/source/TestSP-metadata.xml'
+            )
+          end
         end
       end
     end
