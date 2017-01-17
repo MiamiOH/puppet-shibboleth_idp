@@ -40,3 +40,4 @@ coverage/
 ######################################
 !.gitignore
 !.gitkeep
+vendor
