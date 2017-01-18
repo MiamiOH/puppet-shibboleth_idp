@@ -20,6 +20,8 @@ class shibboleth_idp::jetty (
   # Based on jetty startup script of 'sleep 4' repeated 1..15
   $jetty_start_interval = 4 * $jetty_start_minutes
 
+  $idp_jetty_base = $shibboleth_idp::idp_jetty_base
+
   if $jetty_manage_user {
     ensure_resource('user', $jetty_user, {
         managehome => true,
@@ -50,25 +52,30 @@ class shibboleth_idp::jetty (
   file { '/var/log/jetty':
     ensure => 'link',
     target => "${jetty_home}/jetty/logs",
-  } ->
-
-  file_line { 'jetty_startup_minutes':
-    ensure => present,
-    path   => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
-    line   => "    sleep ${jetty_start_interval}",
-    match  => '^    sleep \d+',
-  } ->
-
-  file { '/etc/init.d/jetty':
-    ensure => 'link',
-    target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
   }
 
   if $::service_provider == 'systemd' {
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
-      require => File['/etc/init.d/jetty'],
+      # require => File['/etc/init.d/jetty'],
       before  => Service['jetty'],
+    }
+  } else {
+    file_line { 'jetty_startup_minutes':
+      ensure => present,
+      path   => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+      line   => "    sleep ${jetty_start_interval}",
+      match  => '^    sleep \d+',
+    }
+
+    file { '/etc/init.d/jetty':
+      ensure => 'link',
+      target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+    }
+
+    file { '/etc/default/jetty':
+      ensure  => file,
+      content => template("${module_name}/default.erb"),
     }
   }
 
@@ -167,11 +174,6 @@ class shibboleth_idp::jetty (
     ensure  => file,
     content => template("${module_name}/shib-idp-profile.sh.erb"),
     shell   => 'absent',
-  }
-
-  file { '/etc/default/jetty':
-    ensure  => file,
-    content => template("${module_name}/default.erb"),
   }
 
   ####################################
