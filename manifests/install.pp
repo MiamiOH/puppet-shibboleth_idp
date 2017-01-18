@@ -9,6 +9,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
   $java_home = $shibboleth_idp::java_home
   $include_cas = $shibboleth_idp::include_cas
+  $proxy_host = $shibboleth_idp::proxy_host
+  $proxy_port = $shibboleth_idp::proxy_port
 
   file { $shibboleth_idp::shib_src_dir:
     ensure => directory,

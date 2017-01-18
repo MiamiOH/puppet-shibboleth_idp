@@ -50,6 +50,8 @@ class shibboleth_idp (
 
   $proxy_server           = undef,
   $proxy_type             = undef,
+  $proxy_host             = undef,
+  $proxy_port             = undef,
 
 ) inherits shibboleth_idp::params {
 
