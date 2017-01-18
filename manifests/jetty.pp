@@ -58,23 +58,26 @@ class shibboleth_idp::jetty (
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
       before  => Service['jetty'],
+      require => File["${jetty_home}/jetty"],
     }
   } else {
     file_line { 'jetty_startup_minutes':
-      ensure => present,
-      path   => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
-      line   => "    sleep ${jetty_start_interval}",
-      match  => '^    sleep \d+',
-    }
+      ensure  => present,
+      path    => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+      line    => "    sleep ${jetty_start_interval}",
+      match   => '^    sleep \d+',
+      require => File["${jetty_home}/jetty"],
+    } ->
 
     file { '/etc/init.d/jetty':
       ensure => 'link',
       target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
-    }
+    } ->
 
     file { '/etc/default/jetty':
       ensure  => file,
       content => template("${module_name}/default.erb"),
+      notify  => Service['jetty'],
     }
   }
 
