@@ -48,7 +48,6 @@ class shibboleth_idp (
 
   $java_home              = $shibboleth_idp::params::java_home,
 
-  $proxy_server           = undef,
   $proxy_type             = undef,
   $proxy_host             = undef,
   $proxy_port             = undef,
@@ -56,6 +55,16 @@ class shibboleth_idp (
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
+
+  $proxy_port_string = $proxy_port ? {
+    undef   => undef,
+    default => ":${proxy_port}",
+  }
+
+  $proxy_server = $proxy_host ? {
+    undef   => undef,
+    default => "http://${proxy_host}${proxy_port_string}",
+  }
 
   Archive {
     proxy_server => $proxy_server,
