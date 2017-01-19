@@ -10,7 +10,6 @@ class shibboleth_idp::jetty (
   $jetty_manage_user      = $shibboleth_idp::params::jetty_manage_user,
   $jetty_user             = $shibboleth_idp::params::jetty_user,
   $jetty_group            = $shibboleth_idp::params::jetty_group,
-  $jetty_service_ensure   = $shibboleth_idp::params::jetty_service_ensure,
   $java_home              = $shibboleth_idp::java_home,
   $jetty_start_minutes    = $shibboleth_idp::params::jetty_start_minutes,
   $src_directory          = $shibboleth_idp::params::shib_src_dir,
@@ -41,7 +40,7 @@ class shibboleth_idp::jetty (
     extract_path => $jetty_home,
     cleanup      => true,
     creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
-    notify       => Service['jetty'],
+    notify       => Class['shibboleth_idp::service'],
   } ->
 
   file { "${jetty_home}/jetty":
@@ -52,13 +51,14 @@ class shibboleth_idp::jetty (
   file { '/var/log/jetty':
     ensure => 'link',
     target => "${jetty_home}/jetty/logs",
+    notify => Class['shibboleth_idp::service'],
   }
 
   if $::service_provider == 'systemd' {
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
-      before  => Service['jetty'],
       require => File["${jetty_home}/jetty"],
+      notify  => Class['shibboleth_idp::service'],
     }
   } else {
     file_line { 'jetty_startup_minutes':
@@ -77,19 +77,9 @@ class shibboleth_idp::jetty (
     file { '/etc/default/jetty':
       ensure  => file,
       content => template("${module_name}/default.erb"),
-      notify  => Service['jetty'],
+      notify  => Class['shibboleth_idp::service'],
     }
   }
-
-  service { 'jetty':
-    ensure     => $jetty_service_ensure,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-  }
-
-  # TODO Why does notifying the jetty service cause a dependency cycle in puppet?
-  # TODO Why is the jetty service running as root?
 
   ####################################
 
@@ -114,6 +104,7 @@ class shibboleth_idp::jetty (
     group   => $shibboleth_idp::shib_group,
     mode    => '0744',
     recurse => true,
+    notify  => Class['shibboleth_idp::service'],
   }
 
   archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
@@ -153,6 +144,7 @@ class shibboleth_idp::jetty (
       mode    => '0644',
       source  => "${src_directory}/logback-${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
       require => Archive["/tmp/logback-${shibboleth_idp::logback_version}.tar.gz"],
+      notify  => Class['shibboleth_idp::service'],
     }
   }
 
@@ -165,6 +157,7 @@ class shibboleth_idp::jetty (
       mode    => '0644',
       content => template("${module_name}/jetty_base/${config_file}.erb"),
       require => File[$shibboleth_idp::idp_jetty_base],
+      notify  => Class['shibboleth_idp::service'],
     }
   }
 

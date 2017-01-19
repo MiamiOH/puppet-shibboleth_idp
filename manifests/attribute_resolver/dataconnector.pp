@@ -40,6 +40,7 @@ define shibboleth_idp::attribute_resolver::dataconnector (
       owner  => $shibboleth_idp::shib_user,
       group  => $shibboleth_idp::shib_group,
       mode   => '0644',
+      notify => Class['shibboleth_idp::service'],
     }
   }
 }

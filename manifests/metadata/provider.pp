@@ -30,6 +30,7 @@ define shibboleth_idp::metadata::provider (
     group  => $group,
     mode   => $mode,
     source => "${source_path}/${_source_file}",
+    notify => Class['shibboleth_idp::service'],
   }
 
 }

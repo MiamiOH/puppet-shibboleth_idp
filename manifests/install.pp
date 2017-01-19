@@ -96,7 +96,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       group   => $shibboleth_idp::shib_group,
       mode    => '0644',
       require => Exec['shibboleth idp install'],
-      notify  => Exec['shibboleth idp build'],
+      notify  => Class['shibboleth_idp::service'],
     }
 
     file { "${shibboleth_idp::shib_install_base}/credentials/${certificate['name']}.key":
@@ -106,7 +106,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       group   => $shibboleth_idp::shib_group,
       mode    => '0600',
       require => Exec['shibboleth idp install'],
-      notify  => Exec['shibboleth idp build'],
+      notify  => Class['shibboleth_idp::service'],
     }
     # lint:endignore
   }
@@ -172,7 +172,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       mode    => '0600',
       content => template("${module_name}/shibboleth/conf/${config_file}.erb"),
       require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
-      notify  => Exec['shibboleth idp build'],
+      notify  => Class['shibboleth_idp::service'],
     }
   }
 
@@ -198,6 +198,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
     environment => ["JAVA_HOME=${java_home}"],
     path        => "${::path}:${java_home}",
     refreshonly => true,
+    notify      => Class['shibboleth_idp::service'],
   }
 
 }

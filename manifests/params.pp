@@ -52,11 +52,16 @@ class shibboleth_idp::params {
   $jetty_manage_user      = true
   $jetty_user             = 'jetty'
   $jetty_group            = 'jetty'
-  $jetty_service_ensure   = 'running'
   $jetty_start_minutes    = 4
   $jetty_ks_path          = undef
   $jetty_ks_type          = 'PKCS12'
   $jetty_ks_password      = undef
+
+  $service_name           = 'jetty'
+  $service_enable         = true
+  $service_ensure         = 'running'
+  $service_manage         = true
+  $service_restart        = undef
 
   $ss_version             = '1.14.11'
   $ss_install_base        = '/var/simplesamlphp'

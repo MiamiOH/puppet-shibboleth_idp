@@ -52,6 +52,12 @@ class shibboleth_idp (
   $proxy_host             = undef,
   $proxy_port             = undef,
 
+  $service_name           = $shibboleth_idp::params::service_name,
+  $service_enable         = true,
+  $service_manage         = true,
+  $service_ensure         = 'running',
+  $service_restart        = undef,
+
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
@@ -77,10 +83,19 @@ class shibboleth_idp (
   class { '::shibboleth_idp::attribute_resolver': } ->
   class { '::shibboleth_idp::attribute_filter': }
 
+  class { '::shibboleth_idp::service':
+    service_name    => $service_name,
+    service_enable  => $service_enable,
+    service_manage  => $service_manage,
+    service_ensure  => $service_ensure,
+    service_restart => $service_restart,
+  }
+
   contain '::shibboleth_idp::install'
   contain '::shibboleth_idp::relying_party'
   contain '::shibboleth_idp::metadata'
   contain '::shibboleth_idp::attribute_resolver'
   contain '::shibboleth_idp::attribute_filter'
+  contain '::shibboleth_idp::service'
 
 }

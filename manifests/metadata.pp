@@ -15,6 +15,7 @@ class shibboleth_idp::metadata inherits shibboleth_idp {
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
     mode   => '0644',
+    notify => Class['shibboleth_idp::service'],
   }
 
   # The idp-metadata.xml file represents our IdP to service providers. It

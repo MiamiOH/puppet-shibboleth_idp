@@ -7,18 +7,20 @@ class shibboleth_idp::attribute_resolver inherits shibboleth_idp {
 
   # Create the dataconnectors.properties file.
   concat { 'dataconnectors.properties':
-    path  => "${shibboleth_idp::shib_install_base}/conf/dataconnectors.properties",
-    owner => $shibboleth_idp::shib_user,
-    group => $shibboleth_idp::shib_group,
-    mode  => '0600',
+    path   => "${shibboleth_idp::shib_install_base}/conf/dataconnectors.properties",
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+    mode   => '0600',
+    notify => Class['shibboleth_idp::service'],
   }
 
   # Create the attribute-resolver.xml configuration file.
   concat { 'attribute-resolver.xml':
-    path  => "${shibboleth_idp::shib_install_base}/conf/attribute-resolver.xml",
-    owner => $shibboleth_idp::shib_user,
-    group => $shibboleth_idp::shib_group,
-    mode  => '0600',
+    path   => "${shibboleth_idp::shib_install_base}/conf/attribute-resolver.xml",
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+    mode   => '0600',
+    notify => Class['shibboleth_idp::service'],
   }
 
   concat::fragment { 'attribute_resolver_head':
