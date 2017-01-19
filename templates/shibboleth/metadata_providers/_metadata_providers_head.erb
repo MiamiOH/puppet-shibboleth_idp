@@ -63,6 +63,10 @@
                     xmlns="urn:mace:shibboleth:2.0:metadata"
                     metadataURL="http://md.incommon.org/InCommon/InCommon-metadata.xml"
                     backingFile="%{idp.home}/metadata/InCommon-metadata.xml"
+                    <%- if @proxy_host -%>
+                    proxyHost="<%= @proxy_host %>"
+                    proxyPort="<%= @proxy_port %>"
+                    <%- end -%>
                     minRefreshDelay="PT5M"
                     maxRefreshDelay="PT1H"
                     refreshDelayFactor="0.75">
