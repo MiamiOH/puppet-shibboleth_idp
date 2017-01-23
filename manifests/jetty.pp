@@ -93,7 +93,7 @@ class shibboleth_idp::jetty (
     ensure  => directory,
     owner   => $shibboleth_idp::shib_user,
     group   => $shibboleth_idp::shib_group,
-    mode    => '0744',
+    mode    => '0644',
     recurse => true,
     source  => "puppet:///modules/${module_name}/jetty_base",
   } ->
@@ -102,8 +102,8 @@ class shibboleth_idp::jetty (
     ensure  => directory,
     owner   => $shibboleth_idp::shib_user,
     group   => $shibboleth_idp::shib_group,
-    mode    => '0744',
-    recurse => true,
+    mode    => '0644',
+    recurse => false,
     notify  => Class['shibboleth_idp::service'],
   }
 
