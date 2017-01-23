@@ -10,11 +10,11 @@
 #
 #
 class shibboleth_idp::service (
-  $service_name    = $::shibboleth_idp::params::service_name,
-  $service_enable  = $::shibboleth_idp::params::service_enable,
-  $service_ensure  = $::shibboleth_idp::params::service_ensure,
-  $service_manage  = $::shibboleth_idp::params::service_manage,
-  $service_restart = $::shibboleth_idp::params::service_restart,
+  $service_name    = 'jetty',
+  $service_enable  = true,
+  $service_ensure  = true,
+  $service_manage  = 'running',
+  $service_restart = undef,
 ) {
   # The base class must be included first because parameter defaults depend on it
   if ! defined(Class['shibboleth_idp::params']) {

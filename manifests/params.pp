@@ -57,12 +57,6 @@ class shibboleth_idp::params {
   $jetty_ks_type          = 'PKCS12'
   $jetty_ks_password      = undef
 
-  $service_name           = 'jetty'
-  $service_enable         = true
-  $service_ensure         = 'running'
-  $service_manage         = true
-  $service_restart        = undef
-
   $ss_version             = '1.14.11'
   $ss_install_base        = '/var/simplesamlphp'
   $ss_sp_host             = undef
