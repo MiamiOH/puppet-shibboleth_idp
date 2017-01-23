@@ -5,11 +5,8 @@ Description=Jetty Web Application Server
 After=syslog.target network.target
 
 [Service]
-Type=forking
-
-ExecStart=/etc/init.d/jetty start
-ExecStop=/etc/init.d/jetty stop
-SuccessExitStatus=143
+WorkingDirectory=<%= @idp_jetty_base %>
+ExecStart=/usr/bin/java -jar <%= @jetty_home %>/jetty/start.jar jetty.home=<%= @jetty_home %>/jetty jetty.base=<%= @idp_jetty_base %>
 
 User=<%= @jetty_user %>
 Group=<%= @jetty_group %>

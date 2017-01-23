@@ -7,10 +7,11 @@ class shibboleth_idp::attribute_filter inherits shibboleth_idp {
 
   # Create the attribute-filter.xml configuration file.
   concat { 'attribute-filter.xml':
-    path  => "${shibboleth_idp::shib_install_base}/conf/attribute-filter.xml",
-    owner => $shibboleth_idp::shib_user,
-    group => $shibboleth_idp::shib_group,
-    mode  => '0600',
+    path   => "${shibboleth_idp::shib_install_base}/conf/attribute-filter.xml",
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+    mode   => '0600',
+    notify => Class['shibboleth_idp::service'],
   }
 
   concat::fragment { 'attribute_filter_head':
