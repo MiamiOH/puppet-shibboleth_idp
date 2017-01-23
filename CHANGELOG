@@ -1,3 +1,9 @@
+2017-01-23 (0.1.1)  Dirk Tepe
+        * Improved service management
+        * Various bug fixes
+        * Pass http proxy settings into Jetty
+        * Config changes don't seem to trigger a refresh of the jetty service
+
 2017-01-11 (0.1.0)  Dirk Tepe
         * First Stable Release
 
