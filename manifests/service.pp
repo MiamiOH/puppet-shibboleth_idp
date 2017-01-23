@@ -9,38 +9,32 @@
 #    }
 #
 #
-class shibboleth_idp::service (
-  $service_name    = 'jetty',
-  $service_enable  = true,
-  $service_ensure  = true,
-  $service_manage  = 'running',
-  $service_restart = undef,
-) {
+class shibboleth_idp::service {
   # The base class must be included first because parameter defaults depend on it
   if ! defined(Class['shibboleth_idp::params']) {
     fail('You must include the shibboleth_idp::params class before using any shibboleth_idp defined resources')
   }
-  validate_bool($service_enable)
-  validate_bool($service_manage)
+  validate_bool($shibboleth_idp::params::service_enable)
+  validate_bool($shibboleth_idp::params::service_manage)
 
-  case $service_ensure {
+  case $shibboleth_idp::params::service_ensure {
     true, false, 'running', 'stopped': {
-      $_service_ensure = $service_ensure
+      $_service_ensure = $shibboleth_idp::params::service_ensure
     }
     default: {
       $_service_ensure = undef
     }
   }
 
-  $service_hasrestart = $service_restart == undef
+  $_service_hasrestart = $shibboleth_idp::params::service_restart == undef
 
-  if $service_manage {
+  if $shibboleth_idp::params::service_manage {
     service { 'jetty':
       ensure     => $_service_ensure,
-      name       => $service_name,
-      enable     => $service_enable,
-      restart    => $service_restart,
-      hasrestart => $service_hasrestart,
+      name       => $shibboleth_idp::params::service_name,
+      enable     => $shibboleth_idp::params::service_enable,
+      restart    => $shibboleth_idp::params::service_restart,
+      hasrestart => $_service_hasrestart,
     }
   }
 }
