@@ -12,7 +12,9 @@ describe 'shibboleth_idp::metadata::provider', :type => :define do
       describe 'file resource with defaults' do
         let :pre_condition do
           'class{"shibboleth_idp":
-              shib_install_base => "/junk/path"
+              shib_install_base => "/junk/path",
+              idp_server_name => "shibvm-idp.example.com",
+              idp_entity_id => "https://shibvm-idp.miamioh.edu:21443/idp/shibboleth",
            }'
         end
 

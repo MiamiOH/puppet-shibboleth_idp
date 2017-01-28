@@ -13,14 +13,14 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $proxy_port = $shibboleth_idp::proxy_port
 
   if $shibboleth_idp::manage_user {
-    ensure_resource('user', $shib_user, {
+    ensure_resource('user', $shibboleth_idp::shib_user, {
         managehome => true,
         system     => true,
-        gid        => $shib_group,
+        gid        => $shibboleth_idp::shib_group,
         shell      => '/sbin/nologin',
     })
 
-    ensure_resource('group', $shib_group, {
+    ensure_resource('group', $shibboleth_idp::shib_group, {
         ensure => present
     })
   }

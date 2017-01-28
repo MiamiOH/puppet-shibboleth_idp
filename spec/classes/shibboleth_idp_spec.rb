@@ -8,6 +8,12 @@ describe 'shibboleth_idp', :type => :class do
       end
 
       context 'with defaults' do
+        let(:params) do
+          {
+            :idp_server_name => 'shibvm-idp.example.com',
+            :idp_entity_id => 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'
+          }
+        end
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('shibboleth_idp::install') }
         it { is_expected.to contain_class('shibboleth_idp::relying_party') }
