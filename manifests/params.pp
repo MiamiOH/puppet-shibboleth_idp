@@ -87,9 +87,4 @@ class shibboleth_idp::params {
   $ss_cert_owner           = undef
   $ss_cert_group           = undef
 
-  $ss_sp_domain = $ss_sp_port ? {
-    undef   => $ss_sp_host,
-    default => "${ss_sp_host}:${ss_sp_port}",
-  }
-
 }
