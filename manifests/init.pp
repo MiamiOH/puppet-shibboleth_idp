@@ -77,11 +77,11 @@ class shibboleth_idp (
   validate_hash($metadata_providers)
 
   if $idp_server_name == undef {
-    fail("You must provide the hostname in the idp_server_name parameter")
+    fail('You must provide the hostname in the idp_server_name parameter')
   }
 
   if $idp_entity_id == undef {
-    fail("You must provide the IdP entity ID in the idp_entity_id parameter")
+    fail('You must provide the IdP entity ID in the idp_entity_id parameter')
   }
 
   $proxy_port_string = $proxy_port ? {
