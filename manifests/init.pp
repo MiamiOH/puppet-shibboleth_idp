@@ -84,6 +84,19 @@ class shibboleth_idp (
     fail('You must provide the IdP entity ID in the idp_entity_id parameter')
   }
 
+  ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
+    'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
+    'idp_loglevel_spring', 'idp_loglevel_container', 'idp_loglevel_xmlsec',
+    'idp_loglevel_attrmap',
+  ].each |$log| {
+    $log_level = getvar($log)
+    if ! ($log_level in ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR']) {
+      fail("Log level ${log} is not valid for IdP logging, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
+    }
+  }
+
+  validate_integer($idp_log_history)
+
   $proxy_port_string = $proxy_port ? {
     undef   => undef,
     default => ":${proxy_port}",
