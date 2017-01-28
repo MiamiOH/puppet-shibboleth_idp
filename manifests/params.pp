@@ -35,7 +35,7 @@ class shibboleth_idp::params {
   $logback_checksum_type   = 'md5'
   $logback_checksum        = '0466114001b29808aeee2bf665e1b2f8'
 
-  $idp_log_dir             = '/opt/shibboleth_idp/logs'
+  $idp_log_dir             = '/opt/shibboleth-idp/logs'
   $idp_log_history         = 180
   $idp_loglevel_idp        = 'INFO'
   $idp_loglevel_ldap       = 'WARN'
