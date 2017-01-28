@@ -24,13 +24,24 @@ define shibboleth_idp::metadata::provider (
     content => template("${module_name}/shibboleth/metadata_providers/_provider.erb"),
   }
 
+  ensure_resource('file', "${shibboleth_idp::shib_install_base}/metadata",
+    {
+      ensure  => directory,
+      owner   => $owner,
+      group   => $group,
+      mode    => $mode,
+      require => File[$shibboleth_idp::shib_install_base],
+    }
+  )
+
   file { "${shibboleth_idp::shib_install_base}/metadata/${filename}":
-    ensure => file,
-    owner  => $owner,
-    group  => $group,
-    mode   => $mode,
-    source => "${source_path}/${_source_file}",
-    notify => Class['shibboleth_idp::service'],
+    ensure  => file,
+    owner   => $owner,
+    group   => $group,
+    mode    => $mode,
+    source  => "${source_path}/${_source_file}",
+    require => File["${shibboleth_idp::shib_install_base}/metadata"],
+    notify  => Class['shibboleth_idp::service'],
   }
 
 }
