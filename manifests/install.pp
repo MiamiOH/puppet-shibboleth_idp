@@ -12,7 +12,26 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $proxy_host = $shibboleth_idp::proxy_host
   $proxy_port = $shibboleth_idp::proxy_port
 
+  if $shibboleth_idp::manage_user {
+    ensure_resource('user', $shib_user, {
+        managehome => true,
+        system     => true,
+        gid        => $shib_group,
+        shell      => '/sbin/nologin',
+    })
+
+    ensure_resource('group', $shib_group, {
+        ensure => present
+    })
+  }
+
   file { $shibboleth_idp::shib_src_dir:
+    ensure => directory,
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+  }
+
+  file { $shibboleth_idp::idp_log_dir:
     ensure => directory,
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
@@ -163,7 +182,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
   # Render the Shibboleth configuration. These are run time and not used
   # during the build process. It should restart Jetty, though.
-  ['ldap.properties', 'idp.properties', 'authn/general-authn.xml',
+  ['ldap.properties', 'idp.properties', 'authn/general-authn.xml', 'logback.xml',
   ].each |$config_file| {
     file { "${shibboleth_idp::shib_install_base}/conf/${config_file}":
       ensure  => file,
