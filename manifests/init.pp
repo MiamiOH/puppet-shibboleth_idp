@@ -3,6 +3,9 @@
 # This class installs the Shibboleth IdP
 
 class shibboleth_idp (
+  $idp_server_name,
+  $idp_entity_id,
+
   $shib_idp_version        = $shibboleth_idp::params::shib_idp_version,
   $shib_user               = $shibboleth_idp::params::shib_user,
   $shib_group              = $shibboleth_idp::params::shib_group,
@@ -11,9 +14,7 @@ class shibboleth_idp (
   $shib_install_base       = $shibboleth_idp::params::shib_install_base,
   $idp_jetty_base          = $shibboleth_idp::params::idp_jetty_base,
   $idp_jetty_user          = $shibboleth_idp::params::idp_jetty_user,
-  $idp_entity_id           = $shibboleth_idp::params::idp_entity_id,
   $idp_server_url          = $shibboleth_idp::params::idp_server_url,
-  $idp_server_name         = $shibboleth_idp::params::idp_server_name,
   $jce_policy_src          = $shibboleth_idp::params::jce_policy_src,
 
   $include_cas             = $shibboleth_idp::params::include_cas,
@@ -76,23 +77,14 @@ class shibboleth_idp (
 
   validate_hash($metadata_providers)
 
-  if $idp_server_name == undef {
-    fail('You must provide the hostname in the idp_server_name parameter')
-  }
-
-  if $idp_entity_id == undef {
-    fail('You must provide the IdP entity ID in the idp_entity_id parameter')
-  }
-
   ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
     'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
     'idp_loglevel_spring', 'idp_loglevel_container', 'idp_loglevel_xmlsec',
     'idp_loglevel_attrmap',
   ].each |$log| {
     $log_level = getvar($log)
-    if ! ($log_level in ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR']) {
-      fail("Log level ${log} is not valid for IdP logging, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
-    }
+    validate_re($log_level, ['^TRACE$', '^DEBUG$', '^INFO$', '^WARN$', '^ERROR$'],
+    "Log level ${log} is not valid for IdP logging, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
   }
 
   validate_integer($idp_log_history)

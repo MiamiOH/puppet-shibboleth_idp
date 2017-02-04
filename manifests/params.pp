@@ -13,9 +13,7 @@ class shibboleth_idp::params {
   $shib_install_base       = '/opt/shibboleth-idp'
   $idp_jetty_base          = '/opt/idp_jetty'
   $idp_jetty_user          = 'jetty'
-  $idp_entity_id           = undef
   $idp_server_url          = undef
-  $idp_server_name         = undef
   $jce_policy_src          = undef
 
   $include_cas             = false
