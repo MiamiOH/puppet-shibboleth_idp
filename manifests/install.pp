@@ -30,12 +30,14 @@ class shibboleth_idp::install inherits shibboleth_idp {
     ensure => directory,
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
+    mode   => '0644',
   }
 
   file { $shibboleth_idp::idp_log_dir:
     ensure => directory,
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
+    mode   => '0644',
   }
 
   ####################################
