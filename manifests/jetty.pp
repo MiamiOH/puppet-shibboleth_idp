@@ -27,6 +27,7 @@ class shibboleth_idp::jetty (
         system     => true,
         gid        => $jetty_group,
         shell      => '/sbin/nologin',
+        home       => "/var/lib/${jetty_user}",
     })
 
     ensure_resource('group', $jetty_group, {
