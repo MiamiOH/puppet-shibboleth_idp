@@ -15,7 +15,6 @@ class shibboleth_idp::simplesp (
   $ss_install_base   = $shibboleth_idp::params::ss_install_base,
   $ss_sp_host        = $shibboleth_idp::params::ss_sp_host,
   $ss_sp_port        = $shibboleth_idp::params::ss_sp_port,
-  $ss_sp_domain      = $shibboleth_idp::params::ss_sp_domain,
   $ss_sp_url_path    = $shibboleth_idp::params::ss_sp_url_path,
   $ss_admin_password = $shibboleth_idp::params::ss_admin_password,
   $ss_secret_salt    = $shibboleth_idp::params::ss_secret_salt,
@@ -28,6 +27,11 @@ class shibboleth_idp::simplesp (
   Archive {
     proxy_server => $proxy_server,
     proxy_type   => $proxy_type,
+  }
+
+  $ss_sp_domain = $ss_sp_port ? {
+    undef   => $ss_sp_host,
+    default => "${ss_sp_host}:${ss_sp_port}",
   }
 
   file { $ss_install_base:
