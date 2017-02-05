@@ -1,3 +1,8 @@
+2017-02-05 (0.1.2)  Dirk Tepe
+        * Add log configuration parameters
+        * Require entity id and IdP server hostname
+        * Require metadata directory before SP metadata files
+
 2017-01-23 (0.1.1)  Dirk Tepe
         * Improved service management
         * Various bug fixes
