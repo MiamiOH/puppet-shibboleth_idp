@@ -16,13 +16,15 @@ class shibboleth_idp::install inherits shibboleth_idp {
     ensure_resource('user', $shibboleth_idp::shib_user, {
         managehome => true,
         system     => true,
+        uid        => $shibboleth_idp::shib_user_uid,
         gid        => $shibboleth_idp::shib_group,
         shell      => '/sbin/nologin',
         home       => "/var/lib/${shibboleth_idp::shib_user}",
     })
 
     ensure_resource('group', $shibboleth_idp::shib_group, {
-        ensure => present
+        ensure => present,
+        gid    => $shibboleth_idp::shib_group_gid,
     })
   }
 
