@@ -92,6 +92,9 @@
         <constructor-arg>
             <list>
                 <!-- <value>https://sp.example.org</value> -->
+                <%- @nameid_allowed_entities.each do |entity| -%>
+                <value><%= entity %></value>
+                <%- end -%>
             </list>
         </constructor-arg>
     </bean>

@@ -55,6 +55,8 @@ class shibboleth_idp (
   $dataconnectors          = $shibboleth_idp::params::dataconnectors,
   $attributes              = $shibboleth_idp::params::attributes,
   $filters                 = $shibboleth_idp::params::filters,
+  $nameid_generators       = $shibboleth_idp::params::nameid_generators,
+  $nameid_allowed_entities = $shibboleth_idp::params::nameid_allowed_entities,
 
   $inc_signing_cert_src    = $shibboleth_idp::params::inc_signing_cert_src,
   $jetty_ks_path           = $shibboleth_idp::params::jetty_ks_path,
@@ -76,6 +78,7 @@ class shibboleth_idp (
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
+  validate_array($nameid_generators, $nameid_allowed_entities)
 
   ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
     'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',

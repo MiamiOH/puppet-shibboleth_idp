@@ -54,6 +54,8 @@ class shibboleth_idp::params {
   $dataconnectors          = {}
   $attributes              = {}
   $filters                 = {}
+  $nameid_generators       = []
+  $nameid_allowed_entities = []
 
   $inc_signing_cert_src    = undef
 

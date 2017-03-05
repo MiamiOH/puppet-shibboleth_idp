@@ -43,6 +43,11 @@
             p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
             p:attributeSourceIds="#{ {'mail'} }" />
         -->
+        <%- @nameid_generators.each do |generator| -%>
+        <bean parent="<%= generator['parent'] %>"
+            p:format="<%= generator['format'] %>"
+            p:attributeSourceIds="#{ <% generator['attributeSourceIds'].each_with_index do |a, i| %>{'<%= a %>'}<%= ', ' if i < (generator['attributeSourceIds'].size - 1) %><% end %> }" />
+        <%- end -%>
                 
     </util:list>
 
