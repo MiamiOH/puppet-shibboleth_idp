@@ -46,11 +46,9 @@
         <%- @nameid_generators.each do |generator| -%>
         <bean parent="<%= generator['parent'] %>"
             p:format="<%= generator['format'] %>"
-            
             p:attributeSourceIds="#{ <%= generator['attributeSourceIds'].map{ |a| "{'#{a}'}" }.join(', ') %> }" />
-
         <%- end -%>
-                
+
     </util:list>
 
     <!-- SAML 1 NameIdentifier Generation -->
