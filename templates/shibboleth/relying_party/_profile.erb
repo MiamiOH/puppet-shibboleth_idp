@@ -3,7 +3,7 @@
             <property name="<%= property['name'] %>">
                 <list>
                     <%- property['beans'].each do |bean| -%>
-                    <bean parent="<%= bean['parent'] %>"<%- if !bean['encryptAssertions'].nil? %> p:encryptAssertions="<%= bean['encryptAssertions'] %>"<% end %><% if !bean['encryptNameIDs'].nil? %> p:encryptNameIDs="<%= bean['encryptAssertions'] %>"<% end %> />
+                    <bean parent="<%= bean['parent'] %>"<%- if !bean['encryptAssertions'].nil? %> p:encryptAssertions="<%= bean['encryptAssertions'] %>"<% end %><% if !bean['encryptNameIDs'].nil? %> p:encryptNameIDs="<%= bean['encryptNameIDs'] %>"<% end %><% if !bean['nameIDFormatPrecedence'].nil? %> p:nameIDFormatPrecedence="<%= bean['nameIDFormatPrecedence'] %>"<% end %> />
                     <%- end -%>
                 </list>
             </property>
