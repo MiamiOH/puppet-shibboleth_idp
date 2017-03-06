@@ -8,7 +8,9 @@ class shibboleth_idp (
 
   $shib_idp_version        = $shibboleth_idp::params::shib_idp_version,
   $shib_user               = $shibboleth_idp::params::shib_user,
+  $shib_user_uid           = undef,
   $shib_group              = $shibboleth_idp::params::shib_group,
+  $shib_group_gid          = undef,
   $manage_user             = $shibboleth_idp::params::manage_user,
   $shib_src_dir            = $shibboleth_idp::params::shib_src_dir,
   $shib_install_base       = $shibboleth_idp::params::shib_install_base,

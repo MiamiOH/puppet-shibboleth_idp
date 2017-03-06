@@ -9,7 +9,9 @@ class shibboleth_idp::jetty (
   $jetty_home             = $shibboleth_idp::params::jetty_home,
   $jetty_manage_user      = $shibboleth_idp::params::jetty_manage_user,
   $jetty_user             = $shibboleth_idp::params::jetty_user,
+  $jetty_user_uid         = undef,
   $jetty_group            = $shibboleth_idp::params::jetty_group,
+  $jetty_group_gid        = undef,
   $java_home              = $shibboleth_idp::java_home,
   $jetty_start_minutes    = $shibboleth_idp::params::jetty_start_minutes,
   $src_directory          = $shibboleth_idp::params::shib_src_dir,
@@ -26,12 +28,14 @@ class shibboleth_idp::jetty (
         managehome => true,
         system     => true,
         gid        => $jetty_group,
+        uid        => $jetty_user_uid,
         shell      => '/sbin/nologin',
         home       => "/var/lib/${jetty_user}",
     })
 
     ensure_resource('group', $jetty_group, {
-        ensure => present
+        ensure => present,
+        gid    => $jetty_group_gid,
     })
   }
 
