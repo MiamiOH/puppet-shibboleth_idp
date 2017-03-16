@@ -20,6 +20,8 @@ class shibboleth_idp (
   $jce_policy_src          = $shibboleth_idp::params::jce_policy_src,
 
   $include_cas             = $shibboleth_idp::params::include_cas,
+  $shibcas_version         = $shibboleth_idp::params::shibcas_version,
+  $shibcas_auth_version    = $shibboleth_idp::params::shibcas_auth_version,
   $cas_server_url          = $shibboleth_idp::params::cas_server_url,
 
   $ldap_url                = $shibboleth_idp::params::ldap_url,
