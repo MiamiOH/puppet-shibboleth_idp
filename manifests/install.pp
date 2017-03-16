@@ -9,6 +9,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
   $java_home = $shibboleth_idp::java_home
   $include_cas = $shibboleth_idp::include_cas
+  $shibcas_version = $shibboleth_idp::shibcas_version
+  $shibcas_auth_version = $shibboleth_idp::shibcas_auth_version
   $proxy_host = $shibboleth_idp::proxy_host
   $proxy_port = $shibboleth_idp::proxy_port
   $nameid_generators = $shibboleth_idp::nameid_generators
@@ -140,13 +142,13 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # Fetch and install the ShibCAS component.
   if $include_cas {
     archive { '/tmp/master.tar.gz':
-      source       => 'https://github.com/Unicon/shib-cas-authn3/archive/master.tar.gz',
+      source       => "https://github.com/Unicon/shib-cas-authn3/archive/v${shibcas_version}.tar.gz",
       extract      => true,
       extract_path => $shibboleth_idp::shib_src_dir,
       user         => $shibboleth_idp::shib_user,
       group        => $shibboleth_idp::shib_group,
       cleanup      => true,
-      creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-master/README.md",
+      creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-${shibcas_version}/README.md",
     } ->
 
     file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
@@ -155,19 +157,19 @@ class shibboleth_idp::install inherits shibboleth_idp {
       group   => $shibboleth_idp::shib_group,
       mode    => '0644',
       recurse => true,
-      source  => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-master/IDP_HOME/flows/authn/Shibcas",
+      source  => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-${shibcas_version}/IDP_HOME/flows/authn/Shibcas",
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
 
     # Use archive to fetch a couple of jar files, but do not extract them.
-    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar":
-      source  => 'https://github.com/Unicon/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar',
+    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar":
+      source  => "https://github.com/Unicon/shib-cas-authn3/releases/download/v${shibcas_auth_version}/shib-cas-authenticator-${shibcas_auth_version}.jar",
       extract => false,
       cleanup => false,
       user    => $shibboleth_idp::shib_user,
       group   => $shibboleth_idp::shib_group,
-      creates => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-3.0.0.jar",
+      creates => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar",
       require => Exec['shibboleth idp install'],
       notify  => Exec['shibboleth idp build'],
     }
