@@ -40,6 +40,8 @@ class shibboleth_idp (
   $logback_checksum_type   = $shibboleth_idp::params::logback_checksum_type,
   $logback_checksum        = $shibboleth_idp::params::logback_checksum,
 
+  $admin_allowed_cidr_expr = $shibboleth_idp::params::admin_allowed_cidr_expr,
+
   $idp_log_dir             = $shibboleth_idp::params::idp_log_dir,
   $idp_log_history         = $shibboleth_idp::params::idp_log_history,
   $idp_loglevel_idp        = $shibboleth_idp::params::idp_loglevel_idp,
@@ -92,8 +94,8 @@ class shibboleth_idp (
     'idp_loglevel_attrmap',
   ].each |$log| {
     $log_level = getvar($log)
-    validate_re($log_level, ['^TRACE$', '^DEBUG$', '^INFO$', '^WARN$', '^ERROR$'],
-    "Log level ${log} is not valid for IdP logging, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
+    validate_re($log_level, ['^(TRACE|DEBUG|INFO|WARN|ERROR)$'],
+    "Log level ${log_level} is not valid for ${log}, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
   }
 
   validate_integer($idp_log_history)

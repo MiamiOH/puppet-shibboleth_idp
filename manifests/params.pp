@@ -38,6 +38,8 @@ class shibboleth_idp::params {
   $logback_checksum_type   = 'md5'
   $logback_checksum        = '0466114001b29808aeee2bf665e1b2f8'
 
+  $admin_allowed_cidr_expr = ['127.0.0.1/32', '::1/128']
+
   $idp_log_dir             = '/opt/shibboleth-idp/logs'
   $idp_log_history         = 180
   $idp_loglevel_idp        = 'INFO'
