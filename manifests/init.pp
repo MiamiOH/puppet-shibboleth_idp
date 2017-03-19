@@ -15,6 +15,8 @@ class shibboleth_idp (
   $shib_src_dir            = $shibboleth_idp::params::shib_src_dir,
   $shib_install_base       = $shibboleth_idp::params::shib_install_base,
   $idp_jetty_base          = $shibboleth_idp::params::idp_jetty_base,
+  $idp_jetty_log_dir       = $shibboleth_idp::params::idp_jetty_log_dir,
+  $idp_jetty_log_level     = $shibboleth_idp::params::idp_jetty_log_level,
   $idp_jetty_user          = $shibboleth_idp::params::idp_jetty_user,
   $idp_server_url          = $shibboleth_idp::params::idp_server_url,
   $jce_policy_src          = $shibboleth_idp::params::jce_policy_src,

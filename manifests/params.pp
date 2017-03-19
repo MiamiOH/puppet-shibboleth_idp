@@ -12,6 +12,8 @@ class shibboleth_idp::params {
   $shib_src_dir            = '/opt/idpv3-source'
   $shib_install_base       = '/opt/shibboleth-idp'
   $idp_jetty_base          = '/opt/idp_jetty'
+  $idp_jetty_log_dir       = '/opt/idp_jetty/logs'
+  $idp_jetty_log_level     = 'INFO'
   $idp_jetty_user          = 'jetty'
   $idp_server_url          = undef
   $jce_policy_src          = undef

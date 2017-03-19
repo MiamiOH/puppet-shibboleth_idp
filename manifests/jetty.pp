@@ -22,6 +22,8 @@ class shibboleth_idp::jetty (
   $jetty_start_interval = 4 * $jetty_start_minutes
 
   $idp_jetty_base = $shibboleth_idp::idp_jetty_base
+  $idp_jetty_log_dir = $shibboleth_idp::idp_jetty_log_dir
+  $idp_jetty_log_level = $shibboleth_idp::idp_jetty_log_level
 
   if $jetty_manage_user {
     ensure_resource('user', $jetty_user, {
@@ -51,12 +53,6 @@ class shibboleth_idp::jetty (
   file { "${jetty_home}/jetty":
     ensure => 'link',
     target => "${jetty_home}/jetty-distribution-${jetty_version}",
-  } ->
-
-  file { '/var/log/jetty':
-    ensure => 'link',
-    target => "${jetty_home}/jetty/logs",
-    notify => Class['shibboleth_idp::service'],
   }
 
   if $::service_provider == 'systemd' {
@@ -92,7 +88,7 @@ class shibboleth_idp::jetty (
   # Create the IdP Jetty base. This uses a directory of files
   # which are overridden by templates when necessary.
   $jetty_files = [ "${shibboleth_idp::idp_jetty_base}/lib", "${shibboleth_idp::idp_jetty_base}/lib/logging",
-  "${shibboleth_idp::idp_jetty_base}/logs", "${shibboleth_idp::idp_jetty_base}/lib/ext", "${shibboleth_idp::idp_jetty_base}/tmp" ]
+  "${shibboleth_idp::idp_jetty_base}/lib/ext", "${shibboleth_idp::idp_jetty_base}/tmp" ]
 
   file { $shibboleth_idp::idp_jetty_base:
     ensure  => directory,
@@ -110,6 +106,13 @@ class shibboleth_idp::jetty (
     mode    => '0644',
     recurse => false,
     notify  => Class['shibboleth_idp::service'],
+  } ->
+
+  file { $idp_jetty_log_dir:
+    ensure => directory,
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+    mode   => '0644',
   }
 
   archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
@@ -154,6 +157,7 @@ class shibboleth_idp::jetty (
   }
 
   ['start.ini', 'start.d/ssl.ini', 'start.d/http.ini',
+    'resources/logback.xml', 'resources/logback-access.xml',
   ].each |$config_file| {
     file { "${shibboleth_idp::idp_jetty_base}/${config_file}":
       ensure  => file,
