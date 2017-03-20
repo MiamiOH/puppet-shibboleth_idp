@@ -86,7 +86,7 @@ class shibboleth_idp (
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
-  validate_array($nameid_generators, $nameid_allowed_entities)
+  validate_array($nameid_generators, $nameid_allowed_entities, $admin_allowed_cidr_expr)
 
   ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
     'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
@@ -100,6 +100,9 @@ class shibboleth_idp (
 
   validate_integer($idp_log_history)
 
+  validate_re($idp_jetty_log_level, ['^(DEBUG|INFO|WARN|IGNORE)$'],
+  "Log level ${idp_jetty_log_level} is not valid for idp_jetty_log_level, use one of 'DEBUG', 'INFO', 'WARN' or 'IGNORE'")
+  
   $proxy_port_string = $proxy_port ? {
     undef   => undef,
     default => ":${proxy_port}",

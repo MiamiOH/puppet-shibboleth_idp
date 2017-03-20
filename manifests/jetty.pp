@@ -103,7 +103,7 @@ class shibboleth_idp::jetty (
     ensure  => directory,
     owner   => $shibboleth_idp::shib_user,
     group   => $shibboleth_idp::shib_group,
-    mode    => '0644',
+    mode    => '0750',
     recurse => false,
     notify  => Class['shibboleth_idp::service'],
   } ->
@@ -112,7 +112,7 @@ class shibboleth_idp::jetty (
     ensure => directory,
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
-    mode   => '0644',
+    mode   => '0750',
   }
 
   archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":

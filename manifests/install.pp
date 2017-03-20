@@ -15,6 +15,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $proxy_port = $shibboleth_idp::proxy_port
   $nameid_generators = $shibboleth_idp::nameid_generators
   $nameid_allowed_entities = $shibboleth_idp::nameid_allowed_entities
+  $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
 
   if $shibboleth_idp::manage_user {
     ensure_resource('user', $shibboleth_idp::shib_user, {
