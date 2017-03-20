@@ -100,11 +100,11 @@ class shibboleth_idp::jetty (
   } ->
 
   file { $jetty_files:
-    ensure  => directory,
-    owner   => $shibboleth_idp::shib_user,
-    group   => $shibboleth_idp::shib_group,
-    mode    => '0750',
-    notify  => Class['shibboleth_idp::service'],
+    ensure => directory,
+    owner  => $shibboleth_idp::shib_user,
+    group  => $shibboleth_idp::shib_group,
+    mode   => '0750',
+    notify => Class['shibboleth_idp::service'],
   }
 
   archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
