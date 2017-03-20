@@ -88,13 +88,13 @@ class shibboleth_idp::jetty (
   # Create the IdP Jetty base. This uses a directory of files
   # which are overridden by templates when necessary.
   $jetty_files = [ "${shibboleth_idp::idp_jetty_base}/lib", "${shibboleth_idp::idp_jetty_base}/lib/logging",
-  "${shibboleth_idp::idp_jetty_base}/lib/ext", "${shibboleth_idp::idp_jetty_base}/tmp" ]
+  "${shibboleth_idp::idp_jetty_base}/lib/ext", "${shibboleth_idp::idp_jetty_base}/tmp", $idp_jetty_log_dir ]
 
   file { $shibboleth_idp::idp_jetty_base:
     ensure  => directory,
     owner   => $shibboleth_idp::shib_user,
     group   => $shibboleth_idp::shib_group,
-    mode    => '0644',
+    mode    => '0640',
     recurse => true,
     source  => "puppet:///modules/${module_name}/jetty_base",
   } ->
@@ -104,15 +104,7 @@ class shibboleth_idp::jetty (
     owner   => $shibboleth_idp::shib_user,
     group   => $shibboleth_idp::shib_group,
     mode    => '0750',
-    recurse => false,
     notify  => Class['shibboleth_idp::service'],
-  } ->
-
-  file { $idp_jetty_log_dir:
-    ensure => directory,
-    owner  => $shibboleth_idp::shib_user,
-    group  => $shibboleth_idp::shib_group,
-    mode   => '0750',
   }
 
   archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
