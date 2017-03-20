@@ -1,3 +1,7 @@
+2017-03-20 (0.1.6)  Dirk Tepe
+        * Manage Jetty log directory location
+        * Add param of IPs allowed to access IdP admin pages
+
 2017-03-16 (0.1.5)  Dirk Tepe
         * Manage version of Shibcas source files
 

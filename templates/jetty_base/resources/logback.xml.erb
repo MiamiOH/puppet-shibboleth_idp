@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
     <appender name="jetty" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${jetty.base}/logs/jetty.log</File>
+        <File><%= @idp_jetty_log_dir %>/jetty.log</File>
          
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${jetty.base}/logs/jetty-%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+            <FileNamePattern><%= @idp_jetty_log_dir %>/jetty-%d{yyyy-MM-dd}.log.gz</FileNamePattern>
         </rollingPolicy>
  
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -13,7 +13,7 @@
         </encoder>
     </appender>
    
-    <root level="INFO">
+    <root level="<%= @idp_jetty_log_level %>">
         <appender-ref ref="jetty" />
     </root>
     <logger name="org.springframework" level="OFF" />

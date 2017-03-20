@@ -15,6 +15,8 @@ class shibboleth_idp (
   $shib_src_dir            = $shibboleth_idp::params::shib_src_dir,
   $shib_install_base       = $shibboleth_idp::params::shib_install_base,
   $idp_jetty_base          = $shibboleth_idp::params::idp_jetty_base,
+  $idp_jetty_log_dir       = $shibboleth_idp::params::idp_jetty_log_dir,
+  $idp_jetty_log_level     = $shibboleth_idp::params::idp_jetty_log_level,
   $idp_jetty_user          = $shibboleth_idp::params::idp_jetty_user,
   $idp_server_url          = $shibboleth_idp::params::idp_server_url,
   $jce_policy_src          = $shibboleth_idp::params::jce_policy_src,
@@ -37,6 +39,8 @@ class shibboleth_idp (
   $logback_version         = $shibboleth_idp::params::logback_version,
   $logback_checksum_type   = $shibboleth_idp::params::logback_checksum_type,
   $logback_checksum        = $shibboleth_idp::params::logback_checksum,
+
+  $admin_allowed_cidr_expr = $shibboleth_idp::params::admin_allowed_cidr_expr,
 
   $idp_log_dir             = $shibboleth_idp::params::idp_log_dir,
   $idp_log_history         = $shibboleth_idp::params::idp_log_history,
@@ -82,7 +86,7 @@ class shibboleth_idp (
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
-  validate_array($nameid_generators, $nameid_allowed_entities)
+  validate_array($nameid_generators, $nameid_allowed_entities, $admin_allowed_cidr_expr)
 
   ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
     'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
@@ -90,12 +94,15 @@ class shibboleth_idp (
     'idp_loglevel_attrmap',
   ].each |$log| {
     $log_level = getvar($log)
-    validate_re($log_level, ['^TRACE$', '^DEBUG$', '^INFO$', '^WARN$', '^ERROR$'],
-    "Log level ${log} is not valid for IdP logging, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
+    validate_re($log_level, ['^(TRACE|DEBUG|INFO|WARN|ERROR)$'],
+    "Log level ${log_level} is not valid for ${log}, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
   }
 
   validate_integer($idp_log_history)
 
+  validate_re($idp_jetty_log_level, ['^(DEBUG|INFO|WARN|IGNORE)$'],
+  "Log level ${idp_jetty_log_level} is not valid for idp_jetty_log_level, use one of 'DEBUG', 'INFO', 'WARN' or 'IGNORE'")
+  
   $proxy_port_string = $proxy_port ? {
     undef   => undef,
     default => ":${proxy_port}",

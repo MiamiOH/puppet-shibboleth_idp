@@ -12,6 +12,8 @@ class shibboleth_idp::params {
   $shib_src_dir            = '/opt/idpv3-source'
   $shib_install_base       = '/opt/shibboleth-idp'
   $idp_jetty_base          = '/opt/idp_jetty'
+  $idp_jetty_log_dir       = '/opt/idp_jetty/logs'
+  $idp_jetty_log_level     = 'INFO'
   $idp_jetty_user          = 'jetty'
   $idp_server_url          = undef
   $jce_policy_src          = undef
@@ -35,6 +37,8 @@ class shibboleth_idp::params {
   $logback_version         = '1.1.8'
   $logback_checksum_type   = 'md5'
   $logback_checksum        = '0466114001b29808aeee2bf665e1b2f8'
+
+  $admin_allowed_cidr_expr = ['127.0.0.1/32', '::1/128']
 
   $idp_log_dir             = '/opt/shibboleth-idp/logs'
   $idp_log_history         = 180
