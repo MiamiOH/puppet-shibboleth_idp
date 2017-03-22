@@ -70,6 +70,7 @@ class shibboleth_idp::params {
 
   $jetty_version           = undef
   $jetty_home              = '/opt'
+  $jetty_max_memory        = '1024m'
   $jetty_manage_user       = true
   $jetty_user              = 'jetty'
   $jetty_group             = 'jetty'
