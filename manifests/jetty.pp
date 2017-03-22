@@ -13,6 +13,7 @@ class shibboleth_idp::jetty (
   $jetty_group            = $shibboleth_idp::params::jetty_group,
   $jetty_group_gid        = undef,
   $java_home              = $shibboleth_idp::java_home,
+  $jetty_max_memory       = $shibboleth_idp::params::jetty_max_memory,
   $jetty_start_minutes    = $shibboleth_idp::params::jetty_start_minutes,
   $src_directory          = $shibboleth_idp::params::shib_src_dir,
 ) inherits shibboleth_idp {

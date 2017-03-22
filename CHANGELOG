@@ -1,3 +1,6 @@
+2017-03-22 (0.1.7)  Dirk Tepe
+        * Manage maximum memory allowed for Jetty
+
 2017-03-20 (0.1.6)  Dirk Tepe
         * Manage Jetty log directory location
         * Add param of IPs allowed to access IdP admin pages
