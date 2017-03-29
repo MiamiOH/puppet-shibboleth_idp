@@ -46,5 +46,8 @@
         </property>
     </bean>
     
+    <bean id="SHA1SecurityConfig" parent="shibboleth.DefaultSecurityConfiguration"
+      p:signatureSigningConfiguration-ref="shibboleth.SigningConfiguration.SHA1" />
+      
     <util:list id="shibboleth.RelyingPartyOverrides">
     
