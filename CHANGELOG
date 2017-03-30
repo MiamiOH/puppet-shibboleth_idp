@@ -1,3 +1,6 @@
+2017-03-29 (0.1.9)  Dirk Tepe
+        * Ensure creation of $JETTY_BASE/resources directory
+
 2017-03-29 (0.1.8)  Dirk Tepe
         * Add SHA1 signing support for relying party configuration
 
