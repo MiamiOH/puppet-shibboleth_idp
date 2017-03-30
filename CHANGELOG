@@ -1,3 +1,6 @@
+2017-03-29 (0.1.8)  Dirk Tepe
+        * Add SHA1 signing support for relying party configuration
+
 2017-03-22 (0.1.7)  Dirk Tepe
         * Manage maximum memory allowed for Jetty
 
