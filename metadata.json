@@ -1,6 +1,6 @@
 {
   "name": "MiamiOH-shibboleth_idp",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "Dirk Tepe",
   "summary": "Manage Shibboleth IdP",
   "license": "GPL-3.0+",
