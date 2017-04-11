@@ -6,6 +6,9 @@
                     <bean parent="<%= bean['parent'] %>"
                       <%= bean['attributes'].map{ |k,v| %Q(p:#{k}="#{v}") }.join(' ')%> />
                     <%- end -%>
+                    <%- property['refs'].each do |ref| -%>
+                    <ref bean="<%= ref['bean'] %>" />
+                    <%- end -%>
                 </list>
             </property>
             <%- end -%>
