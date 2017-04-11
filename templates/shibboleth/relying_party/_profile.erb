@@ -2,13 +2,13 @@
             <%- @properties.each do |property| -%>
             <property name="<%= property['name'] %>">
                 <list>
-                    <%- property['beans'].each do |bean| -%>
+                    <%- if property['beans'] -%><%- property['beans'].each do |bean| -%>
                     <bean parent="<%= bean['parent'] %>"
                       <%= bean['attributes'].map{ |k,v| %Q(p:#{k}="#{v}") }.join(' ')%> />
-                    <%- end -%>
-                    <%- property['refs'].each do |ref| -%>
+                    <%- end -%><%- end -%>
+                    <%- if property['refs'] -%> <%- property['refs'].each do |ref| -%>
                     <ref bean="<%= ref['bean'] %>" />
-                    <%- end -%>
+                    <%- end -%><%- end -%>
                 </list>
             </property>
             <%- end -%>
