@@ -20,7 +20,7 @@ AllCops:
     - 'vendor/**/*'
   DisplayCopNames: true
 
-#################### Style ##################################
+#################### Style ###############################
 
 # Cop supports --auto-correct.
 # Configuration parameters: SupportedStyles.
@@ -28,12 +28,7 @@ AllCops:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
-# The shebang stuff at the top triggers this
-Style/LeadingCommentSpace:
-  Exclude:
-    - Puppetfile
-
-#################### Metrics ################################
+#################### Metrics ###############################
 
 Metrics/LineLength:
   # Ruduce this... Max: 80
