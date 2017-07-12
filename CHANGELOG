@@ -1,3 +1,6 @@
+2017-07-12 (1.0.0)  Dirk Tepe
+        * Allow newer archive module release
+
 2017-03-29 (0.1.10)  Dirk Tepe
         * Add ref beans for relying party profile
         * Pin Puppet Concat module to 2.2.0 for Puppet 3 compatibility
