@@ -1,9 +1,7 @@
 fixtures:
   repositories:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    concat: 
-      repo: "https://github.com/puppetlabs/puppetlabs-concat.git"
-      ref: "2.2.0"
+    concat: "https://github.com/puppetlabs/puppetlabs-concat.git"
     archive: "https://github.com/voxpupuli/puppet-archive.git"
     openssl: "https://github.com/camptocamp/puppet-openssl.git"
     profiled: "https://github.com/unibet/puppet-profiled.git"
