@@ -13,7 +13,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $shibcas_auth_version = $shibboleth_idp::shibcas_auth_version
   $proxy_host = $shibboleth_idp::proxy_host
   $proxy_port = $shibboleth_idp::proxy_port
-  $nameid_generators = $shibboleth_idp::nameid_generators
+  $nameid_generators_saml2 = $shibboleth_idp::nameid_generators_saml2
+  $nameid_generators_saml1 = $shibboleth_idp::nameid_generators_saml1
   $nameid_allowed_entities = $shibboleth_idp::nameid_allowed_entities
   $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
 
