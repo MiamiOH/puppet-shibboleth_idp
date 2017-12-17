@@ -3,17 +3,14 @@
         baseDN="%{idp.attribute.resolver.<%= @id %>.baseDN}" 
         principal="%{idp.attribute.resolver.<%= @id %>.bindDN}"
         principalCredential="%{idp.attribute.resolver.<%= @id %>.bindDNCredential}"
-        useStartTLS="%{idp.attribute.resolver.<%= @id %>.useStartTLS:true}">
+        useStartTLS="%{idp.attribute.resolver.<%= @id %>.useStartTLS:true}"
+        <%- if @ldap_trust_cert_source -%>trustFile="%{idp.attribute.resolver.<%= @id %>.trustCertificates}"<%- end -%>
+        >
         <FilterTemplate>
             <![CDATA[
                 %{idp.attribute.resolver.<%= @id %>.searchFilter}
             ]]>
         </FilterTemplate>
-        <%- if @ldap_trust_cert_source -%>
-        <StartTLSTrustCredential id="<%= @id %>toIdPCredential" xsi:type="X509ResourceBacked">
-            <Certificate>%{idp.attribute.resolver.<%= @id %>.trustCertificates}</Certificate>
-        </StartTLSTrustCredential>
-        <%- end -%>
-        <!-- <ReturnAttributes>%{idp.attribute.resolver.<%= @id %>.returnAttributes}</ReturnAttributes> -->
+        <ReturnAttributes>%{idp.attribute.resolver.<%= @id %>.returnAttributes}</ReturnAttributes>
     </DataConnector>
 
