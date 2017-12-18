@@ -4,7 +4,7 @@
         principal="%{idp.attribute.resolver.<%= @id %>.bindDN}"
         principalCredential="%{idp.attribute.resolver.<%= @id %>.bindDNCredential}"
         useStartTLS="%{idp.attribute.resolver.<%= @id %>.useStartTLS:true}"
-        <%- if @ldap_trust_cert_source -%>trustFile="%{idp.attribute.resolver.<%= @id %>.trustCertificates}"<%- end -%>
+        <%- if @ldap_tls_trust_cert -%>trustFile="%{idp.attribute.resolver.<%= @id %>.trustCertificates}"<%- end -%>
         >
         <FilterTemplate>
             <![CDATA[

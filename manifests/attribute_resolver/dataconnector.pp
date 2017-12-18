@@ -13,10 +13,8 @@ define shibboleth_idp::attribute_resolver::dataconnector (
   $ldap_principal_credential = undef,
   $ldap_use_start_tls = undef,
   $ldap_filter_template = undef,
-  $ldap_filter_tls_trust_id = undef,
-  $ldap_filter_tls_trust_cert = undef,
+  $ldap_tls_trust_cert = undef,
   $ldap_return_attributes = undef,
-  $ldap_trust_cert_source = undef,
 ) {
 
   concat::fragment { "attribute_resolver_dataconnector_${id}":
@@ -33,14 +31,4 @@ define shibboleth_idp::attribute_resolver::dataconnector (
     }
   }
 
-  if $ldap_trust_cert_source {
-    file { "${shibboleth_idp::shib_install_base}/${ldap_filter_tls_trust_cert}":
-      ensure => file,
-      source => $ldap_trust_cert_source,
-      owner  => $shibboleth_idp::shib_user,
-      group  => $shibboleth_idp::shib_group,
-      mode   => '0644',
-      notify => Class['shibboleth_idp::service'],
-    }
-  }
 }
