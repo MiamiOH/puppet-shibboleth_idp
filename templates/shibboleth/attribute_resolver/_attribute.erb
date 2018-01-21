@@ -1,13 +1,10 @@
-    <resolver:AttributeDefinition id="<%= @id %>" xsi:type="ad:<%= @type %>" 
+    <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>" 
         <% if @scope %>scope="<%= @scope %>" <% end %><% if @source_attribute_id %>sourceAttributeID="<%= @source_attribute_id %>" <% end %>>
         <%- @dependencies.each do |dependency| -%>
-        <resolver:Dependency ref="<%= dependency %>" />
-        <%- end -%>
-        <%- if @type == 'Script' -%>
-        <resolver:Dependency ref="<%= @id %>_scripted" />
+        <Dependency ref="<%= dependency %>" />
         <%- end -%>
         <%- @encoders.each do |encoder| -%>
-        <resolver:AttributeEncoder xsi:type="enc:<%= encoder['type'] %>"
+        <AttributeEncoder xsi:type="<%= encoder['type'] %>"
             <%- if encoder['name'] -%>
             name="<%= encoder['name'] %>"
             <%- end -%>
@@ -22,24 +19,18 @@
             />
         <%- end -%>
         <%- if @transient -%>
-        <resolver:AttributeEncoder xsi:type="enc:SAML1StringNameIdentifier"
+        <AttributeEncoder xsi:type="SAML1StringNameIdentifier"
             nameFormat="urn:mace:shibboleth:1.0:nameIdentifier" />
-        <resolver:AttributeEncoder xsi:type="enc:SAML2StringNameID" 
+        <AttributeEncoder xsi:type="SAML2StringNameID" 
             nameFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" />
         <%- end -%>
-        <%- if @type == 'Script' -%>
-        <ad:Script><![CDATA[
+        <%- if @type == 'ScriptedAttribute' -%>
+        <%- if @script_file -%>
+        <ScriptFile><%= @script_file %></ScriptFile>
+        <%- else -%>
+        <Script><![CDATA[
         <%= @script %>
-        ]]></ad:Script>
+        ]]></Script>
         <%- end -%>
-    </resolver:AttributeDefinition>
-
-    <%- if @type == 'Script' -%>
-    <resolver:DataConnector xsi:type="dc:Static" id="<%= @id %>_scripted"
-         xmlns="urn:mace:shibboleth:2.0:resolver:dc">
-        <Attribute id="<%= @id %>">
-            <Value>dummy</Value>
-        </Attribute>
-    </resolver:DataConnector>
-
-    <%- end -%>
+        <%- end -%>
+    </AttributeDefinition>

@@ -28,6 +28,10 @@ AllCops:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
+Style/MixinUsage:
+  Exclude: 
+  - 'spec/**/*'
+
 #################### Metrics ###############################
 
 Metrics/LineLength:

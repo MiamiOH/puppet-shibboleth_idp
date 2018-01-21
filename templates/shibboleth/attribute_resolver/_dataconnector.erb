@@ -1,19 +1,16 @@
-    <resolver:DataConnector id="<%= @id %>" xsi:type="dc:<%= @type %>"
+    <DataConnector id="<%= @id %>" xsi:type="<%= @type %>"
         ldapURL="%{idp.attribute.resolver.<%= @id %>.ldapURL}"
         baseDN="%{idp.attribute.resolver.<%= @id %>.baseDN}" 
         principal="%{idp.attribute.resolver.<%= @id %>.bindDN}"
         principalCredential="%{idp.attribute.resolver.<%= @id %>.bindDNCredential}"
-        useStartTLS="%{idp.attribute.resolver.<%= @id %>.useStartTLS:true}">
-        <dc:FilterTemplate>
+        useStartTLS="%{idp.attribute.resolver.<%= @id %>.useStartTLS:true}"
+        <%- if @ldap_tls_trust_cert -%>trustFile="%{idp.attribute.resolver.<%= @id %>.trustCertificates}"<%- end -%>
+        >
+        <FilterTemplate>
             <![CDATA[
                 %{idp.attribute.resolver.<%= @id %>.searchFilter}
             ]]>
-        </dc:FilterTemplate>
-        <%- if @ldap_trust_cert_source -%>
-        <dc:StartTLSTrustCredential id="<%= @id %>toIdPCredential" xsi:type="sec:X509ResourceBacked">
-            <sec:Certificate>%{idp.attribute.resolver.<%= @id %>.trustCertificates}</sec:Certificate>
-        </dc:StartTLSTrustCredential>
-        <%- end -%>
-        <!-- <ReturnAttributes>%{idp.attribute.resolver.<%= @id %>.returnAttributes}</ReturnAttributes> -->
-    </resolver:DataConnector>
+        </FilterTemplate>
+        <ReturnAttributes>%{idp.attribute.resolver.<%= @id %>.returnAttributes}</ReturnAttributes>
+    </DataConnector>
 
