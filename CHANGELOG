@@ -1,3 +1,8 @@
+2018-01-20 (1.1.0)  Dirk Tepe
+        * Require minimum IdP version 3.3.0 if using scripted attributes
+        * Make IdP 3.3.2 the default version
+        * Address various deprecated config options
+
 2017-10-25 (1.0.2)  Duane Drake
         * Split SAML1 and SAML2 nameid generators
 
