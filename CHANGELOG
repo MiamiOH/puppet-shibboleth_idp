@@ -1,3 +1,6 @@
+2018-01-22 (1.1.1)  Dirk Tepe
+        * Loosen puppetlabs-concat module minimum version
+
 2018-01-20 (1.1.0)  Dirk Tepe
         * Require minimum IdP version 3.3.0 if using scripted attributes
         * Make IdP 3.3.2 the default version
