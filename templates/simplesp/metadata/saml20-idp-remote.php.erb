@@ -22,8 +22,8 @@ $metadata['https://openidp.feide.no'] = array(
     'certFingerprint'      => 'c9ed4dfb07caf13fc21e0fec1572047eb8a7a4cb'
 );
 
-$metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
-  'entityid' => 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth',
+$metadata['https://<%= @ss_idp_host %>/idp/shibboleth'] = array (
+  'entityid' => 'https://<%= @ss_idp_host %>/idp/shibboleth',
   'contacts' => 
   array (
   ),
@@ -33,22 +33,22 @@ $metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
     0 => 
     array (
       'Binding' => 'urn:mace:shibboleth:1.0:profiles:AuthnRequest',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/Shibboleth/SSO',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/Shibboleth/SSO',
     ),
     1 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/POST/SSO',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/SAML2/POST/SSO',
     ),
     2 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/POST-SimpleSign/SSO',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/SAML2/POST-SimpleSign/SSO',
     ),
     3 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/Redirect/SSO',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/SAML2/Redirect/SSO',
     ),
   ),
   'ArtifactResolutionService' => 
@@ -56,13 +56,13 @@ $metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
     0 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML1/SOAP/ArtifactResolution',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/SAML1/SOAP/ArtifactResolution',
       'index' => 1,
     ),
     1 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:SOAP',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/SOAP/ArtifactResolution',
+      'Location' => 'https://<%= @ss_idp_host %>/idp/profile/SAML2/SOAP/ArtifactResolution',
       'index' => 2,
     ),
   ),

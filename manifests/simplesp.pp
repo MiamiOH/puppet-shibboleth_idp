@@ -13,13 +13,17 @@
 class shibboleth_idp::simplesp (
   $ss_version        = $shibboleth_idp::params::ss_version,
   $ss_install_base   = $shibboleth_idp::params::ss_install_base,
+  $ss_idp_host       = $shibboleth_idp::params::ss_idp_host,
+  $ss_sp_name        = $shibboleth_idp::params::ss_sp_name,
   $ss_sp_host        = $shibboleth_idp::params::ss_sp_host,
   $ss_sp_port        = $shibboleth_idp::params::ss_sp_port,
   $ss_sp_url_path    = $shibboleth_idp::params::ss_sp_url_path,
+  $ss_manage_cert    = $shibboleth_idp::params::ss_manage_cert,
   $ss_admin_password = $shibboleth_idp::params::ss_admin_password,
   $ss_secret_salt    = $shibboleth_idp::params::ss_secret_salt,
   $ss_cert_owner     = $shibboleth_idp::params::ss_cert_owner,
   $ss_cert_group     = $shibboleth_idp::params::ss_cert_group,
+  $ss_cert_dir       = $shibboleth_idp::params::ss_cert_dir,
   $proxy_server      = undef,
   $proxy_type        = undef,
 ) inherits shibboleth_idp::params {
@@ -32,6 +36,11 @@ class shibboleth_idp::simplesp (
   $ss_sp_domain = $ss_sp_port ? {
     undef   => $ss_sp_host,
     default => "${ss_sp_host}:${ss_sp_port}",
+  }
+
+  $sp_cert_ensure = $ss_manage_cert ? {
+    false   => absent,
+    default => present,
   }
 
   file { $ss_install_base:
@@ -58,15 +67,15 @@ class shibboleth_idp::simplesp (
 
   # This cert pair is used only for signing SAML assertions between the SP
   # and an IdP. It is NOT user facing via the web server.
-  openssl::certificate::x509 { $ss_sp_host:
-    ensure       => present,
+  openssl::certificate::x509 { $ss_sp_name:
+    ensure       => $sp_cert_ensure,
     country      => 'US',
     organization => 'miamioh.edu',
     commonname   => $ss_sp_host,
     state        => 'OH',
     locality     => 'Oxford',
     days         => 3456,
-    base_dir     => "${ss_install_base}/cert",
+    base_dir     => $ss_cert_dir,
     owner        => $ss_cert_owner,
     group        => $ss_cert_group,
   }

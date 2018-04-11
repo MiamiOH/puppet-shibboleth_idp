@@ -10,7 +10,7 @@ $config = array(
         'core:AdminPassword',
     ),
 
-    'shibvm-idp' => array(
+    '<%= @ss_sp_name %>' => array(
         'saml:SP',
 
         'privatekey' => '<%= @ss_sp_host %>.key',
@@ -22,7 +22,7 @@ $config = array(
 
         // The entity ID of the IdP this should SP should contact.
         // Can be NULL/unset, in which case the user will be shown a list of available IdPs.
-        #'idp' => 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth',
+        #'idp' => 'https://<%= @ss_idp_host %>/idp/shibboleth',
     ),
 
     // An authentication source which can authenticate against both SAML 2.0

@@ -86,14 +86,18 @@ class shibboleth_idp::params {
   $service_ensure          = 'running'
   $service_restart         = undef
 
-  $ss_version              = '1.14.11'
-  $ss_install_base         = '/var/simplesamlphp'
+  $ss_version              = '1.15.4'
+  $ss_install_base         = '/var/www/simplesamlphp'
+  $ss_idp_host             = 'shibvm-idp.miamioh.edu:21443'
+  $ss_sp_name              = 'shibvm-sp'
   $ss_sp_host              = undef
   $ss_sp_port              = '31443'
   $ss_sp_url_path          = 'simplesaml'
+  $ss_manage_cert          = true
   $ss_admin_password       = undef
   $ss_secret_salt          = undef
   $ss_cert_owner           = undef
   $ss_cert_group           = undef
+  $ss_cert_dir             = '/var/www/simplesamlphp/cert'
 
 }
