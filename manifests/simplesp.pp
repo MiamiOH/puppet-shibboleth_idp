@@ -11,23 +11,26 @@
 #
 
 class shibboleth_idp::simplesp (
-  $ss_version        = $shibboleth_idp::params::ss_version,
-  $ss_install_base   = $shibboleth_idp::params::ss_install_base,
-  $ss_idp_host       = $shibboleth_idp::params::ss_idp_host,
-  $ss_sp_name        = $shibboleth_idp::params::ss_sp_name,
-  $ss_sp_host        = $shibboleth_idp::params::ss_sp_host,
-  $ss_sp_port        = $shibboleth_idp::params::ss_sp_port,
-  $ss_sp_url_path    = $shibboleth_idp::params::ss_sp_url_path,
-  $ss_manage_cert    = $shibboleth_idp::params::ss_manage_cert,
-  $ss_admin_password = $shibboleth_idp::params::ss_admin_password,
-  $ss_secret_salt    = $shibboleth_idp::params::ss_secret_salt,
-  $ss_cert_owner     = $shibboleth_idp::params::ss_cert_owner,
-  $ss_cert_group     = $shibboleth_idp::params::ss_cert_group,
-  $ss_cert_dir       = $shibboleth_idp::params::ss_cert_dir,
-  $proxy_server      = undef,
-  $proxy_type        = undef,
+  $ss_version          = $shibboleth_idp::params::ss_version,
+  $ss_install_base     = $shibboleth_idp::params::ss_install_base,
+  $ss_sp_name          = $shibboleth_idp::params::ss_sp_name,
+  $ss_sp_host          = $shibboleth_idp::params::ss_sp_host,
+  $ss_sp_port          = $shibboleth_idp::params::ss_sp_port,
+  $ss_sp_url_path      = $shibboleth_idp::params::ss_sp_url_path,
+  $ss_admin_password   = $shibboleth_idp::params::ss_admin_password,
+  $ss_secret_salt      = $shibboleth_idp::params::ss_secret_salt,
+  $ss_manage_cert      = $shibboleth_idp::params::ss_manage_cert,
+  $ss_cert_owner       = $shibboleth_idp::params::ss_cert_owner,
+  $ss_cert_group       = $shibboleth_idp::params::ss_cert_group,
+  $ss_cert_dir         = $shibboleth_idp::params::ss_cert_dir,
+  $idp_signing_cert    = undef,
+  $idp_encryption_cert = undef,
+  $idp_server_url      = undef,
+  $idp_name            = 'Test IdP',
+  $proxy_server        = undef,
+  $proxy_type          = undef,
 ) inherits shibboleth_idp::params {
-
+  
   Archive {
     proxy_server => $proxy_server,
     proxy_type   => $proxy_type,

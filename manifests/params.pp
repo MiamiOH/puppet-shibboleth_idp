@@ -88,7 +88,6 @@ class shibboleth_idp::params {
 
   $ss_version              = '1.15.4'
   $ss_install_base         = '/var/www/simplesamlphp'
-  $ss_idp_host             = 'shibvm-idp.miamioh.edu:21443'
   $ss_sp_name              = 'shibvm-sp'
   $ss_sp_host              = undef
   $ss_sp_port              = '31443'
