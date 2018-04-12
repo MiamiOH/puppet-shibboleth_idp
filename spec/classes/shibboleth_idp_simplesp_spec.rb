@@ -8,7 +8,14 @@ describe 'shibboleth_idp::simplesp', :type => :class do
       end
 
       context 'with defaults' do
-        let(:params) { { :ss_sp_host => 'shibvm-sp.example.com' } }
+        let(:params) do
+          {
+            :ss_sp_host          => 'shibvm-sp.example.com',
+            :idp_signing_cert    => 'abc123',
+            :idp_encryption_cert => 'xyz987',
+            :idp_server_url      => 'https://example.com:12345'
+          }
+        end
         it { is_expected.to compile.with_all_deps }
       end
     end

@@ -10,11 +10,11 @@ $config = array(
         'core:AdminPassword',
     ),
 
-    'shibvm-idp' => array(
+    '<%= @ss_sp_name %>' => array(
         'saml:SP',
 
-        'privatekey' => '<%= @ss_sp_host %>.key',
-        'certificate' => '<%= @ss_sp_host %>.crt',
+        'privatekey' => '<%= @ss_sp_name %>.key',
+        'certificate' => '<%= @ss_sp_name %>.crt',
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
@@ -22,7 +22,7 @@ $config = array(
 
         // The entity ID of the IdP this should SP should contact.
         // Can be NULL/unset, in which case the user will be shown a list of available IdPs.
-        #'idp' => 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth',
+        #'idp' => '<%= @idp_server_url %>/idp/shibboleth',
     ),
 
     // An authentication source which can authenticate against both SAML 2.0
@@ -30,8 +30,8 @@ $config = array(
     'default-sp' => array(
         'saml:SP',
 
-        'privatekey' => '<%= @ss_sp_host %>.key',
-        'certificate' => '<%= @ss_sp_host %>.crt',
+        'privatekey' => '<%= @ss_sp_name %>.key',
+        'certificate' => '<%= @ss_sp_name %>.crt',
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.

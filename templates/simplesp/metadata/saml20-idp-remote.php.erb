@@ -7,23 +7,11 @@
  * See: https://simplesamlphp.org/docs/stable/simplesamlphp-reference-idp-remote 
  */
 
-/*
- * Guest IdP. allows users to sign up and register. Great for testing!
- */
-$metadata['https://openidp.feide.no'] = array(
-    'name' => array(
-        'en' => 'Feide OpenIdP - guest users',
-        'no' => 'Feide Gjestebrukere',
-    ),
-    'description'          => 'Here you can login with your account on Feide RnD OpenID. If you do not already have an account on this identity provider, you can create a new one by following the create new account link and follow the instructions.',
-
-    'SingleSignOnService'  => 'https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php',
-    'SingleLogoutService'  => 'https://openidp.feide.no/simplesaml/saml2/idp/SingleLogoutService.php',
-    'certFingerprint'      => 'c9ed4dfb07caf13fc21e0fec1572047eb8a7a4cb'
-);
-
-$metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
-  'entityid' => 'https://shibvm-idp.miamioh.edu:21443/idp/shibboleth',
+$metadata['<%= @idp_server_url %>/idp/shibboleth'] = array (
+  'entityid' => '<%= @idp_server_url %>/idp/shibboleth',
+  'name' => array(
+      'en' => '<%= @idp_name %>',
+  ),
   'contacts' => 
   array (
   ),
@@ -33,22 +21,22 @@ $metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
     0 => 
     array (
       'Binding' => 'urn:mace:shibboleth:1.0:profiles:AuthnRequest',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/Shibboleth/SSO',
+      'Location' => '<%= @idp_server_url %>/idp/profile/Shibboleth/SSO',
     ),
     1 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/POST/SSO',
+      'Location' => '<%= @idp_server_url %>/idp/profile/SAML2/POST/SSO',
     ),
     2 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/POST-SimpleSign/SSO',
+      'Location' => '<%= @idp_server_url %>/idp/profile/SAML2/POST-SimpleSign/SSO',
     ),
     3 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/Redirect/SSO',
+      'Location' => '<%= @idp_server_url %>/idp/profile/SAML2/Redirect/SSO',
     ),
   ),
   'ArtifactResolutionService' => 
@@ -56,13 +44,13 @@ $metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
     0 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML1/SOAP/ArtifactResolution',
+      'Location' => '<%= @idp_server_url %>/idp/profile/SAML1/SOAP/ArtifactResolution',
       'index' => 1,
     ),
     1 => 
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:SOAP',
-      'Location' => 'https://shibvm-idp.miamioh.edu:21443/idp/profile/SAML2/SOAP/ArtifactResolution',
+      'Location' => '<%= @idp_server_url %>/idp/profile/SAML2/SOAP/ArtifactResolution',
       'index' => 2,
     ),
   ),
@@ -73,52 +61,14 @@ $metadata['https://shibvm-idp.miamioh.edu:21443/idp/shibboleth'] = array (
       'encryption' => false,
       'signing' => true,
       'type' => 'X509Certificate',
-      'X509Certificate' => '
-MIIDPjCCAiagAwIBAgIJAPI7S0Hg1hxlMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
-BAMTE2lkcHRlc3QubWlhbWlvaC5lZHUwHhcNMTQwMjE3MTY0NzMzWhcNMjQwMjE1
-MTY0NzMzWjAeMRwwGgYDVQQDExNpZHB0ZXN0Lm1pYW1pb2guZWR1MIIBIjANBgkq
-hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurUC6sPE/TX0G3nQlkcgd/ibtwJMyi6u
-SMMFUeUYUmjl4Q4d+5QKQhaUJyqcTWpXX+htpp4F1OCtfhlwxGTz2F/LWZq8JkPX
-FD4uxvzn9lmzT6BI4+B6TN2Ww7ILaZ1wR1HcMu6M8wJ7/AreoNy9MGUaxc8uhKGy
-+KhoB+19VObZCjCBRqBV11vTL2h+Y8nQnJcplhdKPkNlGwIWn90SzJbHc/F95QFC
-na2Wbl5l3v4cYcReY4W5iE2TftlTDTDBdSBqwf+iHLNGjhkL8EsktYC3/p/dHBK3
-ev8EaXqfPod3HVC+l87fPkNuA3W3XGoHGtDPHrCHR8VMMNZlUklpOwIDAQABo38w
-fTAdBgNVHQ4EFgQUfrLFYCDW7K1ZnO1QkHQYp0YawxswTgYDVR0jBEcwRYAUfrLF
-YCDW7K1ZnO1QkHQYp0YawxuhIqQgMB4xHDAaBgNVBAMTE2lkcHRlc3QubWlhbWlv
-aC5lZHWCCQDyO0tB4NYcZTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4IB
-AQA5k3SlFffFRq81u1uy3sjkpgp19S9L7KCoc63IVXN1aREJ9kQHRGbQbjcnzT05
-r/7vBO87OQMH0+Ojbn1xPSfIsUR91TgkGOAQc2yM/dkdFODgi+83guR1jilHRuFD
-DgA7rRiuqkPnVcrnatRdlSAYfNL8YtMkf9eQ63B1D6YfnQ23Giwytw3ZTaplD7He
-eoKLu82UwkCAPtbKR5oqAyr+0FUDuLv8pwIrfeA/TaGGm9KwG2ddk/QnxTf5Io3R
-nD4EJJtThpP8l6iMoV9RRnOlrqfK+xuogzBC1lzJDDIM0KTSCMlN8G2qqAsswnrw
-5Cj8SlfNPom7OhnCL7HOCbzC
-                        ',
+      'X509Certificate' => '<%= @idp_signing_cert %>',
     ),
     1 => 
     array (
       'encryption' => true,
       'signing' => false,
       'type' => 'X509Certificate',
-      'X509Certificate' => '
-MIIDPjCCAiagAwIBAgIJAPI7S0Hg1hxlMA0GCSqGSIb3DQEBBQUAMB4xHDAaBgNV
-BAMTE2lkcHRlc3QubWlhbWlvaC5lZHUwHhcNMTQwMjE3MTY0NzMzWhcNMjQwMjE1
-MTY0NzMzWjAeMRwwGgYDVQQDExNpZHB0ZXN0Lm1pYW1pb2guZWR1MIIBIjANBgkq
-hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurUC6sPE/TX0G3nQlkcgd/ibtwJMyi6u
-SMMFUeUYUmjl4Q4d+5QKQhaUJyqcTWpXX+htpp4F1OCtfhlwxGTz2F/LWZq8JkPX
-FD4uxvzn9lmzT6BI4+B6TN2Ww7ILaZ1wR1HcMu6M8wJ7/AreoNy9MGUaxc8uhKGy
-+KhoB+19VObZCjCBRqBV11vTL2h+Y8nQnJcplhdKPkNlGwIWn90SzJbHc/F95QFC
-na2Wbl5l3v4cYcReY4W5iE2TftlTDTDBdSBqwf+iHLNGjhkL8EsktYC3/p/dHBK3
-ev8EaXqfPod3HVC+l87fPkNuA3W3XGoHGtDPHrCHR8VMMNZlUklpOwIDAQABo38w
-fTAdBgNVHQ4EFgQUfrLFYCDW7K1ZnO1QkHQYp0YawxswTgYDVR0jBEcwRYAUfrLF
-YCDW7K1ZnO1QkHQYp0YawxuhIqQgMB4xHDAaBgNVBAMTE2lkcHRlc3QubWlhbWlv
-aC5lZHWCCQDyO0tB4NYcZTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4IB
-AQA5k3SlFffFRq81u1uy3sjkpgp19S9L7KCoc63IVXN1aREJ9kQHRGbQbjcnzT05
-r/7vBO87OQMH0+Ojbn1xPSfIsUR91TgkGOAQc2yM/dkdFODgi+83guR1jilHRuFD
-DgA7rRiuqkPnVcrnatRdlSAYfNL8YtMkf9eQ63B1D6YfnQ23Giwytw3ZTaplD7He
-eoKLu82UwkCAPtbKR5oqAyr+0FUDuLv8pwIrfeA/TaGGm9KwG2ddk/QnxTf5Io3R
-nD4EJJtThpP8l6iMoV9RRnOlrqfK+xuogzBC1lzJDDIM0KTSCMlN8G2qqAsswnrw
-5Cj8SlfNPom7OhnCL7HOCbzC
-                        ',
+      'X509Certificate' => '<%= @idp_encryption_cert %>',
     ),
   ),
   'scope' => 
