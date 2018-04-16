@@ -1,3 +1,6 @@
+2018-04-16 (1.2.0)  Dirk Tepe
+        * Add more params for SimpleSP class
+
 2018-01-22 (1.1.1)  Dirk Tepe
         * Loosen puppetlabs-concat module minimum version
 
