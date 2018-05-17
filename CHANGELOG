@@ -1,3 +1,6 @@
+2018-05-16 (1.0.3)  Brad koby
+        * Loosen camptocamp-systemd module maximum version
+
 2017-10-25 (1.0.2)  Duane Drake
         * Split SAML1 and SAML2 nameid generators
 
