@@ -1,0 +1,13 @@
+    <MetadataProvider id="<%= @id %>" xsi:type="FileBackedHTTPMetadataProvider"
+                    xmlns="urn:mace:shibboleth:2.0:metadata"
+                    metadataURL="<%= @source_url %>"
+                    backingFile="%{idp.home}/metadata/<%= @filename %>"
+                    <%- if @proxy_host -%>
+                    proxyHost="<%= @proxy_host %>"
+                    <%- end -%>
+                    <%- if @proxy_port -%>
+                    proxyPort="<%= @proxy_port %>"
+                    <%- end -%>
+                    minRefreshDelay="PT5M"
+                    maxRefreshDelay="PT1H"
+                    refreshDelayFactor="0.75">

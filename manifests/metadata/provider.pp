@@ -11,7 +11,13 @@ define shibboleth_idp::metadata::provider (
   $mode = '0644',
   $source_path = undef,
   $source_file = undef,
+  $source_url  = undef,
 ) {
+
+  $provider_type = $source_url ? {
+    undef   => 'file',
+    default => 'url',
+  }
 
   $_source_file = $source_file ? {
     undef   => $filename,
@@ -21,7 +27,7 @@ define shibboleth_idp::metadata::provider (
   concat::fragment { "metadata_providers_${id}":
     target  => 'metadata-providers.xml',
     order   => '80',
-    content => template("${module_name}/shibboleth/metadata_providers/_provider.erb"),
+    content => template("${module_name}/shibboleth/metadata_providers/_provider_${provider_type}.erb"),
   }
 
   ensure_resource('file', "${shibboleth_idp::shib_install_base}/metadata",
@@ -34,14 +40,16 @@ define shibboleth_idp::metadata::provider (
     }
   )
 
-  file { "${shibboleth_idp::shib_install_base}/metadata/${filename}":
-    ensure  => file,
-    owner   => $owner,
-    group   => $group,
-    mode    => $mode,
-    source  => "${source_path}/${_source_file}",
-    require => File["${shibboleth_idp::shib_install_base}/metadata"],
-    notify  => Class['shibboleth_idp::service'],
+  if ($provider_type == 'file') {
+    file { "${shibboleth_idp::shib_install_base}/metadata/${filename}":
+      ensure  => file,
+      owner   => $owner,
+      group   => $group,
+      mode    => $mode,
+      source  => "${source_path}/${_source_file}",
+      require => File["${shibboleth_idp::shib_install_base}/metadata"],
+      notify  => Class['shibboleth_idp::service'],
+    }
   }
 
 }
