@@ -4,16 +4,19 @@
 #
 
 define shibboleth_idp::metadata::provider (
-  $id = $name,
-  $filename = "${name}-metadata.xml",
-  $owner = undef,
-  $group = undef,
-  $mode = '0644',
-  $source_path = undef,
-  $source_file = undef,
-  $source_url  = undef,
-  $certificate_file = undef,
-  $valid_interval = undef,
+  $id                   = $name,
+  $filename             = "${name}-metadata.xml",
+  $owner                = undef,
+  $group                = undef,
+  $mode                 = '0644',
+  $source_path          = undef,
+  $source_file          = undef,
+  $source_url           = undef,
+  $min_refresh_delay    = 'PT5M',
+  $max_refresh_delay    = 'PT1H',
+  $refresh_delay_factor = '0.75',
+  $certificate_file     = undef,
+  $valid_interval       = undef,
 ) {
 
   $provider_type = $source_url ? {

@@ -1,9 +1,15 @@
-    <MetadataProvider id="FormStack" xsi:type="FileBackedHTTPMetadataProvider"
-                    backingFile="%{idp.home}/metadata/FormStack-metadata.xml"
-                    metadataURL="https://miamioh.formstack.com/admin/session/auth_provider_hook/207/metadata"
-                    minRefreshDelay="PT5M"
-                    maxRefreshDelay="PT1H"
-                    refreshDelayFactor="0.75">
+    <MetadataProvider id="<%= @id %>" xsi:type="FileBackedHTTPMetadataProvider"
+                    backingFile="%{idp.home}/metadata/<%= @filename %>"
+                    metadataURL="<%= @source_url %>"
+                    <%- if @proxy_host -%>
+                    proxyHost="<%= @proxy_host %>"
+                    <%- end -%>
+                    <%- if @proxy_port -%>
+                    proxyPort="<%= @proxy_port %>"
+                    <%- end -%>
+                    minRefreshDelay="<%= @min_refresh_delay %>"
+                    maxRefreshDelay="<%= @max_refresh_delay %>"
+                    refreshDelayFactor="<%= @refresh_delay_factor %>">
 
         <%- if (@certificate_file) -%>
         <!--
