@@ -12,6 +12,8 @@ define shibboleth_idp::metadata::provider (
   $source_path = undef,
   $source_file = undef,
   $source_url  = undef,
+  $certificate_file = undef,
+  $valid_interval = undef,
 ) {
 
   $provider_type = $source_url ? {

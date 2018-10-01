@@ -1,13 +1,31 @@
-    <MetadataProvider id="<%= @id %>" xsi:type="FileBackedHTTPMetadataProvider"
-                    xmlns="urn:mace:shibboleth:2.0:metadata"
-                    metadataURL="<%= @source_url %>"
-                    backingFile="%{idp.home}/metadata/<%= @filename %>"
-                    <%- if @proxy_host -%>
-                    proxyHost="<%= @proxy_host %>"
-                    <%- end -%>
-                    <%- if @proxy_port -%>
-                    proxyPort="<%= @proxy_port %>"
-                    <%- end -%>
+    <MetadataProvider id="FormStack" xsi:type="FileBackedHTTPMetadataProvider"
+                    backingFile="%{idp.home}/metadata/FormStack-metadata.xml"
+                    metadataURL="https://miamioh.formstack.com/admin/session/auth_provider_hook/207/metadata"
                     minRefreshDelay="PT5M"
                     maxRefreshDelay="PT1H"
                     refreshDelayFactor="0.75">
+
+        <%- if (@certificate_file) -%>
+        <!--
+            Verify the signature on the root element of the metadata aggregate
+            using a trusted metadata signing certificate.
+        -->
+        <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true"
+                certificateFile="%{idp.home}/credentials/<%= @certificate_file %>" />
+        <%- end -%>
+
+        <%- if (@valid_interval) -%>
+        <!--
+            Require a validUntil XML attribute on the root element and
+            make sure its value is no more than 5 days into the future.
+        -->
+        <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="<%= @valid_interval %>"/>
+        <%- end -%>
+     
+        <!-- Consume all SP metadata in the aggregate -->
+        <MetadataFilter xsi:type="EntityRoleWhiteList">
+            <RetainedRole>md:SPSSODescriptor</RetainedRole>
+        </MetadataFilter>      
+     
+    </MetadataProvider>
+
