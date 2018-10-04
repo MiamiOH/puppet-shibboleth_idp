@@ -24,6 +24,12 @@
         <AttributeEncoder xsi:type="SAML2StringNameID" 
             nameFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" />
         <%- end -%>
+        <%- if @type == 'Mapped' -%>
+        <ValueMap>
+          <ReturnValue><%= @return %></ReturnValue>
+          <SourceValue><%= @source %></SourceValue>
+        </ValueMap>
+        <%- end -%>
         <%- if @type == 'ScriptedAttribute' -%>
         <%- if @script_file -%>
         <ScriptFile><%= @script_file %></ScriptFile>
