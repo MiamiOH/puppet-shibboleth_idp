@@ -26,7 +26,7 @@ group :unit_tests do
   gem 'puppet-lint-version_comparison-check',                      :require => false
   gem 'puppetlabs_spec_helper',                                    :require => false
   gem 'rspec-puppet-facts',                                        :require => false
-  gem 'rubocop',                                                   :require => false
+  gem 'rubocop', '~> 0.57.2',                                      :require => false
 end
 
 group :development do
