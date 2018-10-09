@@ -1,0 +1,37 @@
+    <MetadataProvider id="<%= @id %>" xsi:type="FileBackedHTTPMetadataProvider"
+                    backingFile="%{idp.home}/metadata/<%= @filename %>"
+                    metadataURL="<%= @source_url %>"
+                    <%- if @proxy_host -%>
+                    proxyHost="<%= @proxy_host %>"
+                    <%- end -%>
+                    <%- if @proxy_port -%>
+                    proxyPort="<%= @proxy_port %>"
+                    <%- end -%>
+                    minRefreshDelay="<%= @min_refresh_delay %>"
+                    maxRefreshDelay="<%= @max_refresh_delay %>"
+                    refreshDelayFactor="<%= @refresh_delay_factor %>">
+
+        <%- if (@certificate_file) -%>
+        <!--
+            Verify the signature on the root element of the metadata aggregate
+            using a trusted metadata signing certificate.
+        -->
+        <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true"
+                certificateFile="%{idp.home}/credentials/<%= @certificate_file %>" />
+        <%- end -%>
+
+        <%- if (@valid_interval) -%>
+        <!--
+            Require a validUntil XML attribute on the root element and
+            make sure its value is no more than 5 days into the future.
+        -->
+        <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="<%= @valid_interval %>"/>
+        <%- end -%>
+     
+        <!-- Consume all SP metadata in the aggregate -->
+        <MetadataFilter xsi:type="EntityRoleWhiteList">
+            <RetainedRole>md:SPSSODescriptor</RetainedRole>
+        </MetadataFilter>      
+     
+    </MetadataProvider>
+

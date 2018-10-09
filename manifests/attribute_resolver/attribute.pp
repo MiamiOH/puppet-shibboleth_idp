@@ -11,6 +11,8 @@ define shibboleth_idp::attribute_resolver::attribute (
   $transient = false,
   $script = undef,
   $script_file = undef,
+  $source = undef,
+  $return = undef,
 
   $dependencies = {},
   $encoders = {},

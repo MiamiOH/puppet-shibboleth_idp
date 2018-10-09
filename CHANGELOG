@@ -1,3 +1,7 @@
+2018-10-05 (1.2.3)  Dirk Tepe
+        * Add attribute value map
+        * Add http backed metadata provider
+
 2018-05-16 (1.2.1)  Brad koby
         * Loosen camptocamp-systemd module maximum version
 
