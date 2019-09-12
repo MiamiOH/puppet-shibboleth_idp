@@ -1,0 +1,7 @@
+    <DataConnector id="<%= @id %>" xsi:type="<%= @type %>">
+<% @static_attributes.sort.map do |key,value| -%>
+        <Attribute id="<%= key %>">
+            <Value><%= value %></Value>
+        </Attribute>
+<% end -%>
+    </DataConnector>
