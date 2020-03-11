@@ -125,16 +125,6 @@ class shibboleth_idp::jetty (
     require => Archive["${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.tar"],
   }
 
-  archive { "/tmp/logback-${shibboleth_idp::logback_version}.tar.gz":
-    source        => "http://logback.qos.ch/dist/logback-${shibboleth_idp::logback_version}.tar.gz",
-    extract       => true,
-    extract_path  => $src_directory,
-    cleanup       => true,
-    checksum_type => $shibboleth_idp::logback_checksum_type,
-    checksum      => $shibboleth_idp::logback_checksum,
-    creates       => "${src_directory}/logback-${shibboleth_idp::logback_version}/README.txt",
-  }
-
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
     archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.tar":
       source        => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.jar",

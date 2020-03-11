@@ -115,19 +115,19 @@ class shibboleth_idp (
     proxy_type   => $proxy_type,
   }
 
-  class { '::shibboleth_idp::install': } ->
-  class { '::shibboleth_idp::relying_party': } ->
-  class { '::shibboleth_idp::metadata': } ->
-  class { '::shibboleth_idp::attribute_resolver': } ->
-  class { '::shibboleth_idp::attribute_filter': }
+  class { 'shibboleth_idp::install': } ->
+  class { 'shibboleth_idp::relying_party': } ->
+  class { 'shibboleth_idp::metadata': } ->
+  class { 'shibboleth_idp::attribute_resolver': } ->
+  class { 'shibboleth_idp::attribute_filter': }
 
-  class { '::shibboleth_idp::service': }
+  class { 'shibboleth_idp::service': }
 
-  contain '::shibboleth_idp::install'
-  contain '::shibboleth_idp::relying_party'
-  contain '::shibboleth_idp::metadata'
-  contain '::shibboleth_idp::attribute_resolver'
-  contain '::shibboleth_idp::attribute_filter'
-  contain '::shibboleth_idp::service'
+  contain 'shibboleth_idp::install'
+  contain 'shibboleth_idp::relying_party'
+  contain 'shibboleth_idp::metadata'
+  contain 'shibboleth_idp::attribute_resolver'
+  contain 'shibboleth_idp::attribute_filter'
+  contain 'shibboleth_idp::service'
 
 }
