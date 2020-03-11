@@ -34,12 +34,8 @@ class shibboleth_idp (
   $ldap_return_attributes  = $shibboleth_idp::params::ldap_return_attributes,
 
   $slf4j_version           = $shibboleth_idp::params::slf4j_version,
-  $slf4j_checksum_type     = $shibboleth_idp::params::slf4j_checksum_type,
-  $slf4j_checksum          = $shibboleth_idp::params::slf4j_checksum,
   $logback_version         = $shibboleth_idp::params::logback_version,
-  $logback_checksum_type   = $shibboleth_idp::params::logback_checksum_type,
-  $logback_checksum        = $shibboleth_idp::params::logback_checksum,
-
+  
   $admin_allowed_cidr_expr = $shibboleth_idp::params::admin_allowed_cidr_expr,
 
   $idp_log_dir             = $shibboleth_idp::params::idp_log_dir,

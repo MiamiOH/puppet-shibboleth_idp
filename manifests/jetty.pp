@@ -109,14 +109,11 @@ class shibboleth_idp::jetty (
     notify => Class['shibboleth_idp::service'],
   }
 
-  archive { "/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz":
-    source        => "http://slf4j.org/dist/slf4j-${shibboleth_idp::slf4j_version}.tar.gz",
-    extract       => true,
-    extract_path  => $src_directory,
-    cleanup       => true,
-    checksum_type => $shibboleth_idp::slf4j_checksum_type,
-    checksum      => $shibboleth_idp::slf4j_checksum,
-    creates       => "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/README.md",
+  archive { "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.tar":
+    source        => "https://repo1.maven.org/maven2/org/slf4j/slf4j-api/${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar",
+    extract       => false,
+    checksum_type => 'md5',
+    checksum_url  => "https://repo1.maven.org/maven2/org/slf4j/slf4j-api/${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar.md5",
   }
 
   file { "${shibboleth_idp::idp_jetty_base}/lib/logging/slf4j-api.jar":
@@ -125,7 +122,7 @@ class shibboleth_idp::jetty (
     group   => $shibboleth_idp::shib_group,
     mode    => '0644',
     source  => "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar",
-    require => Archive["/tmp/slf4j-${shibboleth_idp::slf4j_version}.tar.gz"],
+    require => Archive["${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.tar"],
   }
 
   archive { "/tmp/logback-${shibboleth_idp::logback_version}.tar.gz":
@@ -139,14 +136,20 @@ class shibboleth_idp::jetty (
   }
 
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
-    file { "${shibboleth_idp::idp_jetty_base}/lib/logging/${jar_file}.jar":
-      ensure  => file,
-      owner   => $shibboleth_idp::shib_user,
-      group   => $shibboleth_idp::shib_group,
-      mode    => '0644',
-      source  => "${src_directory}/logback-${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
-      require => Archive["/tmp/logback-${shibboleth_idp::logback_version}.tar.gz"],
-      notify  => Class['shibboleth_idp::service'],
+    archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.tar":
+      source        => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.jar",
+      extract       => false,
+      checksum_type => 'md5',
+      checksum_url  => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.jar.md5",
+    }
+
+    -> file { "${shibboleth_idp::idp_jetty_base}/lib/logging/${jar_file}.jar":
+      ensure => file,
+      owner  => $shibboleth_idp::shib_user,
+      group  => $shibboleth_idp::shib_group,
+      mode   => '0644',
+      source => "${src_directory}/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.tar",
+      notify => Class['shibboleth_idp::service'],
     }
   }
 
