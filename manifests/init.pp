@@ -35,7 +35,7 @@ class shibboleth_idp (
 
   $slf4j_version           = $shibboleth_idp::params::slf4j_version,
   $logback_version         = $shibboleth_idp::params::logback_version,
-  
+
   $admin_allowed_cidr_expr = $shibboleth_idp::params::admin_allowed_cidr_expr,
 
   $idp_log_dir             = $shibboleth_idp::params::idp_log_dir,
@@ -79,6 +79,8 @@ class shibboleth_idp (
   $service_manage          = $shibboleth_idp::params::service_manage,
   $service_ensure          = $shibboleth_idp::params::service_ensure,
   $service_restart         = $shibboleth_idp::params::service_restart,
+
+  $casclient_source        = undef,
 
 ) inherits shibboleth_idp::params {
 
