@@ -85,9 +85,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
     group   => $shibboleth_idp::shib_group,
     mode    => '0744',
     require => File[$shibboleth_idp::shib_src_dir],
-  } ->
-
-  archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
+  }
+  -> archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
     source       => "https://shibboleth.net/downloads/identity-provider/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
     extract      => true,
     extract_path => $shibboleth_idp::shib_src_dir,
@@ -155,9 +154,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
       group        => $shibboleth_idp::shib_group,
       cleanup      => true,
       creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-${shibcas_version}/README.md",
-    } ->
-
-    file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
+    }
+    -> file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
       ensure  => directory,
       owner   => $shibboleth_idp::shib_user,
       group   => $shibboleth_idp::shib_group,
@@ -214,7 +212,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # The install should run only once for a given version. This creates
   # the Shibboleth install base (by default /opt/shibboleth-dip).
   exec { 'shibboleth idp install':
-    command     => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibboleth_idp::shib_src_dir}/idp.install.properties",
+    command     => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibboleth_idp::shib_src_dir}/idp.install.properties", # lint:ignore:140chars
     cwd         => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}",
     user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],

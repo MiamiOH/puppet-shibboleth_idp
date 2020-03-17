@@ -49,9 +49,8 @@ class shibboleth_idp::jetty (
     cleanup      => true,
     creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
     notify       => Class['shibboleth_idp::service'],
-  } ->
-
-  file { "${jetty_home}/jetty":
+  }
+  -> file { "${jetty_home}/jetty":
     ensure => 'link',
     target => "${jetty_home}/jetty-distribution-${jetty_version}",
   }
@@ -69,14 +68,12 @@ class shibboleth_idp::jetty (
       line    => "    sleep ${jetty_start_interval}",
       match   => '^    sleep \d+',
       require => File["${jetty_home}/jetty"],
-    } ->
-
-    file { '/etc/init.d/jetty':
+    }
+    -> file { '/etc/init.d/jetty':
       ensure => 'link',
       target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
-    } ->
-
-    file { '/etc/default/jetty':
+    }
+    -> file { '/etc/default/jetty':
       ensure  => file,
       content => template("${module_name}/default.erb"),
       notify  => Class['shibboleth_idp::service'],
@@ -99,9 +96,8 @@ class shibboleth_idp::jetty (
     mode    => '0640',
     recurse => true,
     source  => "puppet:///modules/${module_name}/jetty_base",
-  } ->
-
-  file { $jetty_files:
+  }
+  -> file { $jetty_files:
     ensure => directory,
     owner  => $shibboleth_idp::shib_user,
     group  => $shibboleth_idp::shib_group,
