@@ -122,11 +122,11 @@ class shibboleth_idp::jetty (
   }
 
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
-    archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.tar":
-      source        => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.jar",
+    archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.tar":
+      source        => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
       extract       => false,
       checksum_type => 'md5',
-      checksum_url  => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.jar.md5",
+      checksum_url  => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar.md5",
     }
 
     -> file { "${shibboleth_idp::idp_jetty_base}/lib/logging/${jar_file}.jar":
