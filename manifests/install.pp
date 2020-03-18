@@ -113,8 +113,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # Install the signing and encryption certs. These are used internally, not
   # through the web front end. Any change requires coordination with InCommon
   # and our service providers.
-  [{name=>'idp-signing', keypair=>$shibboleth_idp::signing_keypair},
-  {name=>'idp-encryption', keypair=>$shibboleth_idp::encryption_keypair}].each |$certificate| {
+  [{ name=>'idp-signing', keypair=>$shibboleth_idp::signing_keypair },
+  { name=>'idp-encryption', keypair=>$shibboleth_idp::encryption_keypair } ].each |$certificate| {
     # lint:ignore:variable_scope
     # $keypair is used in the crt and key templates
     $keypair = $certificate['keypair']

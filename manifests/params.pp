@@ -49,8 +49,8 @@ class shibboleth_idp::params {
   $idp_loglevel_xmlsec     = 'INFO'
   $idp_loglevel_attrmap    = 'INFO'
 
-  $signing_keypair         = {cert => undef, key => undef}
-  $encryption_keypair      = {cert => undef, key => undef}
+  $signing_keypair         = { cert => undef, key => undef }
+  $encryption_keypair      = { cert => undef, key => undef }
 
   $relying_party_profiles  = {}
   $metadata_providers      = {}
