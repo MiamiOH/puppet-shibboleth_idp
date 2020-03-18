@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "author": "Dirk Tepe",
   "summary": "Manage Shibboleth IdP",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "source": "https://github.com/MiamiOH/puppet-shibboleth_idp.git",
   "project_page": "https://github.com/MiamiOH/puppet-shibboleth_idp",
   "issues_url": "https://github.com/MiamiOH/puppet-shibboleth_idp/issues",
