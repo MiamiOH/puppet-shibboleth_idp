@@ -144,7 +144,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # Fetch and install the ShibCAS component.
   if $include_cas {
     if $casclient_source == undef {
-      fail('Must include value for cas_client_sourse')
+      fail('Must include value for casclient_source')
     }
     archive { '/tmp/master.tar.gz':
       source       => "https://github.com/Unicon/shib-cas-authn3/archive/v${shibcas_version}.tar.gz",
