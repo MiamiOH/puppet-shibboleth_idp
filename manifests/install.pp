@@ -212,7 +212,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # The install should run only once for a given version. This creates
   # the Shibboleth install base (by default /opt/shibboleth-dip).
   exec { 'shibboleth idp install':
-    command     => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibboleth_idp::shib_src_dir}/idp.install.properties", # lint:ignore:140chars
+    command     => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}/bin/install.sh  -Didp.property.file=${shibboleth_idp::shib_src_dir}/idp.install.properties",
     cwd         => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}",
     user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],

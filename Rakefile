@@ -30,6 +30,7 @@ end
 
 PuppetLint.configuration.send('disable_relative')
 PuppetLint.configuration.send('disable_security_package_pinned_version')
+PuppetLint.configuration.send('disable_140chars-check')
 
 if Bundler.rubygems.find_name('github_changelog_generator').any?
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|

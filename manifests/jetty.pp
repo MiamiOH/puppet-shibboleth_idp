@@ -134,7 +134,7 @@ class shibboleth_idp::jetty (
       owner  => $shibboleth_idp::shib_user,
       group  => $shibboleth_idp::shib_group,
       mode   => '0644',
-      source => "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar", # lint:ignore:140chars
+      source => "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
       notify => Class['shibboleth_idp::service'],
     }
   }
