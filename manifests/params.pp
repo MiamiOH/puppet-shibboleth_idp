@@ -32,11 +32,7 @@ class shibboleth_idp::params {
   $ldap_return_attributes  = []
 
   $slf4j_version           = '1.7.22'
-  $slf4j_checksum_type     = 'md5'
-  $slf4j_checksum          = '7ab9c81ec1881fce4d809bbc48008eb6'
   $logback_version         = '1.1.8'
-  $logback_checksum_type   = 'md5'
-  $logback_checksum        = '0466114001b29808aeee2bf665e1b2f8'
 
   $admin_allowed_cidr_expr = ['127.0.0.1/32', '::1/128']
 
@@ -53,8 +49,8 @@ class shibboleth_idp::params {
   $idp_loglevel_xmlsec     = 'INFO'
   $idp_loglevel_attrmap    = 'INFO'
 
-  $signing_keypair         = {cert => undef, key => undef}
-  $encryption_keypair      = {cert => undef, key => undef}
+  $signing_keypair         = { cert => undef, key => undef }
+  $encryption_keypair      = { cert => undef, key => undef }
 
   $relying_party_profiles  = {}
   $metadata_providers      = {}

@@ -30,7 +30,7 @@ class shibboleth_idp::simplesp (
   $proxy_server        = undef,
   $proxy_type          = undef,
 ) inherits shibboleth_idp::params {
-  
+
   Archive {
     proxy_server => $proxy_server,
     proxy_type   => $proxy_type,
@@ -48,9 +48,8 @@ class shibboleth_idp::simplesp (
 
   file { $ss_install_base:
     ensure => directory,
-  } ->
-
-  archive { "/tmp/simplesamlphp-${ss_version}.tar.gz":
+  }
+  -> archive { "/tmp/simplesamlphp-${ss_version}.tar.gz":
     source          => "https://github.com/simplesamlphp/simplesamlphp/releases/download/v${ss_version}/simplesamlphp-${ss_version}.tar.gz",
     extract         => true,
     extract_command => 'tar xfz %s --strip-components=1',

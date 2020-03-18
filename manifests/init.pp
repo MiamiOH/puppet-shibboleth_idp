@@ -34,11 +34,7 @@ class shibboleth_idp (
   $ldap_return_attributes  = $shibboleth_idp::params::ldap_return_attributes,
 
   $slf4j_version           = $shibboleth_idp::params::slf4j_version,
-  $slf4j_checksum_type     = $shibboleth_idp::params::slf4j_checksum_type,
-  $slf4j_checksum          = $shibboleth_idp::params::slf4j_checksum,
   $logback_version         = $shibboleth_idp::params::logback_version,
-  $logback_checksum_type   = $shibboleth_idp::params::logback_checksum_type,
-  $logback_checksum        = $shibboleth_idp::params::logback_checksum,
 
   $admin_allowed_cidr_expr = $shibboleth_idp::params::admin_allowed_cidr_expr,
 
@@ -84,6 +80,8 @@ class shibboleth_idp (
   $service_ensure          = $shibboleth_idp::params::service_ensure,
   $service_restart         = $shibboleth_idp::params::service_restart,
 
+  $casclient_source        = undef,
+
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
@@ -119,19 +117,19 @@ class shibboleth_idp (
     proxy_type   => $proxy_type,
   }
 
-  class { '::shibboleth_idp::install': } ->
-  class { '::shibboleth_idp::relying_party': } ->
-  class { '::shibboleth_idp::metadata': } ->
-  class { '::shibboleth_idp::attribute_resolver': } ->
-  class { '::shibboleth_idp::attribute_filter': }
+  class { 'shibboleth_idp::install': }
+  -> class { 'shibboleth_idp::relying_party': }
+  -> class { 'shibboleth_idp::metadata': }
+  -> class { 'shibboleth_idp::attribute_resolver': }
+  -> class { 'shibboleth_idp::attribute_filter': }
 
-  class { '::shibboleth_idp::service': }
+  class { 'shibboleth_idp::service': }
 
-  contain '::shibboleth_idp::install'
-  contain '::shibboleth_idp::relying_party'
-  contain '::shibboleth_idp::metadata'
-  contain '::shibboleth_idp::attribute_resolver'
-  contain '::shibboleth_idp::attribute_filter'
-  contain '::shibboleth_idp::service'
+  contain 'shibboleth_idp::install'
+  contain 'shibboleth_idp::relying_party'
+  contain 'shibboleth_idp::metadata'
+  contain 'shibboleth_idp::attribute_resolver'
+  contain 'shibboleth_idp::attribute_filter'
+  contain 'shibboleth_idp::service'
 
 }

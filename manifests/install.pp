@@ -17,6 +17,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $nameid_generators_saml1 = $shibboleth_idp::nameid_generators_saml1
   $nameid_allowed_entities = $shibboleth_idp::nameid_allowed_entities
   $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
+  $casclient_source = $shibboleth_idp::casclient_source
 
   if $shibboleth_idp::manage_user {
     ensure_resource('user', $shibboleth_idp::shib_user, {
@@ -84,9 +85,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
     group   => $shibboleth_idp::shib_group,
     mode    => '0744',
     require => File[$shibboleth_idp::shib_src_dir],
-  } ->
-
-  archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
+  }
+  -> archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
     source       => "https://shibboleth.net/downloads/identity-provider/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
     extract      => true,
     extract_path => $shibboleth_idp::shib_src_dir,
@@ -113,8 +113,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
   # Install the signing and encryption certs. These are used internally, not
   # through the web front end. Any change requires coordination with InCommon
   # and our service providers.
-  [{name=>'idp-signing', keypair=>$shibboleth_idp::signing_keypair},
-  {name=>'idp-encryption', keypair=>$shibboleth_idp::encryption_keypair}].each |$certificate| {
+  [{ name=>'idp-signing', keypair=>$shibboleth_idp::signing_keypair },
+  { name=>'idp-encryption', keypair=>$shibboleth_idp::encryption_keypair } ].each |$certificate| {
     # lint:ignore:variable_scope
     # $keypair is used in the crt and key templates
     $keypair = $certificate['keypair']
@@ -143,6 +143,9 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
   # Fetch and install the ShibCAS component.
   if $include_cas {
+    if $casclient_source == undef {
+      fail('Must include value for casclient_source')
+    }
     archive { '/tmp/master.tar.gz':
       source       => "https://github.com/Unicon/shib-cas-authn3/archive/v${shibcas_version}.tar.gz",
       extract      => true,
@@ -151,9 +154,8 @@ class shibboleth_idp::install inherits shibboleth_idp {
       group        => $shibboleth_idp::shib_group,
       cleanup      => true,
       creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-${shibcas_version}/README.md",
-    } ->
-
-    file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
+    }
+    -> file { "${shibboleth_idp::shib_install_base}/flows/authn/Shibcas":
       ensure  => directory,
       owner   => $shibboleth_idp::shib_user,
       group   => $shibboleth_idp::shib_group,
@@ -178,7 +180,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
     # This one does not support https, so verify the md5 hash
     archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.4.1.jar":
-      source        => 'http://central.maven.org/maven2/org/jasig/cas/client/cas-client-core/3.4.1/cas-client-core-3.4.1.jar',
+      source        => "${casclient_source}/cas-client-core-3.4.1.jar",
       extract       => false,
       cleanup       => false,
       user          => $shibboleth_idp::shib_user,

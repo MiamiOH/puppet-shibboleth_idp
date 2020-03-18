@@ -21,7 +21,7 @@ define shibboleth_idp::attribute_resolver::attribute (
   if $type == 'Script' {
     fail("Attribute type 'Script' must be replaced with 'ScriptedAttribute' as of Shibboleth IdP 3.3")
   }
-  
+
   concat::fragment { "attribute_resolver_attribute_${id}":
     target  => 'attribute-resolver.xml',
     order   => '20',
