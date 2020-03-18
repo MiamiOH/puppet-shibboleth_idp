@@ -105,7 +105,7 @@ class shibboleth_idp::jetty (
     notify => Class['shibboleth_idp::service'],
   }
 
-  archive { "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.tar":
+  archive { "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar":
     source        => "https://repo1.maven.org/maven2/org/slf4j/slf4j-api/${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar",
     extract       => false,
     checksum_type => 'md5',
@@ -118,11 +118,11 @@ class shibboleth_idp::jetty (
     group   => $shibboleth_idp::shib_group,
     mode    => '0644',
     source  => "${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar",
-    require => Archive["${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.tar"],
+    require => Archive["${src_directory}/slf4j-${shibboleth_idp::slf4j_version}/slf4j-api-${shibboleth_idp::slf4j_version}.jar"],
   }
 
   ['logback-access', 'logback-classic', 'logback-core'].each |$jar_file| {
-    archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.tar":
+    archive { "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar":
       source        => "https://repo1.maven.org/maven2/ch/qos/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
       extract       => false,
       checksum_type => 'md5',
@@ -134,7 +134,7 @@ class shibboleth_idp::jetty (
       owner  => $shibboleth_idp::shib_user,
       group  => $shibboleth_idp::shib_group,
       mode   => '0644',
-      source => "${src_directory}/logback/${jar_file}/${shibboleth_idp::slf4j_version}/${jar_file}-${shibboleth_idp::slf4j_version}.tar",
+      source => "${src_directory}/logback/${jar_file}/${shibboleth_idp::logback_version}/${jar_file}-${shibboleth_idp::logback_version}.jar",
       notify => Class['shibboleth_idp::service'],
     }
   }
