@@ -49,4 +49,4 @@ Gemfile:
 Rakefile:
   default_disabled_lint_checks:
   - security_package_pinned_version
-  - 140chars-check
+  - 140chars
