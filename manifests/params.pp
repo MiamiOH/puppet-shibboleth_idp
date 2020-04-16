@@ -21,7 +21,7 @@ class shibboleth_idp::params {
   $include_cas             = false
   # These should really be the same, but we have some sort of compatibility issue
   $shibcas_version         = '3.1.0'
-  $shibcas_auth_version    = '3.0.0'
+  $shibcas_auth_version    = '3.3.0'
   $cas_server_url          = undef
 
   $ldap_url                = undef
