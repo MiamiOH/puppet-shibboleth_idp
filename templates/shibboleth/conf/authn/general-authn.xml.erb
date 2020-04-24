@@ -28,13 +28,6 @@
 
     <util:list id="shibboleth.AvailableAuthenticationFlows">
         
-        <%- if @include_cas -%>
-        <bean id="authn/Shibcas" parent="shibboleth.AuthenticationFlow"
-                p:passiveAuthenticationSupported="true"
-                p:forcedAuthenticationSupported="true"
-                p:nonBrowserSupported="false" />
-        <%- end -%>
-        
         <bean id="authn/IPAddress" parent="shibboleth.AuthenticationFlow"
                 p:passiveAuthenticationSupported="true"
                 p:lifetime="PT60S" p:inactivityTimeout="PT60S">
@@ -59,6 +52,8 @@
         </bean>
         
         <bean id="authn/External" parent="shibboleth.AuthenticationFlow"
+            p:passiveAuthenticationSupported="true"
+            p:forcedAuthenticationSupported="true"
             p:nonBrowserSupported="false" />
 
         <bean id="authn/RemoteUser" parent="shibboleth.AuthenticationFlow"

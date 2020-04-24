@@ -100,7 +100,7 @@ idp.encryption.cert= %{idp.home}/credentials/idp-encryption.crt
 #idp.authn.flows= Password
 
 <%- if @include_cas -%>
-idp.authn.flows= Shibcas
+idp.authn.flows= External
 
 # CAS Client properties (usage loosely matches that of the Java CAS Client)
 ## CAS Server Properties
