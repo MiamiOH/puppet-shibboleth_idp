@@ -86,8 +86,14 @@ class shibboleth_idp::install inherits shibboleth_idp {
     mode    => '0744',
     require => File[$shibboleth_idp::shib_src_dir],
   }
+  # Adding option to use archived version of tar file instead of recent
+  if $use_archive { 
+    $archive_version => 'archive/'  
+   } else { 
+    $archive_version => '' }
+    
   -> archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
-    source       => "https://shibboleth.net/downloads/identity-provider/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
+    source       => "https://shibboleth.net/downloads/identity-provider/${archive_version}${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
     extract      => true,
     extract_path => $shibboleth_idp::shib_src_dir,
     user         => $shibboleth_idp::shib_user,
