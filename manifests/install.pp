@@ -163,16 +163,16 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
     # Use archive to fetch a couple of jar files, but do not extract them.
     archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar":
-      source  => "https://github.com/Unicon/shib-cas-authn3/releases/download/${shibcas_auth_version}/shib-cas-authenticator-${shibcas_auth_version}.jar",
-      extract => false,
-      cleanup => false,
-      user    => $shibboleth_idp::shib_user,
-      group   => $shibboleth_idp::shib_group,
+      source        => "https://github.com/Unicon/shib-cas-authn3/releases/download/${shibcas_auth_version}/shib-cas-authenticator-${shibcas_auth_version}.jar",
+      extract       => false,
+      cleanup       => false,
+      user          => $shibboleth_idp::shib_user,
+      group         => $shibboleth_idp::shib_group,
       checksum_type => 'md5',
       checksum      => 'f5bb4d412805f513876cc8f08772909e',
-      creates => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar",
-      require => Exec['shibboleth idp install'],
-      notify  => Exec['shibboleth idp build'],
+      creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar",
+      require       => Exec['shibboleth idp install'],
+      notify        => Exec['shibboleth idp build'],
     }
 
     # This one does not support https, so verify the md5 hash
