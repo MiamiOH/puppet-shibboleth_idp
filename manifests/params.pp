@@ -6,6 +6,7 @@
 class shibboleth_idp::params {
 
   $shib_idp_version        = '3.3.2'
+  $archive_url             = false
   $shib_user               = 'jetty'
   $shib_group              = 'jetty'
   $manage_user             = false

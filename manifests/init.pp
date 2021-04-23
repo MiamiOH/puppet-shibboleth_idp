@@ -7,6 +7,7 @@ class shibboleth_idp (
   $idp_entity_id,
 
   $shib_idp_version        = $shibboleth_idp::params::shib_idp_version,
+  Boolean $archive_url     = $shibboleth_idp::params::archive_url,
   $shib_user               = $shibboleth_idp::params::shib_user,
   $shib_user_uid           = undef,
   $shib_group              = $shibboleth_idp::params::shib_group,

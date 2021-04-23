@@ -19,6 +19,11 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
   $casclient_source = $shibboleth_idp::casclient_source
 
+  $download_url = $shibboleth_idp::archive_url ? {
+    true    => 'https://shibboleth.net/downloads/identity-provider/archive',
+    default => 'https://shibboleth.net/downloads/identity-provider',
+  }
+
   if $shibboleth_idp::manage_user {
     ensure_resource('user', $shibboleth_idp::shib_user, {
         managehome => true,
@@ -87,7 +92,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
     require => File[$shibboleth_idp::shib_src_dir],
   }
   -> archive { "/tmp/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz":
-    source       => "https://shibboleth.net/downloads/identity-provider/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
+    source       => "${download_url}/${shibboleth_idp::shib_idp_version}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}.tar.gz",
     extract      => true,
     extract_path => $shibboleth_idp::shib_src_dir,
     user         => $shibboleth_idp::shib_user,
