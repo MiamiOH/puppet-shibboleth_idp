@@ -1,3 +1,6 @@
+2021-06-10 (1.4.4) Frank luo
+        * bump comp-systemd version to 3.0.0
+
 2020-08-31 (1.4.3)  Chris Edester
         * Allow to download from the archive url for older versions of shibboleth
 
