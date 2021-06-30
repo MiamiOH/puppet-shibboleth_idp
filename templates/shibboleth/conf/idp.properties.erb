@@ -107,6 +107,11 @@ idp.authn.flows= External
 shibcas.casServerUrlPrefix = <%= @cas_server_url %>
 shibcas.casServerLoginUrl = ${shibcas.casServerUrlPrefix}/login
 
+# REFEDS MFA Profile
+# shibcas.casToShibTranslators = net.unicon.idp.externalauth.CasDuoSecurityRefedsAuthnMethodTranslator
+# shibcas.parameterBuilders = net.unicon.idp.authn.provider.extra.CasMultifactorRefedsToDuoSecurityAuthnMethodParameterBuilder
+
+
 ## Shibboleth Server Properties
 shibcas.serverName = <%= @idp_server_url %>
 <%- end -%>
