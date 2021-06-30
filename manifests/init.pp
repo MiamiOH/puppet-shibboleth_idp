@@ -70,6 +70,8 @@ class shibboleth_idp (
   $jetty_ks_password       = $shibboleth_idp::params::jetty_ks_password,
 
   $java_home               = $shibboleth_idp::params::java_home,
+  
+  $nih_refeds_profile      = $shibboleth_idp::params::nih_refeds_profile,
 
   $proxy_type              = undef,
   $proxy_host              = undef,
