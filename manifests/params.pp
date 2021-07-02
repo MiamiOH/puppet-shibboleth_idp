@@ -95,5 +95,6 @@ class shibboleth_idp::params {
   $ss_cert_owner           = undef
   $ss_cert_group           = undef
   $ss_cert_dir             = '/var/www/simplesamlphp/cert'
+  $nih_refeds_profile      = false
 
 }
