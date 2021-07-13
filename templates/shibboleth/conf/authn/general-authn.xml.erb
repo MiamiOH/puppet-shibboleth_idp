@@ -54,7 +54,7 @@
         <bean id="authn/External" parent="shibboleth.AuthenticationFlow"
             p:passiveAuthenticationSupported="true"
             p:forcedAuthenticationSupported="true"
-            p:nonBrowserSupported="false" />
+            p:nonBrowserSupported="false" >
            <%- if @nih_refeds_profile -%>
            <property name="supportedPrincipals">
              <list>
@@ -64,6 +64,7 @@
                     c:classRef="urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport" />
               </list>
              </property>
+        </bean>
            <%- end -%>
         
 
