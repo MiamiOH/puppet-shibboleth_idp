@@ -36,12 +36,19 @@
            <util:list>
                <ref bean="Shibboleth.SSO" />
                <ref bean="SAML1.AttributeQuery" />
+               <ref bean="SAML1.AttributeQuery.MDDriven" />
                <ref bean="SAML1.ArtifactResolution" />
+               <ref bean="SAML1.ArtifactResolution.MDDriven" />
                <ref bean="SAML2.SSO" />
+               <ref bean="SAML2.SSO.MDDriven" />
                <ref bean="SAML2.ECP" />
+               <ref bean="SAML2.ECP.MDDriven" />
                <ref bean="SAML2.Logout" />
+               <ref bean="SAML2.Logout.MDDriven" />
                <ref bean="SAML2.AttributeQuery" />
+               <ref bean="SAML2.AttributeQuery.MDDriven" />
                <ref bean="SAML2.ArtifactResolution" />
+               <ref bean="SAML2.ArtifactResolution.MDDriven" />
            </util:list>
         </property>
     </bean>
