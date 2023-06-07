@@ -59,6 +59,15 @@
     The other properties merely regurgitate their default values. They are included
     here for convenience, in case you want to change their default values.
     -->
+    
+    <!--
+    Include new LocalDynamicMetadataProvider.
+    -->
+    <MetadataProvider id="localDynamicMetadata" xsi:type="LocalDynamicMetadataProvider"
+                   sourceDirectory="%{idp.home}/metadata/generated"
+                   minCacheDuration="PT10M"
+                   maxCacheDuration="PT8H" />
+    
     <MetadataProvider id="ICMD" xsi:type="FileBackedHTTPMetadataProvider"
                     xmlns="urn:mace:shibboleth:2.0:metadata"
                     metadataURL="http://md.incommon.org/InCommon/InCommon-metadata.xml"
