@@ -6,6 +6,8 @@
 class shibboleth_idp::relying_party inherits shibboleth_idp {
 
   # Create the relying-party.xml configuration file.
+  $shib_major_version = $shibboleth_idp::shib_major_version
+  
   concat { 'relying-party.xml':
     path   => "${shibboleth_idp::shib_install_base}/conf/relying-party.xml",
     owner  => $shibboleth_idp::shib_user,
