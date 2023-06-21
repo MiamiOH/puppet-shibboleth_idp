@@ -5,6 +5,8 @@
 
 class shibboleth_idp::metadata inherits shibboleth_idp {
 
+  $shib_major_version = $shibboleth_idp::shib_major_version
+
   # This is the InCommon signing key public cert used to validate the downloaded
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.

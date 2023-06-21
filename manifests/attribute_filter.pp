@@ -6,6 +6,8 @@
 class shibboleth_idp::attribute_filter inherits shibboleth_idp {
 
   # Create the attribute-filter.xml configuration file.
+  $shib_major_version = $shibboleth_idp::shib_major_version
+  
   concat { 'attribute-filter.xml':
     path   => "${shibboleth_idp::shib_install_base}/conf/attribute-filter.xml",
     owner  => $shibboleth_idp::shib_user,
