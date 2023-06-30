@@ -5,7 +5,7 @@
 
 class shibboleth_idp::params {
 
-  $shib_major_version      = '3',
+  $shib_major_version      = '3'
   $shib_idp_version        = '3.3.2'
   $archive_url             = false
   $shib_user               = 'jetty'
