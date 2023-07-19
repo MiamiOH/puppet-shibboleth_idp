@@ -1,6 +1,6 @@
 {
   "name": "MiamiOH-shibboleth_idp",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "author": "Dirk Tepe",
   "summary": "Manage Shibboleth IdP",
   "license": "GPL-3.0-or-later",
@@ -49,7 +49,8 @@
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     }
   ],

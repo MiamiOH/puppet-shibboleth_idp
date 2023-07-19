@@ -1,4 +1,4 @@
-<%- if @shib_major_version == '4' -%>
+<% if scope['shib_major_version'] == 4 -%>
 <!-- Attribute release rules activated by Entity Attribute markup in metadata (filter) -->
  
     <AttributeFilterPolicy id="releaseEntityAttributeMarkedEduPersonPrincipalName">
@@ -549,5 +549,5 @@
         <PermitValueRule xsi:type="ANY" />
       </AttributeRule>
     </AttributeFilterPolicy>  
-<%- end -%>
+<% end -%>
 </AttributeFilterPolicyGroup>
