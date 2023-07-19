@@ -42,7 +42,7 @@
                <ref bean="SAML2.Logout" />
                <ref bean="SAML2.AttributeQuery" />
                <ref bean="SAML2.ArtifactResolution" />
-<%- if @shib_major_version == '4' -%>
+<% if scope['shib_major_version'] == 4 -%>
                <ref bean="SAML1.AttributeQuery.MDDriven" />
                <ref bean="SAML1.ArtifactResolution.MDDriven" />
                <ref bean="SAML2.SSO.MDDriven" />
@@ -50,7 +50,7 @@
                <ref bean="SAML2.Logout.MDDriven" />
                <ref bean="SAML2.AttributeQuery.MDDriven" />
                <ref bean="SAML2.ArtifactResolution.MDDriven" />
-<%- end -%>
+<% end -%>
            </util:list>
         </property>
     </bean>
