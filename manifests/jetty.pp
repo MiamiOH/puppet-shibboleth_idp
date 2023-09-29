@@ -6,6 +6,7 @@
 
 class shibboleth_idp::jetty (
   $jetty_version          = $shibboleth_idp::params::jetty_version,
+  $jetty_distro_type      = $shibboleth_idp::params::jetty_distro_type,
   $jetty_home             = $shibboleth_idp::params::jetty_home,
   $jetty_manage_user      = $shibboleth_idp::params::jetty_manage_user,
   $jetty_user             = $shibboleth_idp::params::jetty_user,
@@ -42,17 +43,17 @@ class shibboleth_idp::jetty (
     })
   }
 
-  archive { "/tmp/jetty-distribution-${jetty_version}.tar.gz":
-    source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${jetty_version}/jetty-distribution-${jetty_version}.tar.gz",
+  archive { "/tmp/jetty-${jetty_distro_type}-${jetty_version}.tar.gz":
+    source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-${jetty_distro_type}/${jetty_version}/jetty-${jetty_distro_type}-${jetty_version}.tar.gz",
     extract      => true,
     extract_path => $jetty_home,
     cleanup      => true,
-    creates      => "${jetty_home}/jetty-distribution-${jetty_version}/README.TXT",
+    creates      => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/README.TXT",
     notify       => Class['shibboleth_idp::service'],
   }
   -> file { "${jetty_home}/jetty":
     ensure => 'link',
-    target => "${jetty_home}/jetty-distribution-${jetty_version}",
+    target => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
   }
 
   if $::service_provider == 'systemd' {
@@ -64,14 +65,14 @@ class shibboleth_idp::jetty (
   } else {
     file_line { 'jetty_startup_minutes':
       ensure  => present,
-      path    => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+      path    => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/bin/jetty.sh",
       line    => "    sleep ${jetty_start_interval}",
       match   => '^    sleep \d+',
       require => File["${jetty_home}/jetty"],
     }
     -> file { '/etc/init.d/jetty':
       ensure => 'link',
-      target => "${jetty_home}/jetty-distribution-${jetty_version}/bin/jetty.sh",
+      target => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/bin/jetty.sh",
     }
     -> file { '/etc/default/jetty':
       ensure  => file,

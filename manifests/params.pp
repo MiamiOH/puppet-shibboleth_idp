@@ -98,4 +98,9 @@ class shibboleth_idp::params {
   $ss_cert_dir             = '/var/www/simplesamlphp/cert'
   $nih_refeds_profile      = false
 
+  $jetty_distro_type = versioncmp($jetty_version, '9.4') ? {
+    -1      => 'distribution',
+    default => 'home',    
+  }
+
 }
