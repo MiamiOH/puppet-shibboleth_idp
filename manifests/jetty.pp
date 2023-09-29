@@ -23,6 +23,11 @@ class shibboleth_idp::jetty (
   # Based on jetty startup script of 'sleep 4' repeated 1..15
   $jetty_start_interval = 4 * $jetty_start_minutes
 
+  $jetty_distro_type = versioncmp($jetty_version, '9.4') ? {
+    -1      => 'distribution',
+    default => 'home',    
+  }
+
   $idp_jetty_base = $shibboleth_idp::idp_jetty_base
   $idp_jetty_log_dir = $shibboleth_idp::idp_jetty_log_dir
   $idp_jetty_log_level = $shibboleth_idp::idp_jetty_log_level
