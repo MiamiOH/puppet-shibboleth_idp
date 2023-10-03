@@ -6,7 +6,6 @@
 
 class shibboleth_idp::jetty (
   $jetty_version          = $shibboleth_idp::params::jetty_version,
-  $jetty_distro_type      = $shibboleth_idp::params::jetty_distro_type,
   $jetty_home             = $shibboleth_idp::params::jetty_home,
   $jetty_manage_user      = $shibboleth_idp::params::jetty_manage_user,
   $jetty_user             = $shibboleth_idp::params::jetty_user,

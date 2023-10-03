@@ -1,4 +1,9 @@
 # Changelog
+2023-10-03 (1.6.2) Andy Farler
+	* Fix variable re-declaration error in jetty.pp
+
+2023-09-29 (1.6.0) Andy Farler
+	* Allow Jetty 10 to be installed
 
 2023-07-19 (1.5.9) Andy Farler
         * Fixed template logic for updated build
