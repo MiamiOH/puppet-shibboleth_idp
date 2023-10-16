@@ -27,6 +27,7 @@ class shibboleth_idp::jetty (
     default => 'home',    
   }
 
+  $shib_major_version = $shibboleth_idp::params::shib_major_version
   $idp_jetty_base = $shibboleth_idp::idp_jetty_base
   $idp_jetty_log_dir = $shibboleth_idp::idp_jetty_log_dir
   $idp_jetty_log_level = $shibboleth_idp::idp_jetty_log_level
@@ -100,7 +101,7 @@ class shibboleth_idp::jetty (
     group   => $shibboleth_idp::shib_group,
     mode    => '0640',
     recurse => true,
-    source  => "puppet:///modules/${module_name}/jetty_base",
+    source  => "puppet:///modules/${module_name}/${shib_major_version}/jetty_base",
   }
   -> file { $jetty_files:
     ensure => directory,
