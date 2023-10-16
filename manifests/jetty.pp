@@ -24,7 +24,7 @@ class shibboleth_idp::jetty (
 
   $jetty_distro_type = versioncmp($jetty_version, '9.4') ? {
     -1      => 'distribution',
-    default => 'home',    
+    default => 'home',
   }
 
   $shib_major_version = $shibboleth_idp::params::shib_major_version

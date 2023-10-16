@@ -4,10 +4,9 @@
 #
 
 define shibboleth_idp::relying_party::profile (
-  $entity_id = $name,
-
+  $entity_id  = $namxe,
   $properties = {},
-) {
+){
 
   concat::fragment { "relying_party_profile_${name}":
     target  => 'relying-party.xml',
