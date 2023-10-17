@@ -49,12 +49,13 @@ class shibboleth_idp::jetty (
   }
 
   archive { "/tmp/jetty-${jetty_distro_type}-${jetty_version}.tar.gz":
-    source       => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-${jetty_distro_type}/${jetty_version}/jetty-${jetty_distro_type}-${jetty_version}.tar.gz",
-    extract      => true,
-    extract_path => $jetty_home,
-    cleanup      => true,
-    creates      => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/README.TXT",
-    notify       => Class['shibboleth_idp::service'],
+    source          => "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-${jetty_distro_type}/${jetty_version}/jetty-${jetty_distro_type}-${jetty_version}.tar.gz",
+    extract         => true,
+    extract_command => "tar vzxf %s && chown -fR ${jetty_user}.${jetty_group} ${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
+    extract_path    => $jetty_home,
+    cleanup         => true,
+    creates         => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/README.TXT",
+    notify          => Class['shibboleth_idp::service'],
   }
   -> file { "${jetty_home}/jetty":
     ensure => 'link',
