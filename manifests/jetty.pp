@@ -145,7 +145,7 @@ class shibboleth_idp::jetty (
     }
   }
 
-  ['start.ini', 'start.d/ssl.ini', 'start.d/http.ini',
+  ['start.d/ssl.ini', 'start.d/http.ini',
     'resources/logback.xml', 'resources/logback-access.xml',
   ].each |$config_file| {
     file { "${shibboleth_idp::idp_jetty_base}/${config_file}":
@@ -157,6 +157,22 @@ class shibboleth_idp::jetty (
       require => File[$shibboleth_idp::idp_jetty_base],
       notify  => Class['shibboleth_idp::service'],
     }
+  }
+
+  $start_ini_path = $shib_major_version ? {
+    '3'     => "${shibboleth_idp::idp_jetty_base}",
+    '4'     => "${shibboleth_idp::idp_jetty_base}/start.d",
+    default => "${shibboleth_idp::idp_jetty_base}",
+  }
+
+  file { "${start_ini_path}/start.ini":
+    ensure  => file,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
+    mode    => '0644',
+    content => template("${module_name}/jetty_base/start.ini.erb"),
+    require => File[$shibboleth_idp::idp_jetty_base],
+    notify  => Class['shibboleth_idp::service'],
   }
 
   ####################################
