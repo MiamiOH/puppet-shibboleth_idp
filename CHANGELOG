@@ -1,18 +1,22 @@
 # Changelog
+
+2023-10-17 (1.6.4) Andy Farler
+        * Fix Jetty 10 config file logic
+
 2023-10-16 (1.6.3) Andy Farler, Sofia Olaya
-	* Separate jetty config files for version 10
+        * Separate jetty config files for version 10
 
 2023-10-03 (1.6.2) Andy Farler
-	* Fix variable re-declaration error in jetty.pp
+        * Fix variable re-declaration error in jetty.pp
 
 2023-09-29 (1.6.0) Andy Farler
-	* Allow Jetty 10 to be installed
+        * Allow Jetty 10 to be installed
 
 2023-07-19 (1.5.9) Andy Farler
         * Fixed template logic for updated build
 
 2023-06-30 (1.5.8) Andy Farler
-	* Fixed syntax error in params list
+        * Fixed syntax error in params list
 
 2023-06-29 (1.5.7) Andy Farler, Sofia Olaya
         * Added config items for upgraded version.
