@@ -15,7 +15,7 @@ class shibboleth_idp::jetty (
   $java_home              = $shibboleth_idp::java_home,
   $jetty_max_memory       = $shibboleth_idp::params::jetty_max_memory,
   $jetty_start_minutes    = $shibboleth_idp::params::jetty_start_minutes,
-  $shib_major_version     = $shibboleth_idp::params::shib_major_version
+  $shib_major_version     = $shibboleth_idp::params::shib_major_version,
   $src_directory          = $shibboleth_idp::params::shib_src_dir,
 ) inherits shibboleth_idp {
 
