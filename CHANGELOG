@@ -1,5 +1,8 @@
 # Changelog
 
+2023-10-17 (1.6.6) Andy Farler
+        * Simplify files and templates, fix ownership 
+
 2023-10-17 (1.6.5) Sofia Olaya
         * More memory for Jetty process
 
