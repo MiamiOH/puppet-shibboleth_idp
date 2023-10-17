@@ -1,5 +1,8 @@
 # Changelog
 
+2023-10-17 (1.6.5) Sofia Olaya
+        * More memory for Jetty process
+
 2023-10-17 (1.6.4) Andy Farler
         * Fix Jetty 10 config file logic
 
