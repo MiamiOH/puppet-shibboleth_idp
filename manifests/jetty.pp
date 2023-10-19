@@ -54,7 +54,7 @@ class shibboleth_idp::jetty (
     extract_command => "tar vzxf %s && chown -fR ${jetty_user}.${jetty_group} ${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
     extract_path    => $jetty_home,
     cleanup         => true,
-    creates         => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/README.TXT",
+    creates         => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/VERSION.txt",
     notify          => Class['shibboleth_idp::service'],
   }
   -> file { "${jetty_home}/jetty":
@@ -160,10 +160,9 @@ class shibboleth_idp::jetty (
     }
   }
 
-  $start_ini_path = $shib_major_version ? {
-    '3'     => $shibboleth_idp::idp_jetty_base,
-    '4'     => "${shibboleth_idp::idp_jetty_base}/start.d",
-    default => $shibboleth_idp::idp_jetty_base,
+  $start_ini_path = versioncmp($jetty_version, '9.4') ? {
+    -1      => $shibboleth_idp::idp_jetty_base,
+    default => "${shibboleth_idp::idp_jetty_base}/start.d",
   }
 
   file { "${start_ini_path}/start.ini":
