@@ -54,7 +54,7 @@ class shibboleth_idp::jetty (
     extract_command => "tar vzxf %s && chown -fR ${jetty_user}.${jetty_group} ${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
     extract_path    => $jetty_home,
     cleanup         => true,
-    creates         => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/README.TXT",
+    creates         => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}/VERSION.txt",
     notify          => Class['shibboleth_idp::service'],
   }
   -> file { "${jetty_home}/jetty":
