@@ -160,10 +160,9 @@ class shibboleth_idp::jetty (
     }
   }
 
-  $start_ini_path = $shib_major_version ? {
-    '3'     => $shibboleth_idp::idp_jetty_base,
-    '4'     => "${shibboleth_idp::idp_jetty_base}/start.d",
-    default => $shibboleth_idp::idp_jetty_base,
+  $start_ini_path = versioncmp($jetty_version, '9.4') ? {
+    -1      => $shibboleth_idp::idp_jetty_base,
+    default => "${shibboleth_idp::idp_jetty_base}/start.d",
   }
 
   file { "${start_ini_path}/start.ini":
