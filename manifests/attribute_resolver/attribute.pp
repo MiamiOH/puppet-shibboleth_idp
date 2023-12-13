@@ -4,10 +4,12 @@
 #
 
 define shibboleth_idp::attribute_resolver::attribute (
+  $shib_major_version = $shibboleth_idp::shib_major_version,
   $id = $name,
   $type = undef,
   $scope = undef,
   $source_attribute_id = undef,
+  $attribute_def = undef,
   $transient = false,
   $script = undef,
   $script_file = undef,
