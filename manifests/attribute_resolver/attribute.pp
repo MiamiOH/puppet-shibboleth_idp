@@ -9,7 +9,7 @@ define shibboleth_idp::attribute_resolver::attribute (
   $type = undef,
   $scope = undef,
   $source_attribute_id = undef,
-  $attribute_def = undef,
+  $input_attribute_def = [],
   $transient = false,
   $script = undef,
   $script_file = undef,
