@@ -11,6 +11,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $include_cas = $shibboleth_idp::include_cas
   $shibcas_version = $shibboleth_idp::shibcas_version
   $shibcas_auth_version = $shibboleth_idp::shibcas_auth_version
+  $shib_major_version = $shibboleth_idp::shib_major_version
   $proxy_host = $shibboleth_idp::proxy_host
   $proxy_port = $shibboleth_idp::proxy_port
   $nameid_generators_saml2 = $shibboleth_idp::nameid_generators_saml2
@@ -54,6 +55,11 @@ class shibboleth_idp::install inherits shibboleth_idp {
     mode   => '0644',
   }
 
+  $security_path = $shib_major_version ? {
+    4       => '../jre/lib/security',
+    default => 'jre/lib/security',
+  }
+
   ####################################
   # The Shibboleth IdP uses the Java unlimited strength crypto libraries.
   # We have the required files as an artifact, just download and install.
@@ -69,7 +75,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
     ['local_policy.jar', 'US_export_policy.jar',
     ].each |$jar_file| {
-      file { "${java_home}/jre/lib/security/${jar_file}":
+      file { "${java_home}/${security_path}/${jar_file}":
         ensure  => file,
         owner   => $shibboleth_idp::shib_user,
         group   => $shibboleth_idp::shib_group,
