@@ -219,7 +219,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       owner   => $shibboleth_idp::shib_user,
       group   => $shibboleth_idp::shib_group,
       mode    => '0600',
-      source  => "puppet:///modules/${module_name}/${shib_major_version}/web.xml}",
+      source  => "puppet:///modules/${module_name}/${shib_major_version}/web.xml",
       require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
       notify  => Exec['shibboleth idp build'],
     }
