@@ -11,6 +11,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $include_cas = $shibboleth_idp::include_cas
   $shibcas_version = $shibboleth_idp::shibcas_version
   $shibcas_auth_version = $shibboleth_idp::shibcas_auth_version
+  $shibcas_auth_checksum = $shibboleth_idp::shibcas_auth_checksum
   $shib_major_version = $shibboleth_idp::shib_major_version
   $proxy_host = $shibboleth_idp::proxy_host
   $proxy_port = $shibboleth_idp::proxy_port
@@ -20,6 +21,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
   $casclient_source = $shibboleth_idp::casclient_source
   $casclient_version = $shibboleth_idp::casclient_version
+  $casclient_checksum = $shibboleth_idp::casclient_checksum
 
   $download_url = $shibboleth_idp::archive_url ? {
     true    => 'https://shibboleth.net/downloads/identity-provider/archive',
@@ -176,7 +178,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       user          => $shibboleth_idp::shib_user,
       group         => $shibboleth_idp::shib_group,
       checksum_type => 'md5',
-      checksum      => 'f5bb4d412805f513876cc8f08772909e',
+      checksum      => $shibcas_auth_checksum,
       creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar",
       require       => Exec['shibboleth idp install'],
       notify        => Exec['shibboleth idp build'],
@@ -190,7 +192,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       user          => $shibboleth_idp::shib_user,
       group         => $shibboleth_idp::shib_group,
       checksum_type => 'md5',
-      checksum      => 'bd33fe28a08f96df25c8b03c2c0efe27',
+      checksum      => $casclient_checksum,
       creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-${casclient_version}.jar",
       require       => Exec['shibboleth idp install'],
       notify        => Exec['shibboleth idp build'],
