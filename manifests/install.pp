@@ -19,6 +19,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   $nameid_allowed_entities = $shibboleth_idp::nameid_allowed_entities
   $admin_allowed_cidr_expr = $shibboleth_idp::admin_allowed_cidr_expr
   $casclient_source = $shibboleth_idp::casclient_source
+  $casclient_version = $shibboleth_idp::casclient_version
 
   $download_url = $shibboleth_idp::archive_url ? {
     true    => 'https://shibboleth.net/downloads/identity-provider/archive',
@@ -158,7 +159,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       fail('Must include value for casclient_source')
     }
     archive { '/tmp/master.tar.gz':
-      source       => "https://github.com/Unicon/shib-cas-authn3/archive/v${shibcas_version}.tar.gz",
+      source       => "https://github.com/Unicon/shib-cas-authn/archive/refs/tags/${shibcas_version}.tar.gz",
       extract      => true,
       extract_path => $shibboleth_idp::shib_src_dir,
       user         => $shibboleth_idp::shib_user,
@@ -169,7 +170,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
 
     # Use archive to fetch a couple of jar files, but do not extract them.
     archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/shib-cas-authenticator-${shibcas_auth_version}.jar":
-      source        => "https://github.com/Unicon/shib-cas-authn3/releases/download/${shibcas_auth_version}/shib-cas-authenticator-${shibcas_auth_version}.jar",
+      source        => "https://github.com/Unicon/shib-cas-authn/releases/download/${shibcas_auth_version}/shib-cas-authenticator-${shibcas_auth_version}.jar",
       extract       => false,
       cleanup       => false,
       user          => $shibboleth_idp::shib_user,
@@ -182,15 +183,15 @@ class shibboleth_idp::install inherits shibboleth_idp {
     }
 
     # This one does not support https, so verify the md5 hash
-    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.6.0.jar":
-      source        => "${casclient_source}/cas-client-core-3.6.0.jar",
+    archive { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-${casclient_version}.jar":
+      source        => "${casclient_source}/cas-client-core-${casclient_version}.jar",
       extract       => false,
       cleanup       => false,
       user          => $shibboleth_idp::shib_user,
       group         => $shibboleth_idp::shib_group,
       checksum_type => 'md5',
       checksum      => 'bd33fe28a08f96df25c8b03c2c0efe27',
-      creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-3.6.0.jar",
+      creates       => "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/lib/cas-client-core-${casclient_version}.jar",
       require       => Exec['shibboleth idp install'],
       notify        => Exec['shibboleth idp build'],
     }

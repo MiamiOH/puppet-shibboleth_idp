@@ -84,6 +84,7 @@ class shibboleth_idp (
   $service_restart         = $shibboleth_idp::params::service_restart,
 
   $casclient_source        = undef,
+  $casclient_version       = $shibboleth_idp::params::casclient_version,
 
 ) inherits shibboleth_idp::params {
 
