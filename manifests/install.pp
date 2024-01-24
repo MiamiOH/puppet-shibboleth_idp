@@ -226,7 +226,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
   }
 
   if ($shib_major_version == 4) {
-    ['web.xml', 'no-conversation-state.jsp].each |$added_file| {
+    ['web.xml', 'no-conversation-state.jsp'].each |$added_file| {
       file { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/${added_file}":
         ensure  => file,
         owner   => $shibboleth_idp::shib_user,
