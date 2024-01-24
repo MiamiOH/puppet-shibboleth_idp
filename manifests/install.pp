@@ -226,24 +226,22 @@ class shibboleth_idp::install inherits shibboleth_idp {
   }
 
   if ($shib_major_version == 4) {
-    ['web.xml', 'no-conversation-state.jsp'].each |$added_file| {
-      file { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/web.xml":
-        ensure  => file,
-        owner   => $shibboleth_idp::shib_user,
-        group   => $shibboleth_idp::shib_group,
-        mode    => '0600',
-        source  => "puppet:///modules/${module_name}/${shib_major_version}/web.xml",
-        require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
-      }
-      -> file { "${shibboleth_idp::shib_install_base}/edit-webapp/no-conversation-state.jsp":
-        ensure  => file,
-        owner   => $shibboleth_idp::shib_user,
-        group   => $shibboleth_idp::shib_group,
-        mode    => '0600',
-        source  => "puppet:///modules/${module_name}/${shib_major_version}/no-conversation-state.jsp",
-        require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
-        notify  => Exec['shibboleth idp build'],
-      }
+    file { "${shibboleth_idp::shib_install_base}/edit-webapp/WEB-INF/web.xml":
+      ensure  => file,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
+      mode    => '0600',
+      source  => "puppet:///modules/${module_name}/${shib_major_version}/web.xml",
+      require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
+    }
+    -> file { "${shibboleth_idp::shib_install_base}/edit-webapp/no-conversation-state.jsp":
+      ensure  => file,
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
+      mode    => '0600',
+      source  => "puppet:///modules/${module_name}/${shib_major_version}/no-conversation-state.jsp",
+      require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
+      notify  => Exec['shibboleth idp build'],
     }
   }
 
