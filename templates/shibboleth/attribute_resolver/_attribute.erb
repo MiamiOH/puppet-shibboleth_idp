@@ -1,6 +1,5 @@
 <%- if scope['shib_major_version'] == 4 -%>
-    <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>"
-        <%- if @scope -%>scope="<%= @scope %>" <%- end -%>>
+    <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>"<%- if @scope -%> scope="<%= @scope %>"<%- end -%>>
         <%- if @connectors -%><%- @connectors.each do |connector| -%>
         <InputDataConnector ref="<%= connector['ref'] %>"<%- if @name -%> attributeNames="<%= connector['name'] -%>"<%- end -%> />
         <%- end -%><%- end -%>
