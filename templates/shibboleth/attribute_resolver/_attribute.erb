@@ -2,7 +2,7 @@
     <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>"
         <%- if @scope -%>scope="<%= @scope %>" <%- end -%>>
         <%- if @connectors -%><%- @connectors.each do |connector| -%>
-        <InputDataConnector ref="<%= @ref %>"<%- if @name -%> attributeNames="<%= @name -%>"<% end %> />
+        <InputDataConnector ref="<%= connector['ref'] %>"<%- if @name -%> attributeNames="<%= connector['name'] -%>"<%- end -%> />
         <%- end -%><%- end -%>
         <%- @input_attribute_def.each do |attribute_def| -%>
         <InputAttributeDefinition ref="<%= attribute_def -%>" />
