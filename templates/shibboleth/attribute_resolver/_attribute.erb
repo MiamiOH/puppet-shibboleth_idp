@@ -1,9 +1,8 @@
 <%- if scope['shib_major_version'] == 4 -%>
-    <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>">
-        <%- if @scope -%>scope="<%= @scope %>" <%- end -%>
-        <%- @dependencies.each do |dependency| -%>
-        <InputDataConnector ref="<%= dependency %><%- if @source_attribute_id %>" attributeNames="<%= @source_attribute_id -%>"<% end %> />
-        <%- end -%>
+    <AttributeDefinition id="<%= @id %>" xsi:type="<%= @type %>"<%- if @scope -%> scope="<%= @scope %>"<%- end -%>>
+        <%- if @connectors -%><%- @connectors.each do |connector| -%>
+        <InputDataConnector ref="<%= connector['ref'] %>"<%- if @name -%> attributeNames="<%= connector['name'] -%>"<%- end -%> />
+        <%- end -%><%- end -%>
         <%- @input_attribute_def.each do |attribute_def| -%>
         <InputAttributeDefinition ref="<%= attribute_def -%>" />
         <%- end -%>

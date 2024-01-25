@@ -26,6 +26,7 @@ class shibboleth_idp (
   $include_cas             = $shibboleth_idp::params::include_cas,
   $shibcas_version         = $shibboleth_idp::params::shibcas_version,
   $shibcas_auth_version    = $shibboleth_idp::params::shibcas_auth_version,
+  $shibcas_auth_checksum   = undef,
   $cas_server_url          = $shibboleth_idp::params::cas_server_url,
 
   $ldap_url                = $shibboleth_idp::params::ldap_url,
@@ -84,6 +85,8 @@ class shibboleth_idp (
   $service_restart         = $shibboleth_idp::params::service_restart,
 
   $casclient_source        = undef,
+  $casclient_version       = $shibboleth_idp::params::casclient_version,
+  $casclient_checksum      = undef,
 
 ) inherits shibboleth_idp::params {
 
