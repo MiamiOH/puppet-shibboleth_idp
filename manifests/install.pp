@@ -123,16 +123,14 @@ class shibboleth_idp::install inherits shibboleth_idp {
       notify  => Exec['shibboleth idp install'],
     }
   }
-  if ($shib_major_version == 4) {
-    file { "${shibboleth_idp::shib_install_base}/conf":
-      ensure  => directory,
-      owner   => $shibboleth_idp::shib_user,
-      group   => $shibboleth_idp::shib_group,
-      source  => "puppet:///modules/${module_name}/${shib_major_version}/shibboleth_base/conf",
-      recurse => true,
-      require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
-    } 
-  }
+  file { "${shibboleth_idp::shib_install_base}/conf":
+    ensure  => directory,
+    owner   => $shibboleth_idp::shib_user,
+    group   => $shibboleth_idp::shib_group,
+    source  => "puppet:///modules/${module_name}/${shib_major_version}/shibboleth_base/conf",
+    recurse => true,
+    require => [File[$shibboleth_idp::shib_install_base], Exec['shibboleth idp install']],
+  } 
 
   # Install the signing and encryption certs. These are used internally, not
   # through the web front end. Any change requires coordination with InCommon
