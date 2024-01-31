@@ -548,6 +548,15 @@
       <AttributeRule attributeID="muohioeduPrimaryAffiliationCode">
         <PermitValueRule xsi:type="ANY" />
       </AttributeRule>
+    </AttributeFilterPolicy>
+    
+    <AttributeFilterPolicy id="releaseEntityAttributeMarkedCountryName">
+      <PolicyRequirementRule xsi:type="EntityAttributeExactMatch"
+                           attributeName="http://shibboleth.net/ns/attributes/releaseAllValues"
+                           attributeValue="countryName" />
+      <AttributeRule attributeID="countryName">
+        <PermitValueRule xsi:type="ANY" />
+      </AttributeRule>
     </AttributeFilterPolicy>  
 <% end -%>
 </AttributeFilterPolicyGroup>
