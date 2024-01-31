@@ -550,13 +550,32 @@
       </AttributeRule>
     </AttributeFilterPolicy>
     
-    <AttributeFilterPolicy id="releaseEntityAttributeMarkedCountryName">
+    <AttributeFilterPolicy id="releaseEntityAttributeMarkedUser.CountryName">
       <PolicyRequirementRule xsi:type="EntityAttributeExactMatch"
                            attributeName="http://shibboleth.net/ns/attributes/releaseAllValues"
-                           attributeValue="countryName" />
+                           attributeValue="User.Country" />
+      <AttributeRule attributeID="User.Country">
+        <PermitValueRule xsi:type="ANY" />
+      </AttributeRule>
+    </AttributeFilterPolicy> 
+    
+    <AttributeFilterPolicy id="releaseEntityAttributeMarkedUser.LastName">
+      <PolicyRequirementRule xsi:type="EntityAttributeExactMatch"
+                           attributeName="http://shibboleth.net/ns/attributes/releaseAllValues"
+                           attributeValue="User.LastName" />
       <AttributeRule attributeID="countryName">
         <PermitValueRule xsi:type="ANY" />
       </AttributeRule>
-    </AttributeFilterPolicy>  
+    </AttributeFilterPolicy>
+    
+    <AttributeFilterPolicy id="releaseEntityAttributeMarkedUser.GivenName">
+      <PolicyRequirementRule xsi:type="EntityAttributeExactMatch"
+                           attributeName="http://shibboleth.net/ns/attributes/releaseAllValues"
+                           attributeValue="User.GivenName" />
+      <AttributeRule attributeID="User.GivenName">
+        <PermitValueRule xsi:type="ANY" />
+      </AttributeRule>
+    </AttributeFilterPolicy>
+
 <% end -%>
 </AttributeFilterPolicyGroup>
