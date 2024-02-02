@@ -25,7 +25,6 @@ class shibboleth_idp::params {
   $shibcas_version           = '3.1.0'
   $shibcas_auth_version      = '3.3.0'
   $cas_server_url            = undef
-  
   $ldap_url                  = undef
   $ldap_base_dn              = undef
   $ldap_bind_dn              = undef
