@@ -58,10 +58,10 @@ class shibboleth_idp::params {
   $metadata_providers        = {}
   $dataconnectors            = {}
   $attributes                = {}
-  $attribute_filter_header   = undef,
-  $attribute_filter_footer   = undef,
-  $attribute_resolver_header = undef,
-  $attribute_resolver_footer = undef,
+  $attribute_filter_header   = undef
+  $attribute_filter_footer   = undef
+  $attribute_resolver_header = undef
+  $attribute_resolver_footer = undef
   $filters                   = {}
   $nameid_generators_saml2   = []
   $nameid_generators_saml1   = []
