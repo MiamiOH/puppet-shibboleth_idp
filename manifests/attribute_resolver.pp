@@ -4,7 +4,8 @@
 #
 
 class shibboleth_idp::attribute_resolver inherits shibboleth_idp {
-
+  $attribute_resolver_header = $shibboleth_idp::attribute_resolver_header
+  $attribute_resolver_footer = $shibboleth_idp::attribute_resolver_footer
   # Create the dataconnectors.properties file.
   concat { 'dataconnectors.properties':
     path   => "${shibboleth_idp::shib_install_base}/conf/dataconnectors.properties",

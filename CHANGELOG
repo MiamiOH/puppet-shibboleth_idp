@@ -1,4 +1,8 @@
 # Changelog
+2024-02-01 (2.0.0)  Andy Farler, Sofia Olaya, Joe Mills
+        - Support for IdP version 4.3.1
+        - Remove Miami-specific code from templates
+        - Attribute template headers and footers now passed as strings
 
 2023-10-19 (1.6.7)  Andy Farler
         - Fix start.ini path, unpacking logic
