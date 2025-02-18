@@ -69,19 +69,9 @@
                    minCacheDuration="PT10M"
                    maxCacheDuration="PT8H" />
 <% end -%>    
-    <MetadataProvider id="ICMD" xsi:type="FileBackedHTTPMetadataProvider"
-                    xmlns="urn:mace:shibboleth:2.0:metadata"
-                    metadataURL="http://md.incommon.org/InCommon/InCommon-metadata.xml"
-                    backingFile="%{idp.home}/metadata/InCommon-metadata.xml"
-                    <%- if @proxy_host -%>
-                    proxyHost="<%= @proxy_host %>"
-                    <%- end -%>
-                    <%- if @proxy_port -%>
-                    proxyPort="<%= @proxy_port %>"
-                    <%- end -%>
+    <MetadataProvider id="incommon" xsi:type="DynamicHTTPMetadataProvider"
                     minRefreshDelay="PT5M"
-                    maxRefreshDelay="PT1H"
-                    refreshDelayFactor="0.75">
+                    maxRefreshDelay="PT1H">
 
       <!--
         To bootstrap the trust fabric of the federation, each relying party
@@ -101,7 +91,7 @@
         Signing Certificate.
       -->
       <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true"
-              certificateFile="%{idp.home}/credentials/inc-md-cert.pem" />
+              certificateFile="%{idp.home}/credentials/inc-md-cert-mdq.pem" />
 
       <!--
         Require a validUntil XML attribute on the EntitiesDescriptor element
@@ -113,5 +103,7 @@
       <MetadataFilter xsi:type="EntityRoleWhiteList">
         <RetainedRole>md:SPSSODescriptor</RetainedRole>
       </MetadataFilter>
+
+      <MetadataQueryProtocol>https://mdq.incommon.org/</MetadataQueryProtocol>
 
     </MetadataProvider>
