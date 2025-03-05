@@ -66,7 +66,7 @@ class shibboleth_idp::params {
   $nameid_generators_saml1   = []
   $nameid_allowed_entities   = []
 
-  $inc_signing_cert_src      = undef
+  $inc_signing_cert_src      = []
 
   $java_home                 = '/usr/java/latest'
 

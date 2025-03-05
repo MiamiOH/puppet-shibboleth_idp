@@ -11,13 +11,15 @@ class shibboleth_idp::metadata inherits shibboleth_idp {
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.
   # TODO Make this optional and source directly (also impacts the provider xml file)
-  file { "${shibboleth_idp::shib_install_base}/credentials/${shibboleth_idp::inc_signing_cert_src}":
-    ensure => file,
-    source => $shibboleth_idp::inc_signing_cert_src,
-    owner  => $shibboleth_idp::shib_user,
-    group  => $shibboleth_idp::shib_group,
-    mode   => '0644',
-    notify => Class['shibboleth_idp::service'],
+  $shibboleth_idp::inc_signing_cert_src.each |$signing_cert| {
+    file { "${shibboleth_idp::shib_install_base}/credentials/$signing_cert":
+      ensure => file,
+      source => "puppet:///modules/${module_name}/shibboleth/${signing_cert}",
+      owner  => $shibboleth_idp::shib_user,
+      group  => $shibboleth_idp::shib_group,
+      mode   => '0644',
+      notify => Class['shibboleth_idp::service'],
+    }
   }
 
   # The idp-metadata.xml file represents our IdP to service providers. It
