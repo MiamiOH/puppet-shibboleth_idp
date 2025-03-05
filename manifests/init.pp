@@ -95,7 +95,7 @@ class shibboleth_idp (
 ) inherits shibboleth_idp::params {
 
   validate_hash($metadata_providers)
-  validate_array($nameid_generators_saml2, $nameid_generators_saml1, $nameid_allowed_entities, $admin_allowed_cidr_expr)
+  validate_array($nameid_generators_saml2, $nameid_generators_saml1, $nameid_allowed_entities, $admin_allowed_cidr_expr, $inc_signing_cert_src)
 
   ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
     'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
