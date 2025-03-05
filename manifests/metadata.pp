@@ -11,7 +11,7 @@ class shibboleth_idp::metadata inherits shibboleth_idp {
   # InCommon metadata. The metadata-providers.xml config contains instructions
   # for acquiring the cert and the configuration for the automated refresh.
   # TODO Make this optional and source directly (also impacts the provider xml file)
-  file { "${shibboleth_idp::shib_install_base}/credentials/inc-md-cert.pem":
+  file { "${shibboleth_idp::shib_install_base}/credentials/${shibboleth_idp::inc_signing_cert_src}":
     ensure => file,
     source => $shibboleth_idp::inc_signing_cert_src,
     owner  => $shibboleth_idp::shib_user,
