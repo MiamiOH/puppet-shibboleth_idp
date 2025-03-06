@@ -13,12 +13,12 @@ class shibboleth_idp::metadata inherits shibboleth_idp {
   # TODO Make this optional and source directly (also impacts the provider xml file)
   $shibboleth_idp::inc_signing_cert_src.each |$signing_cert| {
     file { "${shibboleth_idp::shib_install_base}/credentials/$signing_cert":
-      ensure => file,
-      source => "puppet:///modules/${module_name}/shibboleth/${signing_cert}",
-      owner  => $shibboleth_idp::shib_user,
-      group  => $shibboleth_idp::shib_group,
-      mode   => '0644',
-      notify => Class['shibboleth_idp::service'],
+      ensure  => file,
+      content => template("${module_name}/shibboleth/credentials/${signing_cert}.erb"),
+      owner   => $shibboleth_idp::shib_user,
+      group   => $shibboleth_idp::shib_group,
+      mode    => '0644',
+      notify  => Class['shibboleth_idp::service'],
     }
   }
 
