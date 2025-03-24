@@ -175,7 +175,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
       user         => $shibboleth_idp::shib_user,
       group        => $shibboleth_idp::shib_group,
       cleanup      => true,
-      creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn3-${shibcas_version}/README.md",
+      creates      => "${shibboleth_idp::shib_src_dir}/shib-cas-authn-${shibcas_version}/README.md",
     }
 
     # Use archive to fetch a couple of jar files, but do not extract them.
