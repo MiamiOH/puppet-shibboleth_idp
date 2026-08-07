@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+       <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
@@ -27,6 +27,14 @@
     are shown below.
 
     -->
+    <bean id="NetPartnerRP"
+      class="net.shibboleth.idp.profile.logic.RelyingPartyIdPredicate">
+      <constructor-arg>
+        <util:set>
+            <value>NetPartner</value>
+        </util:set>
+      </constructor-arg>
+    </bean>
 
     <!-- SAML 2 NameID Generation -->
     <util:list id="shibboleth.SAML2NameIDGenerators">
@@ -46,7 +54,7 @@
         <bean parent="shibboleth.SAML2AttributeSourcedGenerator"
             p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
             p:attributeSourceIds="#{ {'muohioeduWebID'} }"
-            p:activationCondition-ref="NetPartner" />
+            p:activationCondition-ref="NetPartnerRP" />
 
         <%- @nameid_generators_saml2.each do |generator| -%>
         <bean parent="<%= generator['parent'] %>"
