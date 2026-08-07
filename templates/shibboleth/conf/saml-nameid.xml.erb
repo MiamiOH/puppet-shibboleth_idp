@@ -27,11 +27,20 @@
     are shown below.
 
     -->
-    <bean id="NetPartnerRP"
+    <bean id="NetPartner"
       class="net.shibboleth.idp.profile.logic.RelyingPartyIdPredicate">
       <constructor-arg>
         <util:set>
             <value>NetPartner</value>
+        </util:set>
+      </constructor-arg>
+    </bean>
+
+    <bean id="NetPartnerRP"
+      class="net.shibboleth.idp.profile.logic.RelyingPartyIdPredicate">
+      <constructor-arg>
+        <util:set>
+            <value>NetPartnerTEST</value>
         </util:set>
       </constructor-arg>
     </bean>
@@ -51,6 +60,11 @@
             p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
             p:attributeSourceIds="#{ {'mail'} }" />
         -->
+        <bean parent="shibboleth.SAML2AttributeSourcedGenerator"
+            p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+            p:attributeSourceIds="#{ {'muohioeduWebID'} }"
+            p:activationCondition-ref="NetPartner" />
+
         <bean parent="shibboleth.SAML2AttributeSourcedGenerator"
             p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
             p:attributeSourceIds="#{ {'muohioeduWebID'} }"
