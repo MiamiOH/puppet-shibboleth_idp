@@ -4,7 +4,7 @@
 #
 
 define shibboleth_idp::relying_party::profile (
-  $entity_id  = $namxe,
+  $entity_id  = $name,
   $properties = {},
 ){
 

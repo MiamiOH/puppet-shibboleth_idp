@@ -63,7 +63,7 @@ class shibboleth_idp::jetty (
     target => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
   }
 
-  if $::service_provider == 'systemd' {
+  if $facts['service_provider'] == 'systemd' {
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
       require => File["${jetty_home}/jetty"],

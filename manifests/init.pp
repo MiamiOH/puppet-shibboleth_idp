@@ -102,12 +102,18 @@ class shibboleth_idp (
   assert_type(Array, $admin_allowed_cidr_expr)
   assert_type(Array, $inc_signing_cert_src)
 
-  ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
-    'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
-    'idp_loglevel_spring', 'idp_loglevel_container', 'idp_loglevel_xmlsec',
-    'idp_loglevel_attrmap',
-  ].each |$log| {
-    $log_level = getvar($log)
+  [
+    $idp_loglevel_idp,
+    $idp_loglevel_ldap,
+    $idp_loglevel_messages,
+    $idp_loglevel_encryption,
+    $idp_loglevel_opensaml,
+    $idp_loglevel_props,
+    $idp_loglevel_spring,
+    $idp_loglevel_container,
+    $idp_loglevel_xmlsec,
+    $idp_loglevel_attrmap,
+  ].each |$log_level| {
     assert_type(Enum['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'], $log_level)
   }
 

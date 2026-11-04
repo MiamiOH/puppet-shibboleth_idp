@@ -250,7 +250,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
     cwd         => "${shibboleth_idp::shib_src_dir}/shibboleth-identity-provider-${shibboleth_idp::shib_idp_version}",
     user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],
-    path        => "${::path}:${java_home}",
+    path        => "${facts['path']}:${java_home}",
     # refreshonly => true,
     unless      => "test -f ${shibboleth_idp::shib_install_base}/war/idp.war",
   }
@@ -263,7 +263,7 @@ class shibboleth_idp::install inherits shibboleth_idp {
     cwd         => $shibboleth_idp::shib_install_base,
     user        => $shibboleth_idp::shib_user,
     environment => ["JAVA_HOME=${java_home}"],
-    path        => "${::path}:${java_home}",
+    path        => "${facts['path']}:${java_home}",
     refreshonly => true,
     notify      => Class['shibboleth_idp::service'],
   }
