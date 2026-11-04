@@ -13,45 +13,54 @@ def location_for(place_or_version, fake_version = nil)
   end
 end
 
-ruby_version_segments = Gem::Version.new(RUBY_VERSION.dup).segments
-minor_version = ruby_version_segments[0..1].join('.')
-
 group :development do
-  gem "json", '= 2.0.4',                                         require: false if Gem::Requirement.create('~> 2.4.2').satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "json", '= 2.1.0',                                         require: false if Gem::Requirement.create(['>= 2.5.0', '< 2.7.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "json", '= 2.3.0',                                         require: false if Gem::Requirement.create(['>= 2.7.0', '< 2.8.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "puppet-module-posix-default-r#{minor_version}", '~> 1.0', require: false, platforms: [:ruby]
-  gem "puppet-module-posix-dev-r#{minor_version}", '~> 1.0',     require: false, platforms: [:ruby]
-  gem "puppet-module-win-default-r#{minor_version}", '~> 1.0',   require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "puppet-module-win-dev-r#{minor_version}", '~> 1.0',       require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "travis",                                                  require: false
+  gem "json", '= 2.1.0',                         require: false if Gem::Requirement.create(['>= 2.5.0', '< 2.7.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "json", '= 2.3.0',                         require: false if Gem::Requirement.create(['>= 2.7.0', '< 3.0.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "json", '= 2.5.1',                         require: false if Gem::Requirement.create(['>= 3.0.0', '< 3.0.5']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "json", '= 2.6.1',                         require: false if Gem::Requirement.create(['>= 3.1.0', '< 3.1.3']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "json", '= 2.6.3',                         require: false if Gem::Requirement.create(['>= 3.2.0', '< 4.0.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "racc", '~> 1.4.0',                        require: false if Gem::Requirement.create(['>= 2.7.0', '< 3.0.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "deep_merge", '~> 1.2.2',                  require: false
+  gem "voxpupuli-puppet-lint-plugins", '~> 5.0', require: false
+  gem "facterdb", '~> 2.1',                      require: false
+  gem "metadata-json-lint", '~> 4.0',            require: false
+  gem "rspec-puppet-facts", '~> 4.0',            require: false
+  gem "dependency_checker", '~> 1.0.0',          require: false
+  gem "parallel_tests", '= 3.12.1',              require: false
+  gem "pry", '~> 0.10',                          require: false
+  gem "simplecov-console", '~> 0.9',             require: false
+  gem "puppet-debugger", '~> 1.0',               require: false
+  gem "rubocop", '~> 1.50.0',                    require: false
+  gem "rubocop-performance", '= 1.16.0',         require: false
+  gem "rubocop-rspec", '= 2.19.0',               require: false
+  gem "rb-readline", '= 0.5.5',                  require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "rexml", '>= 3.0.0', '< 3.2.7',            require: false
+  gem "travis",                                  require: false
+end
+group :development, :release_prep do
+  gem "puppet-strings", '~> 4.0',         require: false
+  gem "puppetlabs_spec_helper", '~> 8.0', require: false
+  gem "puppet-blacksmith", '~> 7.0',      require: false
 end
 group :system_tests do
-  gem "puppet-module-posix-system-r#{minor_version}", '~> 1.0', require: false, platforms: [:ruby]
-  gem "puppet-module-win-system-r#{minor_version}", '~> 1.0',   require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "puppet_litmus", '~> 1.0',   require: false, platforms: [:ruby, :x64_mingw]
+  gem "CFPropertyList", '< 3.0.7', require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "serverspec", '~> 2.41',     require: false
 end
 group :puppet_lint do
-  gem "puppet-lint-absolute_classname-check",                      require: false
-  gem "puppet-lint-absolute_template_path",                        require: false
-  gem "puppet-lint-alias-check",                                   require: false
-  gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
-  gem "puppet-lint-duplicate_class_parameters-check",              require: false
-  gem "puppet-lint-empty_string-check",                            require: false
-  gem "puppet-lint-extended",                                      require: false
-  gem "puppet-lint-file_ensure-check",                             require: false
-  gem "puppet-lint-file_source_rights-check",                      require: false
-  gem "puppet-lint-leading_zero-check",                            require: false
-  gem "puppet-lint-numericvariable",                               require: false
-  gem "puppet-lint-resource_reference_syntax",                     require: false
-  gem "puppet-lint-security-plugins",                              require: false
-  gem "puppet-lint-spaceship_operator_without_tag-check",          require: false
-  gem "puppet-lint-strict_indent-check",                           require: false
-  gem "puppet-lint-trailing_comma-check",                          require: false
-  gem "puppet-lint-trailing_newline-check",                        require: false
-  gem "puppet-lint-undef_in_function-check",                       require: false
-  gem "puppet-lint-unquoted_string-check",                         require: false
-  gem "puppet-lint-variable_contains_upcase",                      require: false
-  gem "puppet-lint-version_comparison-check",                      require: false
+  gem "puppet-lint-absolute_classname-check",             require: false
+  gem "puppet-lint-absolute_template_path",               require: false
+  gem "puppet-lint-alias-check",                          require: false
+  gem "puppet-lint-extended",                             require: false
+  gem "puppet-lint-file_ensure-check",                    require: false
+  gem "puppet-lint-leading_zero-check",                   require: false
+  gem "puppet-lint-resource_reference_syntax",            require: false
+  gem "puppet-lint-spaceship_operator_without_tag-check", require: false
+  gem "puppet-lint-strict_indent-check",                  require: false
+  gem "puppet-lint-trailing_comma-check",                 require: false
+  gem "puppet-lint-unquoted_string-check",                require: false
+  gem "puppet-lint-variable_contains_upcase",             require: false
+  gem "puppet-lint-version_comparison-check",             require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
