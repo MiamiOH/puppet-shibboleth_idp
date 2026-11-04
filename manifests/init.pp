@@ -94,23 +94,32 @@ class shibboleth_idp (
 
 ) inherits shibboleth_idp::params {
 
-  validate_hash($metadata_providers)
-  validate_array($nameid_generators_saml2, $nameid_generators_saml1, $nameid_allowed_entities, $admin_allowed_cidr_expr, $inc_signing_cert_src)
+  # Use Puppet's built-in type assertions instead of legacy stdlib validate_* functions.
+  assert_type(Hash, $metadata_providers)
+  assert_type(Array, $nameid_generators_saml2)
+  assert_type(Array, $nameid_generators_saml1)
+  assert_type(Array, $nameid_allowed_entities)
+  assert_type(Array, $admin_allowed_cidr_expr)
+  assert_type(Array, $inc_signing_cert_src)
 
-  ['idp_loglevel_idp', 'idp_loglevel_ldap', 'idp_loglevel_messages',
-    'idp_loglevel_encryption', 'idp_loglevel_opensaml', 'idp_loglevel_props',
-    'idp_loglevel_spring', 'idp_loglevel_container', 'idp_loglevel_xmlsec',
-    'idp_loglevel_attrmap',
-  ].each |$log| {
-    $log_level = getvar($log)
-    validate_re($log_level, ['^(TRACE|DEBUG|INFO|WARN|ERROR)$'],
-    "Log level ${log_level} is not valid for ${log}, use one of 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'")
+  [
+    $idp_loglevel_idp,
+    $idp_loglevel_ldap,
+    $idp_loglevel_messages,
+    $idp_loglevel_encryption,
+    $idp_loglevel_opensaml,
+    $idp_loglevel_props,
+    $idp_loglevel_spring,
+    $idp_loglevel_container,
+    $idp_loglevel_xmlsec,
+    $idp_loglevel_attrmap,
+  ].each |$log_level| {
+    assert_type(Enum['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'], $log_level)
   }
 
-  validate_integer($idp_log_history)
+  assert_type(Integer, $idp_log_history)
 
-  validate_re($idp_jetty_log_level, ['^(DEBUG|INFO|WARN|IGNORE)$'],
-  "Log level ${idp_jetty_log_level} is not valid for idp_jetty_log_level, use one of 'DEBUG', 'INFO', 'WARN' or 'IGNORE'")
+  assert_type(Enum['DEBUG', 'INFO', 'WARN', 'IGNORE'], $idp_jetty_log_level)
 
   $proxy_port_string = $proxy_port ? {
     undef   => undef,

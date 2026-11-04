@@ -19,7 +19,8 @@ class shibboleth_idp::jetty (
   $src_directory          = $shibboleth_idp::params::shib_src_dir,
 ) inherits shibboleth_idp {
 
-  validate_integer($jetty_start_minutes)
+  assert_type(String[1], $jetty_version)
+  assert_type(Integer, $jetty_start_minutes)
   # Based on jetty startup script of 'sleep 4' repeated 1..15
   $jetty_start_interval = 4 * $jetty_start_minutes
 
@@ -62,7 +63,7 @@ class shibboleth_idp::jetty (
     target => "${jetty_home}/jetty-${jetty_distro_type}-${jetty_version}",
   }
 
-  if $::service_provider == 'systemd' {
+  if $facts['service_provider'] == 'systemd' {
     systemd::unit_file { 'jetty.service':
       content => template("${module_name}/jetty/jetty.service.erb"),
       require => File["${jetty_home}/jetty"],
